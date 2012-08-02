@@ -20,8 +20,8 @@ program.parse(process.argv);
 
 console.log();
 program.args.forEach(function(pkg){
-  component.log('install', pkg);
   pkg = component.install(pkg, program.out || 'components');
+  component.log('install', pkg.name + '@' + pkg.version);
   pkg.install();
 });
 console.log();
