@@ -22,5 +22,6 @@ console.log();
 program.args.forEach(function(pkg){
   component.log('install', pkg);
   pkg = component.install(pkg, program.out || 'components');
+  pkg.install();
 });
 console.log();
