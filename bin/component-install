@@ -5,6 +5,7 @@
  */
 
 var program = require('commander')
+  , mkdir = require('mkdirp')
   , component = require('..');
 
 // options
@@ -20,13 +21,20 @@ program.parse(process.argv);
 
 console.log();
 program.args.forEach(function(pkg){
-  pkg = component.install(pkg, program.out || 'components');
+  var dest = program.out || 'components';
+  mkdir(dest);
+
+  pkg = component.install(pkg, dest);
 
   component.log('install', pkg.name + '@' + pkg.version);
   pkg.install();
 
   pkg.on('file:start', function(file){
     component.log('fetch', pkg.name + ':' + file);
+  });
+
+  pkg.on('end', function(){
+    component.log('complete', pkg.name);
   });
 });
 
