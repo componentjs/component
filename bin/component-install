@@ -29,7 +29,11 @@ program.args.forEach(function(pkg){
   component.log('install', pkg.name + '@' + pkg.version);
   pkg.install();
 
-  pkg.on('file:start', function(file){
+  pkg.on('error', function(err){
+    console.error(err.stack);
+  });
+
+  pkg.on('file', function(file){
     component.log('fetch', pkg.name + ':' + file);
   });
 
