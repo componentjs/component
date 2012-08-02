@@ -21,7 +21,12 @@ program.parse(process.argv);
 console.log();
 program.args.forEach(function(pkg){
   pkg = component.install(pkg, program.out || 'components');
+
   component.log('install', pkg.name + '@' + pkg.version);
   pkg.install();
+
+  pkg.on('file:start', function(file){
+    component.log('fetch', pkg.name + ':' + file);
+  });
 });
-console.log();
+
