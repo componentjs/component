@@ -21,10 +21,11 @@ program.parse(process.argv);
 
 program.args.forEach(function(pkg){
   var dest = program.out || 'components';
-  mkdir(dest);
-
-  pkg = component.install(pkg, dest);
-  pkg.install();
-  component.terse(pkg);
+  mkdir(dest, function(err){
+    if (err) throw err;
+    pkg = component.install(pkg, dest);
+    pkg.install();
+    component.terse(pkg);
+  });
 });
 
