@@ -19,30 +19,12 @@ program.parse(process.argv);
 
 // install
 
-console.log();
 program.args.forEach(function(pkg){
   var dest = program.out || 'components';
   mkdir(dest);
 
   pkg = component.install(pkg, dest);
-
-  component.log('install', pkg.name + '@' + pkg.version);
   pkg.install();
-
-  pkg.on('error', function(err){
-    console.error(err.stack);
-  });
-
-  pkg.on('dep', function(dep){
-    component.log('dependency', dep.name + '@' + dep.version);
-  });
-
-  pkg.on('file', function(file){
-    component.log('fetch', pkg.name + ':' + file);
-  });
-
-  pkg.on('end', function(){
-    component.log('complete', pkg.name);
-  });
+  component.terse(pkg);
 });
 
