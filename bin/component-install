@@ -33,6 +33,10 @@ program.args.forEach(function(pkg){
     console.error(err.stack);
   });
 
+  pkg.on('dep', function(dep){
+    component.log('dependency', dep.name + '@' + dep.version);
+  });
+
   pkg.on('file', function(file){
     component.log('fetch', pkg.name + ':' + file);
   });
