@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..');
+
+// options
+
+program
+  .option('-o, --out <dir>', 'output components to the given <dir>')
+
+// parse argv
+
+program.parse(process.argv);
+
+// install
+
+console.log();
+program.args.forEach(function(pkg){
+  component.log('install', pkg);
+  pkg = component.install(pkg, program.out || 'components');
+});
+console.log();

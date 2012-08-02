@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..')
+  , spawn = require('child_process').spawn
+  , fs = require('fs')
+  , exists = fs.existsSync;
+
+// sub-command help
+
+program.on('--help', function(){
+  console.log('  Commands:');
+  console.log();
+  console.log('    install <name ...>  install one or more components');
+  console.log('    search [query]      search with the given query');
+  console.log();
+  process.exit();
+});
+
+// parse argv
+
+program.parse(process.argv);
+
+// command
+
+var cmd = __dirname + '/component-' + program.args[0];
+
+// args void of cmd
+
+var args = process.argv.slice(3);
+
+// doesn't exist
+
+if (!exists(cmd)) {
+  component.fatal('the "%s" command does not exist', program.args[0]);
+}
+
+// exec command
+
+var proc = spawn(cmd, args);
+proc.stdout.pipe(process.stdout);
+proc.stderr.pipe(process.stderr);
+proc.on('exit', process.exit);
