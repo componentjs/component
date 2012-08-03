@@ -11,6 +11,7 @@ var program = require('commander')
 
 program
   .option('-o, --out <dir>', 'output components to the given <dir>')
+  .option('-f, --force', 'force installation even if previously installed')
 
 // parse argv
 
@@ -22,8 +23,7 @@ program.args.forEach(function(pkg){
   var parts = pkg.split('@');
   pkg = parts.shift();
   var version = parts.shift() || 'master';
-  var dest = program.out || 'components';
-  pkg = component.install(pkg, version, dest);
+  pkg = component.install(pkg, version, { dest: program.out, force: program.force });
   component.terse(pkg);
   pkg.install();
 });
