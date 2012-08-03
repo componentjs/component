@@ -60,7 +60,7 @@ try {
 
 // exec command
 
-var proc = spawn(cmd, args);
+var proc = spawn(cmd, args, { customFds: [1, -1, -1] });
 proc.stdout.pipe(process.stdout);
 proc.stderr.pipe(process.stderr);
 proc.on('exit', process.exit);
