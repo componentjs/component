@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..');
+
+// parse argv
+
+program.parse(process.argv);
+
+// lookup info
+
+program.args.forEach(function(pkg){
+  var parts = pkg.split('@');
+  pkg = parts.shift();
+  var version = parts.shift() || 'master';
+  component.info(pkg, version, function(err, json){
+    if (err) throw err;
+    process.stdout.write(JSON.stringify(json, null, 2));
+  });
+});
+
