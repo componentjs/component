@@ -50,7 +50,7 @@ if (!program.args[0]) {
 // doesn't exist
 
 if (!exists(cmd)) {
-  component.fatal('the "' + program.args[0] + '" command does not exist');
+  component.utils.fatal('the "' + program.args[0] + '" command does not exist');
 }
 
 // exec command
