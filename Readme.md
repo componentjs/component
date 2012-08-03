@@ -11,6 +11,18 @@
   - hackable internals (no monolithic lib here)
   - resolves dependencies
 
+## Dependencies
+
+  By using GitHub as the registry, `component(1)` is automatically
+  available to you without further explicit knowledge or work
+  creating a registry account etc.
+
+  A nice side-effect of this namespaced world is that dependencies
+  are explicit and self-documenting. No longer do you need to query
+  the registry for a "repo" property that may not exist, it's simply
+  build in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
+  than the ambiguous "page".
+
 ## Developing component(1)
 
   `component(1)` and sub-commands are structured much like `git(1)`,
