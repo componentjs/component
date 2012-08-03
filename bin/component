@@ -43,6 +43,7 @@ var args = process.argv.slice(3);
 
 if (!program.args[0]) {
   console.log(program.helpInformation());
+  program.emit('--help');
   process.exit();
 }
 
