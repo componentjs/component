@@ -21,7 +21,7 @@ program.on('--help', function(){
   console.log();
   console.log('    install <name ...>  install one or more components');
   console.log('    search [query]      search with the given query');
-  console.log('    info <name ...>     output json component information');
+  console.log('    info [prop]         output json component information');
   console.log('    ls                  list installed components');
   console.log();
   process.exit();

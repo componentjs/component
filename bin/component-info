@@ -11,15 +11,17 @@ var program = require('commander')
 
 program.parse(process.argv);
 
+// package
+
+var pkg = program.args.shift();
+
 // lookup info
 
-program.args.forEach(function(pkg){
-  var parts = pkg.split('@');
-  pkg = parts.shift();
-  var version = parts.shift() || 'master';
-  component.info(pkg, version, function(err, json){
-    if (err) throw err;
-    process.stdout.write(JSON.stringify(json, null, 2));
-  });
+var parts = pkg.split('@');
+pkg = parts.shift();
+var version = parts.shift() || 'master';
+component.info(pkg, version, function(err, json){
+  if (err) throw err;
+  process.stdout.write(JSON.stringify(json, null, 2));
 });
 
