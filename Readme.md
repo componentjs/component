@@ -59,6 +59,7 @@ Commands:
   - extensible sub-commands via `component-YOURCOMMAND` git-style
   - hackable internals (no monolithic lib here)
   - resolves dependencies
+  - component skeleton command
 
 ## Dependencies
 
@@ -71,6 +72,29 @@ Commands:
   the registry for a "repo" property that may not exist, it's simply
   build in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
   than the ambiguous "page".
+
+## Creating a component
+
+  The `component-create(1)` command can create a component
+  project skeleton for you by filling out the prompts. Once
+  this repo is published to Github, you're all done!
+
+```
+$ component create popover
+repo (username/project): visionmedia/popover
+description: Popover UI component
+does this component have js? yes
+does this component have css? yes
+does this component have html? yes
+
+   create : popover
+   create : popover/index.js
+   create : popover/popover.html
+   create : popover/popover.css
+   create : popover/Readme.md
+   create : popover/component.json
+
+```
 
 ## Developing component(1)
 
