@@ -1,0 +1,106 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..')
+  , utils = component.utils
+  , path = require('path')
+  , fs = require('fs')
+  , join = path.join
+  , read = fs.readFileSync
+  , mkdir = require('mkdirp').sync;
+
+// usage
+
+program.usage('<dir>');
+
+// parse
+
+program.parse(process.argv);
+
+// config
+
+var conf = {};
+
+// dest
+
+var dir = program.args[0];
+
+// require destination
+
+if (!dir) utils.fatal('<dir> required');
+
+/**
+ * Verbose write.
+ */
+
+function write(path, str) {
+  utils.log('create', path);
+  fs.writeFileSync(path, str);
+}
+
+// prompt
+
+program.prompt({
+  repo: 'repo (username/project): ',
+  desc: 'description: ',
+  js: 'does this component have js? ',
+  css: 'does this component have css? ',
+  html: 'does this component have html? '
+}, function(obj){
+  // validate
+  if (!~obj.repo.indexOf('/')) {
+    utils.fatal('repo must use <username>/<project> format');
+  }
+
+  // name
+  var name = obj.repo.split('/').pop();
+
+  // populate json
+  conf.name = obj.repo;
+  conf.description = obj.desc;
+  conf.version = "0.0.1";
+  conf.dependencies = {};
+
+  // dir
+  console.log();
+  utils.log('create', dir);
+  mkdir(dir);
+
+  // js
+  if (bool(obj.js)) {
+    conf.scripts = ["index.js"];
+    write(join(dir, 'index.js'), '');
+  }
+
+  // html
+  if (bool(obj.html)) {
+    conf.templates = [name + '.html'];
+    write(join(dir, name + '.html'), '');
+  }
+
+  // css
+  if (bool(obj.css)) {
+    conf.styles = [name + '.css'];
+    write(join(dir, name + '.css'), '');
+  }
+
+  write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
+
+  // write component.json
+  write(join(dir, 'component.json'), JSON.stringify(conf, null, 2));
+
+  console.log();
+  process.exit();
+});
+
+/**
+ * Boolean from `str`.
+ */
+
+function bool(str) {
+  if (str == 'yes') return true;
+}
