@@ -37,9 +37,17 @@ program.parse(process.argv);
 
 var args = process.argv.slice(3);
 
+// command
+
+var cmd = program.args[0];
+
+// alias "install" as "add"
+
+if ('add' == cmd) cmd = 'install';
+
 // display help
 
-if (!program.args[0]) {
+if (!cmd) {
   process.stdout.write(program.helpInformation());
   program.emit('--help');
   process.exit();
@@ -47,7 +55,7 @@ if (!program.args[0]) {
 
 // command
 
-var cmd = 'component-' + program.args[0];
+cmd = 'component-' + cmd;
 
 // which(1) it
 
