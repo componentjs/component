@@ -42,7 +42,7 @@ var args = process.argv.slice(3);
 // display help
 
 if (!program.args[0]) {
-  console.log(program.helpInformation());
+  process.stdout.write(program.helpInformation());
   program.emit('--help');
   process.exit();
 }
