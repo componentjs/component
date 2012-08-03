@@ -5,11 +5,13 @@
  */
 
 var program = require('commander')
-  , component = require('..');
+  , component = require('..')
+  , path = require('path');
 
 // options
 
 program
+  .usage('[pkg ...]')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
 
@@ -17,9 +19,22 @@ program
 
 program.parse(process.argv);
 
+// pkgs
+
+var pkgs = program.args;
+
+// install from ./component.json
+
+if (!pkgs.length) {
+  pkgs = require(path.resolve('component.json')).dependencies;
+  pkgs = Object.keys(pkgs).map(function(name){
+    return name + '@' + pkgs[name]; 
+  });
+}
+
 // install
 
-program.args.forEach(function(pkg){
+pkgs.forEach(function(pkg){
   var parts = pkg.split('@');
   pkg = parts.shift();
   var version = parts.shift() || 'master';
