@@ -7,6 +7,10 @@
 var program = require('commander')
   , component = require('..');
 
+// usage
+
+program.usage('<name> [prop]');
+
 // parse argv
 
 program.parse(process.argv);
@@ -15,6 +19,10 @@ program.parse(process.argv);
 
 var pkg = program.args.shift();
 
+// props
+
+var props = program.args.shift();
+
 // lookup info
 
 var parts = pkg.split('@');
@@ -22,6 +30,15 @@ pkg = parts.shift();
 var version = parts.shift() || 'master';
 component.info(pkg, version, function(err, json){
   if (err) throw err;
+
+  // reduce props
+  if (props) {
+    props.split('.').forEach(function(prop){
+      json = json[prop];
+    });
+  }
+
+  // output
   process.stdout.write(JSON.stringify(json, null, 2));
 });
 
