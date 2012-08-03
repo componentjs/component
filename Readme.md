@@ -1,7 +1,56 @@
 
 # component
 
-  Component package manager consuming git repositories
+  Component package manager.
+
+## Installation
+
+   $ npm install -g component
+
+## Installing packages
+
+  To install one or more packages, simply pass their github
+  repo names as arguments to `component install`. Dependencies
+  are resolved and the component contents are downloaded into
+  `./components` by default.
+
+```
+$ component install component/tip
+  
+   install : component/tip@master
+       dep : component/emitter@master
+   install : component/emitter@master
+       dep : component/jquery@master
+   install : component/jquery@master
+     fetch : component/tip:index.js
+     fetch : component/tip:tip.css
+     fetch : component/tip:tip.html
+     fetch : component/emitter:index.js
+     fetch : component/jquery:index.js
+  complete : component/emitter
+  complete : component/jquery
+  complete : component/tip
+```
+
+## Usage
+
+ Via `--help`:
+
+```
+Usage: component <command> [options]
+
+Options:
+
+  -h, --help     output usage information
+  -V, --version  output the version number
+
+Commands:
+
+  install <name ...>  install one or more components
+  search [query]      search with the given query
+  info [prop]         output json component information
+  ls                  list installed components
+```
 
 ## Features
 
