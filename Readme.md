@@ -3,6 +3,14 @@
 
   Component package manager consuming git repositories
 
+## Features
+
+  - no registry required, uses github repositories
+  - fast (~2x faster than uncached npm at the time of comparison)
+  - extensible sub-commands via `component-YOURCOMMAND`
+  - hackable internals (no monolithic lib here)
+  - resolves dependencies
+
 ## Developing component(1)
 
   `component(1)` and sub-commands are structured much like `git(1)`,
