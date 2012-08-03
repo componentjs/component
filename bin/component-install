@@ -19,8 +19,11 @@ program.parse(process.argv);
 // install
 
 program.args.forEach(function(pkg){
+  var parts = pkg.split('@');
+  pkg = parts.shift();
+  var version = parts.shift() || 'master';
   var dest = program.out || 'components';
-  pkg = component.install(pkg, dest);
+  pkg = component.install(pkg, version, dest);
   component.terse(pkg);
   pkg.install();
 });
