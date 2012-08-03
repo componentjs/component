@@ -6,6 +6,7 @@
 
 var program = require('commander')
   , component = require('..')
+  , log = component.utils.log
   , path = require('path')
   , fs = require('fs');
 
@@ -19,6 +20,6 @@ console.log();
 fs.readdirSync('components').forEach(function(pkg){
   var json = path.join(process.cwd(), 'components', pkg, 'component.json');
   var obj = require(json);
-  component.log(obj.name, obj.version);
+  log(obj.name, obj.version);
 });
 console.log();
