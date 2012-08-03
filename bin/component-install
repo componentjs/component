@@ -21,7 +21,7 @@ program.parse(process.argv);
 program.args.forEach(function(pkg){
   var dest = program.out || 'components';
   pkg = component.install(pkg, dest);
-  pkg.install();
   component.terse(pkg);
+  pkg.install();
 });
 
