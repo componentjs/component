@@ -13,31 +13,12 @@ var program = require('commander')
 
 program.parse(process.argv);
 
-/**
- * Log the given `type` with `msg`.
- *
- * @param {String} type
- * @param {String} msg
- * @api public
- */
-
-function log(type, msg){
-  var w = 20;
-  var len = Math.max(0, w - type.length);
-  var pad = Array(len + 1).join(' ');
-  if ('error' == type) {
-    console.error('  \033[31m%s\033[m : \033[90m%s\033[m', pad + type, msg);
-  } else {
-    console.log('  \033[36m%s\033[m : \033[90m%s\033[m', pad + type, msg);
-  }
-};
-
 // list
 
 console.log();
 fs.readdirSync('components').forEach(function(pkg){
   var json = path.join(process.cwd(), 'components', pkg, 'component.json');
   var obj = require(json);
-  log(obj.name, obj.version);
+  component.log(obj.name, obj.version);
 });
 console.log();

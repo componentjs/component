@@ -10,6 +10,10 @@ var program = require('commander')
   , fs = require('fs')
   , exists = fs.existsSync;
 
+// usage
+
+program.usage('<command> [options]');
+
 // sub-command help
 
 program.on('--help', function(){
@@ -33,10 +37,17 @@ var cmd = __dirname + '/component-' + program.args[0];
 
 var args = process.argv.slice(3);
 
+// display help
+
+if (!program.args[0]) {
+  console.log(program.helpInformation());
+  process.exit();
+}
+
 // doesn't exist
 
 if (!exists(cmd)) {
-  component.fatal('the "%s" command does not exist', program.args[0]);
+  component.fatal('the "' + program.args[0] + '" command does not exist');
 }
 
 // exec command
