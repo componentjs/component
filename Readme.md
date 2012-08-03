@@ -56,7 +56,7 @@ Commands:
 
   - no registry required, uses github repositories
   - fast (~2x faster than uncached npm at the time of comparison)
-  - extensible sub-commands via `component-YOURCOMMAND`
+  - extensible sub-commands via `component-YOURCOMMAND` git-style
   - hackable internals (no monolithic lib here)
   - resolves dependencies
 
