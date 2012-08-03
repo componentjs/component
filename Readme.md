@@ -3,6 +3,16 @@
 
   Component package manager consuming git repositories
 
+## Developing component(1)
+
+  `component(1)` and sub-commands are structured much like `git(1)`,
+  in that sub-commands are simply separate executables. For example
+  `$ component info pkg` and `$ component-info pkg` are equivalent.
+
+  Because of this you'll likely want `PATH="./bin:$PATH"` in your
+  profile or session while developing component, otherwise `./bin/component`
+  will have a hard time finding the sub-commands.
+
 ## License 
 
 (The MIT License)
