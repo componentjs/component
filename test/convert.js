@@ -7,7 +7,7 @@ var exec = require('child_process').exec
   , fs = require('fs')
   , path = require('path');
 
-describe('component-convert', function(){
+describe('component convert', function(){
   describe('<file>', function(){
     it('should convert the html to a require()-able js file', function(done){
       exec('bin/component convert test/fixtures/tip.html', function(err, stdout){

@@ -7,7 +7,7 @@ var exec = require('child_process').exec
   , fs = require('fs')
   , path = require('path');
 
-describe('component-install', function(){
+describe('component install', function(){
   beforeEach(function(done){
     exec('rm -fr components component.json', done);
   })
