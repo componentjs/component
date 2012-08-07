@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , html2js = require('html-to-js')
+  , component = require('..')
+  , utils = component.utils
+  , path = require('path')
+  , fs = require('fs')
+  , join = path.join
+  , read = fs.readFileSync;
+
+// usage
+
+program.usage('<file>');
+
+// parse
+
+program.parse(process.argv);
+
+// config
+
+var conf = {};
+
+// file
+
+var file = program.args[0];
+
+// require file
+
+if (!file) utils.fatal('<file> required');
+
+/**
+ * Verbose write.
+ */
+
+function write(path, str) {
+  utils.log('create', path);
+  fs.writeFileSync(path, str);
+}
+
+// convert
+
+var html = read(file, 'utf8');
+var out = path.join(path.dirname(file), path.basename(file, '.html') + '.js');
+write(out, html2js(html));
