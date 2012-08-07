@@ -9,8 +9,7 @@ var program = require('commander')
   , utils = component.utils
   , log = component.utils.log
   , path = require('path')
-  , fs = require('fs')
-  , exists = fs.existsSync;
+  , fs = require('fs');
 
 // parse argv
 
@@ -24,8 +23,7 @@ var json = require(path.resolve('component.json'));
 
 if (json.dependencies) {
   Object.keys(json.dependencies).forEach(function(name){
-    name = name.replace('/', '-');
-    if (exists(path.join('component', name))) return;
+    if (component.exists(name)) return;
     utils.fatal(name + ' is not installed, run `component install`');
   });
 }
