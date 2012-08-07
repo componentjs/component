@@ -82,4 +82,16 @@ describe('component-install', function(){
       done();
     })
   })
+
+  it('should be aliased as "add"', function(done){
+    exec('bin/component add component/emitter', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('install');
+      stdout.should.include('fetch');
+      stdout.should.include('complete');
+      var json = require(path.resolve('components/component-emitter/component.json'));
+      json.name.should.equal('emitter');
+      done();
+    })
+  })
 })
