@@ -9,7 +9,13 @@ var program = require('commander')
   , utils = component.utils
   , log = component.utils.log
   , path = require('path')
-  , fs = require('fs');
+  , fs = require('fs')
+  , mkdir = require('mkdirp');
+
+// options
+
+program
+  .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build');
 
 // parse argv
 
@@ -27,3 +33,10 @@ if (json.dependencies) {
     utils.fatal(name + ' is not installed, run `component install`');
   });
 }
+
+// build
+
+mkdir(program.out, function(err){
+  if (err) utils.fatal(err.message);
+  
+});
