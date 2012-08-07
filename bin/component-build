@@ -38,5 +38,6 @@ if (json.dependencies) {
 
 mkdir(program.out, function(err){
   if (err) utils.fatal(err.message);
-  
+  // TODO: move ^ logic into component.build()
+  component.build(json, program.out);
 });
