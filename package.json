@@ -23,6 +23,7 @@
     "component-install": "bin/component-install",
     "component-ls": "bin/component-ls",
     "component-convert": "bin/component-convert",
+    "component-build": "bin/component-build",
     "component-search": "bin/component-search"
   },
   "main": "index"
