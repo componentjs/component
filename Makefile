@@ -4,6 +4,7 @@ test:
 		--require should \
 		--timeout 5s \
 		--slow 3s \
+		--bail \
 		--reporter spec
 
 .PHONY: test
