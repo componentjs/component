@@ -22,7 +22,7 @@ describe('component-install', function(){
   })
 
   describe('[name]', function(){
-    it('should install the given component', function(done){
+    it('should install a single component', function(done){
       exec('bin/component-install component/emitter', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
@@ -50,7 +50,7 @@ describe('component-install', function(){
   })
 
   describe('[name...]', function(){
-    it('should install the given components', function(done){
+    it('should install the multiple components', function(done){
       exec('bin/component-install component/overlay component/zepto', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
