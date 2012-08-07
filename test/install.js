@@ -25,7 +25,17 @@ describe('component-install', function(){
     })
 
     it('should install dependencies', function(done){
-
+      exec('bin/component-install component/overlay', function(err, stdout){
+        if (err) return done(err);
+        stdout.should.include('install');
+        stdout.should.include('fetch');
+        stdout.should.include('complete');
+        var json = require(path.resolve('components/component-emitter/component.json'));
+        json.name.should.equal('emitter');
+        var json = require(path.resolve('components/component-overlay/component.json'));
+        json.name.should.equal('overlay');
+        done();
+      })
     })
   })
 
