@@ -68,6 +68,18 @@ describe('component-install', function(){
   })
 
   it('should default to installing from ./component.json', function(done){
-    done();
+    exec('bin/component-install', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('install');
+      stdout.should.include('fetch');
+      stdout.should.include('complete');
+      var json = require(path.resolve('components/component-emitter/component.json'));
+      json.name.should.equal('emitter');
+      var json = require(path.resolve('components/component-tip/component.json'));
+      json.name.should.equal('tip');
+      var json = require(path.resolve('components/component-popover/component.json'));
+      json.name.should.equal('popover');
+      done();
+    })
   })
 })
