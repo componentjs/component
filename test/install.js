@@ -4,11 +4,21 @@
  */
 
 var exec = require('child_process').exec
+  , fs = require('fs')
   , path = require('path');
 
 describe('component-install', function(){
   beforeEach(function(done){
-    exec('rm -fr components', done);
+    exec('rm -fr components component.json', done);
+  })
+
+  beforeEach(function(done){
+    fs.writeFile('component.json', JSON.stringify({
+      dependencies: {
+        "component/tip": "*",
+        "component/popover": "*"
+      }
+    }), done);
   })
 
   describe('[name]', function(){
@@ -41,11 +51,23 @@ describe('component-install', function(){
 
   describe('[name...]', function(){
     it('should install the given components', function(done){
-      
+      exec('bin/component-install component/overlay component/zepto', function(err, stdout){
+        if (err) return done(err);
+        stdout.should.include('install');
+        stdout.should.include('fetch');
+        stdout.should.include('complete');
+        var json = require(path.resolve('components/component-emitter/component.json'));
+        json.name.should.equal('emitter');
+        var json = require(path.resolve('components/component-overlay/component.json'));
+        json.name.should.equal('overlay');
+        var json = require(path.resolve('components/component-zepto/component.json'));
+        json.name.should.equal('zepto-component');
+        done();
+      })
     })
   })
 
   it('should default to installing from ./component.json', function(done){
-    
+    done();
   })
 })
