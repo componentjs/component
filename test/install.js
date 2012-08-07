@@ -23,7 +23,7 @@ describe('component-install', function(){
 
   describe('[name]', function(){
     it('should install a single component', function(done){
-      exec('bin/component-install component/emitter', function(err, stdout){
+      exec('bin/component install component/emitter', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('fetch');
@@ -35,7 +35,7 @@ describe('component-install', function(){
     })
 
     it('should install dependencies', function(done){
-      exec('bin/component-install component/overlay', function(err, stdout){
+      exec('bin/component install component/overlay', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('fetch');
@@ -51,7 +51,7 @@ describe('component-install', function(){
 
   describe('[name...]', function(){
     it('should install the multiple components', function(done){
-      exec('bin/component-install component/overlay component/zepto', function(err, stdout){
+      exec('bin/component install component/overlay component/zepto', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('fetch');
@@ -68,7 +68,7 @@ describe('component-install', function(){
   })
 
   it('should default to installing from ./component.json', function(done){
-    exec('bin/component-install', function(err, stdout){
+    exec('bin/component install', function(err, stdout){
       if (err) return done(err);
       stdout.should.include('install');
       stdout.should.include('fetch');
