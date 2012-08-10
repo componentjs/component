@@ -5,7 +5,7 @@
 
 ## Installation
 
-   $ npm install -g component
+     $ npm install -g component
 
 ## Installing packages
 
