@@ -5,6 +5,7 @@
  */
 
 var program = require('commander')
+  , Builder = require('component-builder')
   , component = require('..')
   , utils = component.utils
   , log = component.utils.log
@@ -23,23 +24,27 @@ program.parse(process.argv);
 
 // load json
 
-var json = require(path.resolve('component.json'));
+var conf = require(path.resolve('component.json'));
 
-// ensure deps are installed
+// mkdir -p
 
-if (json.dependencies) {
-  Object.keys(json.dependencies).forEach(function(name){
-    if (component.exists(name)) return;
-    utils.fatal(name + ' is not installed, run `component install`');
-  });
-}
+mkdir.sync(program.out);
+
+// output streams
+
+var js = fs.createWriteStream(path.join(program.out, 'build.js'));
+var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 
 // build
 
-mkdir(program.out, function(err){
-  if (err) utils.fatal(err.message);
-  // TODO: move ^ logic into component.build()
-  component.build(json, program.out, function(err){
+Object.keys(conf.dependencies).forEach(function(name){
+  if (!component.exists(name)) utils.fatal(name + ' is not installed, run `component install`');
+  name = name.replace('/', '-');
+  var dir = path.join('components', name);
+  var builder = new Builder(dir);
+  builder.build(function(err, obj){
     if (err) utils.fatal(err.message);
+    js.write(obj.js);
+    css.write(obj.css);
   });
 });
