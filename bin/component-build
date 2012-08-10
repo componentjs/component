@@ -36,9 +36,22 @@ mkdir.sync(program.out);
 var js = fs.createWriteStream(path.join(program.out, 'build.js'));
 var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 
+// deps
+
+var deps = Object.keys(conf.dependencies);
+var pending = deps.length;
+var start = new Date;
+
+// stats
+
+var stats = {
+  css: 0,
+  js: 0
+};
+
 // build
 
-Object.keys(conf.dependencies).forEach(function(name){
+deps.forEach(function(name){
   if (!component.exists(name)) utils.fatal(name + ' is not installed, run `component install`');
   name = name.replace('/', '-');
   var dir = path.join('components', name);
@@ -46,9 +59,22 @@ Object.keys(conf.dependencies).forEach(function(name){
   if (program.verbose) log('build', name);
   builder.build(function(err, obj){
     if (err) utils.fatal(err.message);
+    stats.css += obj.css.length;
+    stats.js += obj.js.length;
     if (program.verbose) log('write', name + ' ' + (obj.js.length / 1024 | 0) + 'kb of js');
     if (program.verbose) log('write', name + ' ' + (obj.css.length / 1024 | 0) + 'kb of css');
     js.write(obj.js);
     css.write(obj.css);
+    --pending || done();
   });
 });
+
+// all finished
+
+function done() {
+  if (!program.verbose) return;
+  var duration = new Date - start;
+  log('js', (stats.js / 1024 | 0) + 'kb');
+  log('css', (stats.css / 1024 | 0) + 'kb');
+  log('duration', duration + 'ms');
+}
