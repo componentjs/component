@@ -16,7 +16,8 @@ var program = require('commander')
 // options
 
 program
-  .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build');
+  .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
+  .option('-v, --verbose', 'output verbose build information')
 
 // parse argv
 
@@ -42,8 +43,11 @@ Object.keys(conf.dependencies).forEach(function(name){
   name = name.replace('/', '-');
   var dir = path.join('components', name);
   var builder = new Builder(dir);
+  if (program.verbose) log('build', name);
   builder.build(function(err, obj){
     if (err) utils.fatal(err.message);
+    if (program.verbose) log('write', name + ' ' + (obj.js.length / 1024 | 0) + 'kb of js');
+    if (program.verbose) log('write', name + ' ' + (obj.css.length / 1024 | 0) + 'kb of css');
     js.write(obj.js);
     css.write(obj.css);
   });
