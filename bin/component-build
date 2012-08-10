@@ -51,6 +51,7 @@ var stats = {
 
 // build
 
+if (program.verbose) console.log();
 deps.forEach(function(name){
   if (!component.exists(name)) utils.fatal(name + ' is not installed, run `component install`');
   name = name.replace('/', '-');
@@ -77,4 +78,5 @@ function done() {
   log('js', (stats.js / 1024 | 0) + 'kb');
   log('css', (stats.css / 1024 | 0) + 'kb');
   log('duration', duration + 'ms');
+  console.log();
 }
