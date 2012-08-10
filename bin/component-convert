@@ -5,7 +5,7 @@
  */
 
 var program = require('commander')
-  , html2js = require('html-to-js')
+  , str2js = require('string-to-js')
   , component = require('..')
   , utils = component.utils
   , path = require('path')
@@ -46,4 +46,4 @@ function write(path, str) {
 
 var html = read(file, 'utf8');
 var out = path.join(path.dirname(file), path.basename(file, '.html') + '.js');
-write(out, html2js(html));
+write(out, str2js(html));
