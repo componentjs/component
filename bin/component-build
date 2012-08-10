@@ -39,6 +39,7 @@ var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 // deps
 
 var deps = Object.keys(conf.dependencies);
+var ignoring = { scripts: [], styles: [] };
 var pending = deps.length;
 var start = new Date;
 
@@ -58,6 +59,15 @@ deps.forEach(function(name){
   var dir = path.join('components', name);
   var builder = new Builder(dir);
   if (program.verbose) log('build', name);
+
+  builder.ignored = ignoring;
+
+  // TODO: lame, make builder facilitate this
+  builder.on('dependency', function(builder){
+    ignoring.scripts.push(builder.name);
+    ignoring.styles.push(builder.name);
+  });
+
   builder.build(function(err, obj){
     if (err) utils.fatal(err.message);
     stats.css += obj.css.length;
