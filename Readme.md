@@ -55,11 +55,10 @@ Commands:
 ## Features
 
   - no registry required, uses github repositories
-  - fast (~2x faster than uncached npm at the time of comparison)
+  - pretty fast (~2x faster than uncached npm at the time of comparison)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
-  - hackable internals (no monolithic messy lib here)
+  - component skeleton creation command
   - resolves dependencies
-  - component skeleton command
 
 ## Dependencies
 
