@@ -92,7 +92,7 @@ program.prompt({
   write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
 
   // .gitignore
-  write(join(dir, '.gitignore'), 'components\n');
+  write(join(dir, '.gitignore'), 'components\nbuild\n');
 
   // write component.json
   write(join(dir, 'component.json'), JSON.stringify(conf, null, 2));
