@@ -36,57 +36,24 @@ mkdir.sync(program.out);
 var js = fs.createWriteStream(path.join(program.out, 'build.js'));
 var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 
-// deps
-
-var deps = Object.keys(conf.dependencies);
-var ignoring = { scripts: [], styles: [] };
-var pending = deps.length;
-var start = new Date;
-
-// stats
-
-var stats = {
-  css: 0,
-  js: 0
-};
-
 // build
 
+var builder = new Builder('.');
+var start = new Date;
+
 if (program.verbose) console.log();
-deps.forEach(function(name){
-  if (!component.exists(name)) utils.fatal(name + ' is not installed, run `component install`');
-  name = name.replace('/', '-');
-  var dir = path.join('components', name);
-  var builder = new Builder(dir);
-  if (program.verbose) log('build', name);
+builder.build(function(err, obj){
+  if (err) utils.fatal(err.message);
 
-  builder.ignored = ignoring;
+  css.write(obj.css);
+  js.write(obj.js);
 
-  // TODO: lame, make builder facilitate this
-  builder.on('dependency', function(builder){
-    ignoring.scripts.push(builder.name);
-    ignoring.styles.push(builder.name);
-  });
-
-  builder.build(function(err, obj){
-    if (err) utils.fatal(err.message);
-    stats.css += obj.css.length;
-    stats.js += obj.js.length;
-    if (program.verbose) log('write', name + ' ' + (obj.js.length / 1024 | 0) + 'kb of js');
-    if (program.verbose) log('write', name + ' ' + (obj.css.length / 1024 | 0) + 'kb of css');
-    js.write(obj.js);
-    css.write(obj.css);
-    --pending || done();
-  });
-});
-
-// all finished
-
-function done() {
   if (!program.verbose) return;
   var duration = new Date - start;
-  log('js', (stats.js / 1024 | 0) + 'kb');
-  log('css', (stats.css / 1024 | 0) + 'kb');
+  log('write', js.path);
+  log('write', css.path);
+  log('js', (obj.js.length / 1024 | 0) + 'kb');
+  log('css', (obj.css.length / 1024 | 0) + 'kb');
   log('duration', duration + 'ms');
   console.log();
-}
+});
