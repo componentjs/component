@@ -46,6 +46,7 @@ builder.build(function(err, obj){
   if (err) utils.fatal(err.message);
 
   css.write(obj.css);
+  js.write(obj.require);
   js.write(obj.js);
 
   if (!program.verbose) return;
