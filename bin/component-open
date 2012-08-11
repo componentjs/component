@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..')
+  , exec = require('child_process').exec;
+
+// parse argv
+
+program
+  .usage('<name>')
+  .parse(process.argv);
+
+// open
+
+var pkg = program.args[0];
+if (!pkg) component.utils.fatal("<name> required");
+exec('open http://github.com/' + pkg);

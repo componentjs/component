@@ -25,6 +25,7 @@ program.on('--help', function(){
   console.log('    search [query]       search with the given query');
   console.log('    convert <file ...>   convert html files to js modules');
   console.log('    info [prop]          output json component information');
+  console.log('    open <name>          open component github repo');
   console.log('    ls                   list installed components');
   console.log();
   process.exit();
