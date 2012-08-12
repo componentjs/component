@@ -59,6 +59,7 @@ if (!pkgs.length) {
 
 // install
 
+console.log();
 pkgs.forEach(function(pkg){
   var parts = pkg.split('@');
   pkg = parts.shift();
@@ -96,3 +97,8 @@ function report(pkg) {
   });
 }
 
+// padding
+
+process.on('exit', function(){
+  console.log();
+});
