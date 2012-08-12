@@ -15,6 +15,25 @@ program
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
 
+// examples
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log();
+  console.log('    # install deps in ./component.json');
+  console.log('    $ component install');
+  console.log();
+  console.log('    # install a single component');
+  console.log('    $ component install component/tip');
+  console.log();
+  console.log('    # install several components');
+  console.log('    $ component install component/tip component/popover');
+  console.log();
+  console.log('    # shell brace expansion ftw');
+  console.log('    $ component install component/{tip,popover,dialog}');
+  console.log();
+});
+
 // parse argv
 
 program.parse(process.argv);
