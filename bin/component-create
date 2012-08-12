@@ -59,6 +59,7 @@ program.prompt({
   conf.name = obj.name;
   conf.description = obj.desc;
   conf.version = "0.0.1";
+  conf.keywords = [];
   conf.dependencies = {};
 
   // dir
