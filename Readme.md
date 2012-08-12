@@ -139,6 +139,13 @@ Then run:
 $ make test
 ```
 
+## Shout-outs
+
+  This tool is of course inspired by various package managers out there,
+  npm, volo, etc. My hope is that other communities will re-implement this
+  simple tool in their language of choice so that we can all consume components
+  easily.
+
 ## Links
 
  - [Mailing List](https://groups.google.com/group/componentjs)
