@@ -12,7 +12,7 @@
   To install one or more packages, simply pass their github
   repo names as arguments to `component install`. Dependencies
   are resolved and the component contents are downloaded into
-  `./components` by default.
+  `./components` by default. View `component help install` for details.
 
 ```
 $ component install component/tip
@@ -59,13 +59,13 @@ Commands:
 
 ## Features
 
-  - no registry required, uses github repositories
+  - no registry publishing or account required, uses github repositories
   - pretty fast (~2x faster than uncached npm at the time of comparison)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
   - component skeleton creation command
-  - resolves dependencies
+  - installs dependencies from the command-line or ./component.json
 
-## Dependencies
+## Using Github as a registry
 
   By using GitHub as the registry, `component(1)` is automatically
   available to you without further explicit knowledge or work
@@ -74,7 +74,7 @@ Commands:
   A nice side-effect of this namespaced world is that dependencies
   are explicit and self-documenting. No longer do you need to query
   the registry for a "repo" property that may not exist, it's simply
-  build in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
+  built in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
   than the unclear "page".
 
 ## Creating a component
