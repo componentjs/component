@@ -96,6 +96,9 @@ does this component have html? yes
 
 ```
 
+  A `Makefile` is created for you in order to create a build of the component,
+  complete with installed dependencies simply execute `make`.
+
 ## Developing component(1)
 
   `component(1)` and sub-commands are structured much like `git(1)`,
