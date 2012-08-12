@@ -99,7 +99,15 @@ does this component have html? yes
   A `Makefile` is created for you in order to create a build of the component,
   complete with installed dependencies simply execute `make`.
 
-## Developing component(1)
+## Templates
+
+  Because `component(1)` has no notion of a "template", even simple HTML files
+  should be converted to a `require()`-able module. It is recommended that public
+  components shared within the community use regular HTML templates, and regular 
+  CSS stylesheets to maximize contributions, however if you wish to use alternate
+  technologies just make sure to compile them before publishing them to Github.
+
+## Developing component(1) sub-commands
 
   `component(1)` and sub-commands are structured much like `git(1)`,
   in that sub-commands are simply separate executables. For example
