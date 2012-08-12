@@ -103,9 +103,12 @@ does this component have html? yes
 
   Because `component(1)` has no notion of a "template", even simple HTML files
   should be converted to a `require()`-able module. It is recommended that public
-  components shared within the community use regular HTML templates, and regular 
+  components shared within the community use regular HTML templates, and regular
   CSS stylesheets to maximize contributions, however if you wish to use alternate
   technologies just make sure to compile them before publishing them to Github.
+
+  For the recommended use-case of regular HTML, the `component-convert(1)` command
+  will translate a regular HTML file to its `require()`-able JavaScript counterpart.
 
 ## Developing component(1) sub-commands
 
