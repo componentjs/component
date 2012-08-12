@@ -79,19 +79,20 @@ Commands:
   this repo is published to Github, you're all done!
 
 ```
-$ component create popover
-repo (username/project): visionmedia/popover
-description: Popover UI component
+name: popover
+description: Popover UI component 
 does this component have js? yes
 does this component have css? yes
 does this component have html? yes
 
-   create : popover
-   create : popover/index.js
-   create : popover/template.html
-   create : popover/popover.css
-   create : popover/Readme.md
-   create : popover/component.json
+     create : popover
+     create : popover/index.js
+     create : popover/template.html
+     create : popover/popover.css
+     create : popover/Makefile
+     create : popover/Readme.md
+     create : popover/.gitignore
+     create : popover/component.json
 
 ```
 
