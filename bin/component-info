@@ -11,6 +11,19 @@ var program = require('commander')
 
 program.usage('<name> [prop]');
 
+// examples
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log();
+  console.log('    # output remote component.json');
+  console.log('    $ component info component/tip');
+  console.log();
+  console.log('    # output version only');
+  console.log('    $ component info component/tip version');
+  console.log();
+});
+
 // parse argv
 
 program.parse(process.argv);
