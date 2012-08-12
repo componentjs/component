@@ -134,6 +134,10 @@ Then run:
 $ make test
 ```
 
+## Links
+
+ - [Mailing List](https://groups.google.com/group/componentjs)
+
 ## License 
 
 (The MIT License)
