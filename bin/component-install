@@ -6,6 +6,8 @@
 
 var program = require('commander')
   , component = require('..')
+  , utils = component.utils
+  , log = utils.log
   , path = require('path');
 
 // options
@@ -62,7 +64,35 @@ pkgs.forEach(function(pkg){
   pkg = parts.shift();
   var version = parts.shift() || 'master';
   pkg = component.install(pkg, version, { dest: program.out, force: program.force });
-  component.terse(pkg);
+  report(pkg);
   pkg.install();
 });
+
+// reporter
+
+function report(pkg) {
+  log('install', pkg.name + '@' + pkg.version);
+
+  pkg.on('error', function(err){
+    log('error', err.message);
+    process.exit(1);
+  });
+
+  pkg.on('dep', function(dep){
+    log('dep', dep.name + '@' + dep.version);
+    report(dep);
+  });
+
+  pkg.on('exists', function(dep){
+    log('exists', dep.name + '@' + dep.version);
+  });
+
+  pkg.on('file', function(file){
+    log('fetch', pkg.name + ':' + file);
+  });
+
+  pkg.on('end', function(){
+    log('complete', pkg.name);
+  });
+}
 
