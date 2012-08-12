@@ -27,6 +27,7 @@ var pkgs = program.args;
 
 if (!pkgs.length) {
   pkgs = require(path.resolve('component.json')).dependencies;
+  if (!pkgs) return;
   pkgs = Object.keys(pkgs).map(function(name){
     return name + '@' + pkgs[name]; 
   });
