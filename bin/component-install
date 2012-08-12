@@ -32,6 +32,9 @@ program.on('--help', function(){
   console.log('    # shell brace expansion ftw');
   console.log('    $ component install component/{tip,popover,dialog}');
   console.log();
+  console.log('    # install a specific tag / sha');
+  console.log('    $ component install component/tip@8bf1ffc3f');
+  console.log();
 });
 
 // parse argv
