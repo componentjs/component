@@ -26,7 +26,8 @@
     "component-ls": "bin/component-ls",
     "component-convert": "bin/component-convert",
     "component-build": "bin/component-build",
-    "component-search": "bin/component-search"
+    "component-search": "bin/component-search",
+    "component-create": "bin/component-create"
   },
   "main": "index"
 }
