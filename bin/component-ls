@@ -18,7 +18,7 @@ program.parse(process.argv);
 
 console.log();
 fs.readdirSync('components').forEach(function(pkg){
-  var json = path.join(process.cwd(), 'components', pkg, 'component.json');
+  var json = path.resolve('components', pkg, 'component.json');
   var obj = require(json);
   log(obj.name, obj.version);
 });
