@@ -45,22 +45,18 @@ function write(path, str) {
 // prompt
 
 program.prompt({
-  repo: 'repo (username/project): ',
+  name: 'name: ',
   desc: 'description: ',
   js: 'does this component have js? ',
   css: 'does this component have css? ',
   html: 'does this component have html? '
 }, function(obj){
-  // validate
-  if (!~obj.repo.indexOf('/')) {
-    utils.fatal('repo must use <username>/<project> format');
-  }
 
   // name
-  var name = obj.repo.split('/').pop();
+  var name = obj.name;
 
   // populate json
-  conf.name = obj.repo;
+  conf.name = obj.name;
   conf.description = obj.desc;
   conf.version = "0.0.1";
   conf.dependencies = {};
@@ -88,6 +84,9 @@ program.prompt({
     write(join(dir, name + '.css'), '');
   }
 
+  // makefile
+  write(join(dir, 'Makefile'), createMakefile(obj));
+
   // readme
   write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
 
@@ -107,4 +106,38 @@ program.prompt({
 
 function bool(str) {
   if (str == 'yes') return true;
+}
+
+/**
+ * Create a makefile.
+ */
+
+function createMakefile(obj) {
+  var buf = '\n';
+
+  // build target
+  buf += 'build: components';
+  if (bool(obj.js)) buf += ' index.js';
+  if (bool(obj.css)) buf += ' ' + obj.name + '.css';
+  if (bool(obj.html)) buf += ' template.js';
+  buf += '\n\t@component build\n\n';
+
+  // template.js target
+  if (bool(obj.html)) {
+    buf += 'template.js: template.html\n';
+    buf += '\t@component convert $<\n\n';
+  }
+
+  // components target
+  buf += 'components:\n';
+  buf += '\t@Component install\n\n';
+
+  // clean phony
+  buf += 'clean:\n';
+  buf += '\trm -fr build components template.js\n\n';
+
+  // PHONY
+  buf += '.PHONY: clean\n';
+
+  return buf;
 }
