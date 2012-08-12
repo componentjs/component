@@ -52,6 +52,10 @@ component.info(pkg, version, function(err, json){
   }
 
   // output
-  process.stdout.write(JSON.stringify(json, null, 2));
+  if ('string' == typeof json) {
+    process.stdout.write(json);
+  } else {
+    process.stdout.write(JSON.stringify(json, null, 2));
+  }
 });
 
