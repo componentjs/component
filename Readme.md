@@ -88,7 +88,7 @@ does this component have html? yes
 
    create : popover
    create : popover/index.js
-   create : popover/popover.html
+   create : popover/template.html
    create : popover/popover.css
    create : popover/Readme.md
    create : popover/component.json

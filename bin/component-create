@@ -78,8 +78,8 @@ program.prompt({
 
   // html
   if (bool(obj.html)) {
-    conf.templates = [name + '.html'];
-    write(join(dir, name + '.html'), '');
+    conf.scripts.push('template.js');
+    write(join(dir, 'template.html'), '');
   }
 
   // css
