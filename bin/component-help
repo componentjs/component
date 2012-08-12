@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , exec = require('child_process').exec;
+
+// parse argv
+
+program.parse(process.argv);
+
+// output --help
+
+var cmd = program.args[0]
+  ? 'component ' + program.args[0] + ' --help'
+  : 'component --help';
+
+exec(cmd, function(err, stdout){
+  if (err) throw err;
+  process.stdout.write(stdout);
+});
