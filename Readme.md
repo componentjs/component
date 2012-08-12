@@ -70,7 +70,7 @@ Commands:
   are explicit and self-documenting. No longer do you need to query
   the registry for a "repo" property that may not exist, it's simply
   build in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
-  than the ambiguous "page".
+  than the unclear "page".
 
 ## Creating a component
 
