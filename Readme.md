@@ -46,10 +46,13 @@ Options:
 
 Commands:
 
-  install <name ...>  install one or more components
-  search [query]      search with the given query
-  info [prop]         output json component information
-  ls                  list installed components
+  install <name ...>   install one or more components
+  create <dir>         create a component skeleton
+  search [query]       search with the given query
+  convert <file ...>   convert html files to js modules
+  info [prop]          output json component information
+  open <name>          open component github repo
+  ls                   list installed components
 ```
 
 ## Features
