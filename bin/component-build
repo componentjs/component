@@ -19,6 +19,19 @@ program
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-v, --verbose', 'output verbose build information')
 
+// examples
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log();
+  console.log('    # build to ./build');
+  console.log('    $ component build');
+  console.log();
+  console.log('    # build to ./dist');
+  console.log('    $ component build -o dist');
+  console.log();
+});
+
 // parse argv
 
 program.parse(process.argv);
