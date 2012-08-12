@@ -37,6 +37,7 @@ $ component install component/tip
  Via `--help`:
 
 ```
+
 Usage: component <command> [options]
 
 Options:
@@ -53,6 +54,7 @@ Commands:
   info [prop]          output json component information
   open <name>          open component github repo
   ls                   list installed components
+
 ```
 
 ## Features
