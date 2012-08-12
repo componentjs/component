@@ -22,6 +22,7 @@
   "bin": {
     "component": "bin/component",
     "component-info": "bin/component-info",
+    "component-help": "bin/component-help",
     "component-install": "bin/component-install",
     "component-ls": "bin/component-ls",
     "component-convert": "bin/component-convert",
