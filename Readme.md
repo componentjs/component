@@ -120,6 +120,20 @@ does this component have html? yes
   profile or session while developing component, otherwise `./bin/component`
   will have a hard time finding the sub-commands.
 
+## Running tests
+
+Make sure dependencies are installed:
+
+```
+$ npm install
+```
+
+Then run:
+
+```
+$ make test
+```
+
 ## License 
 
 (The MIT License)
