@@ -17,6 +17,16 @@ var program = require('commander')
 
 program.usage('<file>');
 
+// examples
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log();
+  console.log('    # convert template.html to js');
+  console.log('    $ component convert template.html');
+  console.log();
+});
+
 // parse
 
 program.parse(process.argv);
