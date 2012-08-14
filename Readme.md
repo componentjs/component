@@ -149,6 +149,7 @@ $ make test
 ## Links
 
  - [Mailing List](https://groups.google.com/group/componentjs)
+ - join `#components` on freenode
 
 ## License 
 
