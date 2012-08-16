@@ -31,7 +31,7 @@ var conf = require(path.resolve('component.json'));
 
 // register
 
-component.register(repo[0], repo[1], function(err){
+component.register(repo[0], repo[1], conf, function(err){
   if (err) utils.fatal(err.message);
   utils.log('register', repo[0] + '/' + repo[1]);
 });
