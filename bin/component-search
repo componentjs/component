@@ -5,8 +5,30 @@
  */
 
 var program = require('commander')
-  , component = require('..');
+  , component = require('..')
+  , utils = component.utils;
 
 // parse argv
 
-program.parse(process.argv);
+program
+  .usage('<query>')
+  .parse(process.argv);
+
+// <query> required
+
+if (!program.args.length) utils.fatal('<query> required');
+
+// query
+
+var query = program.args[0];
+
+// search
+
+component.search(query, function(err, pkgs){
+  if (err) utils.fatal(err.message);
+  console.log();
+  pkgs.forEach(function(pkg){
+    utils.log(pkg.name, pkg.description);
+  });
+  console.log();
+});
