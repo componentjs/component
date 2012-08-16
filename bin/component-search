@@ -26,6 +26,7 @@ var query = program.args[0];
 
 component.search(query, function(err, pkgs){
   if (err) utils.fatal(err.message);
+  if (!pkgs || !pkgs.length) return;
   console.log();
   pkgs.forEach(function(pkg){
     utils.log(pkg.name, pkg.description);
