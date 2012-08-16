@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander')
+  , component = require('..')
+  , path = require('path')
+  , utils = component.utils;
+
+// parse argv
+
+program
+  .usage('<username>/<repo>')
+  .parse(process.argv);
+
+// repo required
+
+if (!program.args.length) utils.fatal('<username>/<repo> required');
+
+// repo
+
+var repo = program.args[0].split('/');
+
+if (2 != repo.length) utils.fatal('<username>/<repo> required, for example "visionmedia/page.js"');
+
+// conf
+
+var conf = require(path.resolve('component.json'));
+
+// register
+
+component.register(repo[0], repo[1], function(err){
+  if (err) utils.fatal(err.message);
+  utils.log('register', repo[0] + '/' + repo[1]);
+});
