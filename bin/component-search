@@ -29,7 +29,7 @@ component.search(query, function(err, pkgs){
   if (!pkgs || !pkgs.length) return;
   console.log();
   pkgs.forEach(function(pkg){
-    utils.log(pkg.name, pkg.description);
+    utils.log(pkg.name, pkg.description.toLowerCase());
   });
   console.log();
 });
