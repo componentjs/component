@@ -51,7 +51,7 @@ var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 
 // build
 
-var builder = new Builder('.');
+var builder = new Builder(process.cwd());
 var start = new Date;
 
 if (program.verbose) console.log();
