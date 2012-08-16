@@ -28,7 +28,8 @@
     "component-convert": "bin/component-convert",
     "component-build": "bin/component-build",
     "component-search": "bin/component-search",
-    "component-create": "bin/component-create"
+    "component-create": "bin/component-create",
+    "component-register": "bin/component-register"
   },
   "main": "index"
 }
