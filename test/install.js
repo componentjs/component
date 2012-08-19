@@ -5,6 +5,8 @@
 
 var exec = require('child_process').exec
   , fs = require('fs')
+  , exists = fs.existsSync
+  , assert = require('assert')
   , path = require('path');
 
 describe('component install', function(){
@@ -17,6 +19,9 @@ describe('component install', function(){
       dependencies: {
         "component/tip": "*",
         "component/popover": "*"
+      },
+      devDependencies: {
+        "component/inherit": "*"
       }
     }), done);
   })
@@ -79,6 +84,24 @@ describe('component install', function(){
       json.name.should.equal('tip');
       var json = require(path.resolve('components/component-popover/component.json'));
       json.name.should.equal('popover');
+      assert(!exists('components/component-inherit'), 'dev deps should be installed');
+      done();
+    })
+  })
+
+  it('should install dev deps when --dev is used', function(done){
+    exec('bin/component install -d', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('install');
+      stdout.should.include('fetch');
+      stdout.should.include('complete');
+      var json = require(path.resolve('components/component-emitter/component.json'));
+      json.name.should.equal('emitter');
+      var json = require(path.resolve('components/component-tip/component.json'));
+      json.name.should.equal('tip');
+      var json = require(path.resolve('components/component-popover/component.json'));
+      json.name.should.equal('popover');
+      assert(exists('components/component-inherit'), 'dev deps should not be installed');
       done();
     })
   })
