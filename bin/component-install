@@ -14,6 +14,7 @@ var program = require('commander')
 
 program
   .usage('[pkg ...]')
+  .option('-d, --dev', 'install development dependencies')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
 
@@ -37,6 +38,9 @@ program.on('--help', function(){
   console.log('    # install a specific tag / sha');
   console.log('    $ component install component/tip@8bf1ffc3f');
   console.log();
+  console.log('    # install regular & development deps in .');
+  console.log('    $ component install -d');
+  console.log();
 });
 
 // parse argv
@@ -50,11 +54,15 @@ var pkgs = program.args;
 // install from ./component.json
 
 if (!pkgs.length) {
-  pkgs = require(path.resolve('component.json')).dependencies;
-  if (!pkgs) return;
-  pkgs = Object.keys(pkgs).map(function(name){
-    return name + '@' + pkgs[name]; 
-  });
+  var conf = require(path.resolve('component.json'));
+
+  if (conf.dependencies) {
+    pkgs = normalize(conf.dependencies);
+  }
+
+  if (conf.devDependencies && program.dev) {
+    pkgs = pkgs.concat(normalize(conf.devDependencies));
+  }
 }
 
 // install
@@ -64,10 +72,22 @@ pkgs.forEach(function(pkg){
   var parts = pkg.split('@');
   pkg = parts.shift();
   var version = parts.shift() || 'master';
-  pkg = component.install(pkg, version, { dest: program.out, force: program.force });
+  pkg = component.install(pkg, version, {
+    dest: program.out,
+    force: program.force,
+    dev: program.dev
+  });
   report(pkg);
   pkg.install();
 });
+
+// map deps to args
+
+function normalize(deps) {
+  return Object.keys(deps).map(function(name){
+    return name + '@' + deps[name];
+  });
+}
 
 // reporter
 
