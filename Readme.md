@@ -146,6 +146,10 @@ $ make test
   simple tool in their language of choice so that we can all consume components
   easily.
 
+## Screencasts
+
+ - [App integration introduction](https://vimeo.com/48054442)
+
 ## Links
 
  - [Mailing List](https://groups.google.com/group/componentjs)
