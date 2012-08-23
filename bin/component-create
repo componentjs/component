@@ -130,8 +130,8 @@ function createMakefile(obj) {
   }
 
   // components target
-  buf += 'components:\n';
-  buf += '\t@Component install --dev\n\n';
+  buf += 'components: component.json\n';
+  buf += '\t@component install --dev\n\n';
 
   // clean phony
   buf += 'clean:\n';
