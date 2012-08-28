@@ -20,6 +20,10 @@ program.parse(process.argv);
 
 var pkg = program.args.shift();
 
+// required
+
+if (!pkg) utils.fatal("<name> required");
+
 // lookup docs
 
 component.docs(pkg, function(err, docs){
