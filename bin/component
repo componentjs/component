@@ -27,7 +27,7 @@ program.on('--help', function(){
   console.log('    register <user>/<proj>  register a component so others can find it');
   console.log('    info <name> [prop]      output json component information');
   console.log('    changes <name>          output changelog contents');
-  console.log('    docs <name>             output readme markdown contents');
+  console.log('    docs <name>             output readme contents');
   console.log('    open <name>             open component github repo');
   console.log('    build                   build the component');
   console.log('    ls                      list installed components');
