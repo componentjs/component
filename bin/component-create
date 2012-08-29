@@ -75,6 +75,7 @@ program.prompt({
 
   // html
   if (bool(obj.html)) {
+    conf.scripts = conf.scripts || [];
     conf.scripts.push('template.js');
     write(join(dir, 'template.html'), '');
   }
