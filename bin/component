@@ -13,7 +13,9 @@ var program = require('commander')
 
 // usage
 
-program.usage('<command> [options]');
+program
+  .version(require('../package').version)
+  .usage('<command> [options]');
 
 // sub-command help
 
