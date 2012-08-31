@@ -11,12 +11,8 @@ var program = require('commander')
 // parse argv
 
 program
-  .usage('<query>')
+  .usage('[query]')
   .parse(process.argv);
-
-// <query> required
-
-if (!program.args.length) utils.fatal('<query> required');
 
 // query
 
