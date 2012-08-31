@@ -20,7 +20,7 @@ if (!program.args.length) utils.fatal('<query> required');
 
 // query
 
-var query = program.args[0];
+var query = program.args.join(' ');
 
 // search
 
