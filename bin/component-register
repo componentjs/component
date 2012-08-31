@@ -19,7 +19,7 @@ var conf = require(path.resolve('component.json'));
 
 // require repo
 
-if (!conf.repo) utils.fatal('component.json "repo" property required');
+if (!conf.repo) utils.fatal('component.json "repo" property required (ex "repo": "component/tip")');
 
 // split
 
