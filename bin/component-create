@@ -45,18 +45,22 @@ function write(path, str) {
 // prompt
 
 program.prompt({
-  name: 'name: ',
+  repo: 'repo (username/project): ',
   desc: 'description: ',
   js: 'does this component have js? ',
   css: 'does this component have css? ',
   html: 'does this component have html? '
 }, function(obj){
+  // repo
+  var repo = obj.repo.split('/');
+  if (2 != repo.length) throw new Error('repo must be <username>/<project>');
 
   // name
-  var name = obj.name;
+  var name = repo[1];
 
   // populate json
-  conf.name = obj.name;
+  conf.name = name;
+  conf.repo = repo.join('/');
   conf.description = obj.desc;
   conf.version = "0.0.1";
   conf.keywords = [];
