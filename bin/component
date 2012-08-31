@@ -26,7 +26,7 @@ program.on('--help', function(){
   console.log('    create <dir>            create a component skeleton');
   console.log('    search [query]          search with the given query');
   console.log('    convert <file ...>      convert html files to js modules');
-  console.log('    register <user>/<proj>  register a component so others can find it');
+  console.log('    register                register a component so others can find it');
   console.log('    info <name> [prop]      output json component information');
   console.log('    changes <name>          output changelog contents');
   console.log('    docs <name>             output readme contents');
