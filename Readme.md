@@ -81,6 +81,12 @@ Commands:
   built in to the package name, for example ["visionmedia/page.js"](https://github.com/visionmedia/page.js) rather
   than the unclear "page".
 
+  Another benefit of this is that there are zero name collisions, for example
+  you may use "component/tip" for a dependency of "foo", and "someuser/tip"
+  as a dependency of "bar", providing `require('tip')` in each. This prevents
+  obscure or irrelevant naming such as "progress", "progress2", "progress-bar",
+  "progress-component" found in npm.
+
 ## Creating a component
 
   The `component-create(1)` command can create a component
