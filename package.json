@@ -9,7 +9,7 @@
     "commander": "1.0.3",
     "mkdirp": "0.3.3",
     "superagent": "0.8.0",
-    "component-builder": "0.0.1",
+    "component-builder": "0.0.2",
     "string-to-js": "0.0.1",
     "which": "1.0.5",
     "batch": "*",
