@@ -1,4 +1,14 @@
 
+0.0.4 / 2012-09-01 
+==================
+
+  * add `.repo` to `component-create(1)`
+  * add `.files` support. Closes #11
+  * fix installation of files nested in dirs
+  * change `component-register(1)` to use .repo prop
+  * change `component-search(1)` query to be optional
+  * change `component-search(1)` to join args
+
 0.0.3 / 2012-08-30 
 ==================
 
