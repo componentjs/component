@@ -16,6 +16,7 @@ var program = require('commander')
 // options
 
 program
+  .option('-s, --standalone', 'build a stand-alone lib')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-v, --verbose', 'output verbose build information')
 
@@ -40,6 +41,10 @@ program.parse(process.argv);
 
 var conf = require(path.resolve('component.json'));
 
+// standalone
+
+var standalone = program.standalone;
+
 // mkdir -p
 
 mkdir.sync(program.out);
@@ -59,8 +64,11 @@ builder.build(function(err, obj){
   if (err) utils.fatal(err.message);
 
   css.write(obj.css);
+  if (standalone) js.write(';(function(){\n');
   js.write(obj.require);
   js.write(obj.js);
+  if (standalone) js.write('window.' + conf.name + ' = require("' + conf.name + '");\n');
+  if (standalone) js.write('})();');
 
   if (!program.verbose) return;
   var duration = new Date - start;
