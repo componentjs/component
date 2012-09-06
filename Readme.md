@@ -155,8 +155,7 @@ $ make test
 
 ## Shout-outs
 
-  This tool is of course inspired by various package managers out there,
-  npm, volo, and every other package manager in existence. The concept of components themselves are nothing new, Drupal
+  The concept of components themselves are nothing new, Drupal
   for example has been doing this for years, however it seemed the concept was never
   really translated to the client. My hope is that other communities will re-implement this
   simple tool in their language of choice so that we can all consume components
@@ -171,6 +170,7 @@ $ make test
  - [Mailing List](https://groups.google.com/group/componentjs)
  - component ["spec"](https://github.com/component/spec/wiki)
  - join `#components` on freenode
+ - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
 
 ## License 
 
