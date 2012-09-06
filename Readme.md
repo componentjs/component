@@ -152,7 +152,9 @@ $ make test
 ## Shout-outs
 
   This tool is of course inspired by various package managers out there,
-  npm, volo, etc. My hope is that other communities will re-implement this
+  npm, volo, etc. The concept of components themselves are nothing new, Drupal
+  for example has been doing this for years, however it seemed the concept was never
+  really translated to the client. My hope is that other communities will re-implement this
   simple tool in their language of choice so that we can all consume components
   easily.
 
