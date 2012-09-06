@@ -59,7 +59,7 @@ program.prompt({
   var name = repo[1];
 
   // populate json
-  conf.name = name;
+  conf.name = obj.name = name;
   conf.repo = repo.join('/');
   conf.description = obj.desc;
   conf.version = "0.0.1";
@@ -91,7 +91,7 @@ program.prompt({
   }
 
   // makefile
-  write(join(dir, 'Makefile'), createMakefile(conf));
+  write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
   write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
