@@ -64,10 +64,13 @@ Commands:
 ## Features
 
   - no registry publishing or account required, uses github repositories
-  - pretty fast (~2x faster than uncached npm at the time of comparison)
+  - fast (~2x faster than uncached npm at the time of comparison)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
   - component skeleton creation command
   - installs dependencies from the command-line or ./component.json
+  - avoid name squatting through github's naming conventions
+  - write components that include their own styles, images, scripts, or any combo
+  - write commonjs style scripts
 
 ## Using Github as a registry
 
@@ -152,7 +155,7 @@ $ make test
 ## Shout-outs
 
   This tool is of course inspired by various package managers out there,
-  npm, volo, etc. The concept of components themselves are nothing new, Drupal
+  npm, volo, and every other package manager in existence. The concept of components themselves are nothing new, Drupal
   for example has been doing this for years, however it seemed the concept was never
   really translated to the client. My hope is that other communities will re-implement this
   simple tool in their language of choice so that we can all consume components
