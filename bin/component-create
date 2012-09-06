@@ -126,7 +126,7 @@ function createMakefile(obj) {
   if (bool(obj.js)) buf += ' index.js';
   if (bool(obj.css)) buf += ' ' + obj.name + '.css';
   if (bool(obj.html)) buf += ' template.js';
-  buf += '\n\t@component build\n\n';
+  buf += '\n\t@component build --dev\n\n';
 
   // template.js target
   if (bool(obj.html)) {
