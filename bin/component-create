@@ -65,6 +65,7 @@ program.prompt({
   conf.version = "0.0.1";
   conf.keywords = [];
   conf.dependencies = {};
+  conf.development = {};
 
   // dir
   console.log();
