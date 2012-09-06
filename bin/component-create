@@ -91,7 +91,7 @@ program.prompt({
   }
 
   // makefile
-  write(join(dir, 'Makefile'), createMakefile(obj));
+  write(join(dir, 'Makefile'), createMakefile(conf));
 
   // readme
   write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
