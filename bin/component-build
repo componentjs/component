@@ -16,7 +16,7 @@ var program = require('commander')
 // options
 
 program
-  .option('-d, --dev', 'build devDependencies')
+  .option('-d, --dev', 'build development dependencies')
   .option('-s, --standalone', 'build a stand-alone lib')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-v, --verbose', 'output verbose build information')

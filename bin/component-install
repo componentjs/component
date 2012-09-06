@@ -60,8 +60,8 @@ if (!pkgs.length) {
     pkgs = normalize(conf.dependencies);
   }
 
-  if (conf.devDependencies && program.dev) {
-    pkgs = pkgs.concat(normalize(conf.devDependencies));
+  if (conf.development && program.dev) {
+    pkgs = pkgs.concat(normalize(conf.development));
   }
 }
 

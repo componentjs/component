@@ -20,7 +20,7 @@ describe('component install', function(){
         "component/tip": "*",
         "component/popover": "*"
       },
-      devDependencies: {
+      development: {
         "component/inherit": "*"
       }
     }), done);
