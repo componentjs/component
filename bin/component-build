@@ -16,6 +16,7 @@ var program = require('commander')
 // options
 
 program
+  .option('-d, --dev', 'build devDependencies')
   .option('-s, --standalone', 'build a stand-alone lib')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-v, --verbose', 'output verbose build information')
@@ -58,6 +59,10 @@ var css = fs.createWriteStream(path.join(program.out, 'build.css'));
 
 var builder = new Builder(process.cwd());
 var start = new Date;
+
+// --dev
+
+if (program.dev) builder.development();
 
 if (program.verbose) console.log();
 builder.build(function(err, obj){
