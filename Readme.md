@@ -69,6 +69,7 @@ Commands:
   - component skeleton creation command
   - installs dependencies from the command-line or ./component.json
   - avoid name squatting through github's naming conventions
+  - build your components with `--standalone` to share them with non-component(1) users
   - write components that include their own styles, images, scripts, or any combo
   - write commonjs style scripts
 
