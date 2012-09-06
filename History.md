@@ -1,4 +1,11 @@
 
+0.0.6 / 2012-09-05 
+==================
+
+  * add `--dev` to `component-create(1)` build command
+  * add `component-build(1)` --dev flag. Closes #25
+  * fix `component-create(1)` undefined.css. Closes#24
+
 0.0.5 / 2012-09-04 
 ==================
 
