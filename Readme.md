@@ -170,6 +170,7 @@ $ make test
  - [Mailing List](https://groups.google.com/group/componentjs)
  - component ["spec"](https://github.com/component/spec/wiki)
  - join `#components` on freenode
+ - [List](https://github.com/component/component/wiki/Components) of components
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
 
 ## License 
