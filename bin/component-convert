@@ -43,17 +43,8 @@ var file = program.args[0];
 
 if (!file) utils.fatal('<file> required');
 
-/**
- * Verbose write.
- */
-
-function write(path, str) {
-  utils.log('create', path);
-  fs.writeFileSync(path, str);
-}
-
 // convert
 
 var html = read(file, 'utf8');
 var out = path.join(path.dirname(file), path.basename(file, '.html') + '.js');
-write(out, str2js(html));
+fs.writeFileSync(out, str2js(html));
