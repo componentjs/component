@@ -5,8 +5,7 @@
  */
 
 var program = require('commander')
-  , component = require('..')
-  , utils = component.utils
+  , utils = require('../lib/utils')
   , spawn = require('child_process').spawn
   , fs = require('fs')
   , exists = fs.existsSync;
