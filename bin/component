@@ -6,9 +6,7 @@
 
 var program = require('commander')
   , utils = require('../lib/utils')
-  , spawn = require('child_process').spawn
-  , fs = require('fs')
-  , exists = fs.existsSync;
+  , spawn = require('child_process').spawn;
 
 // usage
 
