@@ -6,8 +6,8 @@
 
 var program = require('commander')
   , component = require('..')
+  , utils = component.utils
   , spawn = require('child_process').spawn
-  , which = require('which').sync
   , fs = require('fs')
   , exists = fs.existsSync;
 
@@ -61,22 +61,16 @@ if (!cmd) {
   process.exit();
 }
 
-// command
+// executable
 
-cmd = 'component-' + cmd;
+var bin = 'component-' + cmd;
 
-// which(1) it
+// exec
 
-try {
-  var bin = which(cmd);
-} catch (err) {
-  // TODO: err.code missing ... patch which
-  component.utils.fatal('the "' + cmd + '" command does not exist');
-}
-
-// exec command
-
-var proc = spawn(cmd, args, { customFds: [1, -1, -1] });
+var proc = spawn(bin, args, { customFds: [1, -1, -1] });
 proc.stdout.pipe(process.stdout);
 proc.stderr.pipe(process.stderr);
-proc.on('exit', process.exit);
+
+proc.on('exit', function(code){
+  if (127 == code) utils.fatal('the "' + cmd + '" command does not exist');
+});

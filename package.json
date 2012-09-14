@@ -11,7 +11,6 @@
     "superagent": "0.8.0",
     "component-builder": "0.0.4",
     "string-to-js": "0.0.1",
-    "which": "1.0.5",
     "batch": "*",
     "debug": "*"
   },
