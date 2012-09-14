@@ -1,4 +1,16 @@
 
+0.0.7 / 2012-09-14 
+==================
+
+  * add `--standalone [name]` support to component-build(1). Closes #34
+  * add memoized mkdir
+  * add empty .development `{}` to component-create(1)
+  * update component-builder
+  * remove "which" dependency
+  * remove logging from component-convert(1)
+  * remove "component.json" dep of component target in component-create(1) makefile
+  * rename devDependencies to development
+
 0.0.6 / 2012-09-05 
 ==================
 
