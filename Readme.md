@@ -64,7 +64,7 @@ Commands:
 ## Features
 
   - no registry publishing or account required, uses github repositories
-  - fast (~2x faster than uncached npm at the time of comparison)
+  - fast (~2x faster than uncached npm at the time of comparison, 86 components in < 10s)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
   - component skeleton creation command
   - installs dependencies from the command-line or ./component.json
