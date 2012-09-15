@@ -66,13 +66,17 @@ Commands:
   - write modular commonjs components
   - write components that include their own styles, images, scripts, or any combo
   - no registry publishing or account required, uses github repositories
-  - fast (~2x faster than uncached npm at the time of comparison, 86 components in < 10s)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
   - component skeleton creation command
   - installs dependencies from the command-line or ./component.json
   - avoid name squatting through github's naming conventions
   - build your components with `--standalone` to share them with non-component(1) users
   - view documentation from the command line
+  - fast
+    - ~2x faster than npm
+    - ~8x faster than volo
+    - ~8x faster than bower
+    - installs 85 components in ~10s
 
 ## Using Github as a registry
 
