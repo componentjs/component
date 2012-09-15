@@ -64,7 +64,7 @@ Commands:
 ## Features
 
   - write modular commonjs components
-  - bundle assets such as CSS, HTML and images with your components
+  - write components that include their own styles, images, scripts, or any combo
   - no registry publishing or account required, uses github repositories
   - fast (~2x faster than uncached npm at the time of comparison, 86 components in < 10s)
   - extensible sub-commands via `component-YOURCOMMAND` git-style
@@ -72,8 +72,7 @@ Commands:
   - installs dependencies from the command-line or ./component.json
   - avoid name squatting through github's naming conventions
   - build your components with `--standalone` to share them with non-component(1) users
-  - write components that include their own styles, images, scripts, or any combo
-  - write commonjs style scripts
+  - view documentation from the command line
 
 ## Using Github as a registry
 
