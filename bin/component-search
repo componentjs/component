@@ -56,6 +56,14 @@ function description(str) {
 }
 
 /**
+ * Filter blanks. TODO: remove... shouldn't be necessary
+ */
+
+function blanks(pkg) {
+  return pkg;
+}
+
+/**
  * Sort by stars descending.
  */
 
@@ -69,8 +77,7 @@ function stars(a, b) {
 
 function verbose(pkgs) {
   console.log();
-  pkgs.sort(stars).forEach(function(pkg){
-    if (!pkg) return;
+  pkgs.filter(blanks).sort(stars).forEach(function(pkg){
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
     console.log('  desc: \033[90m%s\033[m', description(pkg.description));
@@ -87,8 +94,7 @@ function verbose(pkgs) {
 function json(pkgs) {
   var len = pkgs.length;
   console.log('[');
-  pkgs.forEach(function(pkg, i){
-    if (!pkg) return;
+  pkgs.filter(blanks).sort(stars).forEach(function(pkg, i){
     process.stdout.write(JSON.stringify(pkg, null, 2));
     if (i < len - 1) process.stdout.write(',\n');
   });
