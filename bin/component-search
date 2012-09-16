@@ -42,6 +42,22 @@ function truncate(str, repo) {
 }
 
 /**
+ * Wrap description `str`.
+ */
+
+function description(str) {
+  var space;
+  var width = cols - 20;
+  for (var i = 0; i < str.length; ++i) {
+    if (i && i % width == 0) {
+      space = str.indexOf(' ', i);
+      str = str.slice(0, space) + '\n  ' + str.slice(space);
+    }
+  }
+  return str;
+}
+
+/**
  * Terse output.
  */
 
@@ -66,7 +82,7 @@ function verbose(pkgs) {
     if (!pkg) return;
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
-    console.log('  desc: \033[90m%s\033[m', pkg.description);
+    console.log('  desc: \033[90m%s\033[m', description(pkg.description));
     console.log();
   });
   console.log();
