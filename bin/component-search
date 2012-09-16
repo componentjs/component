@@ -83,6 +83,7 @@ function verbose(pkgs) {
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
     console.log('  desc: \033[90m%s\033[m', description(pkg.description));
+    console.log('  stars: \033[90m%s\033[m', pkg.stars);
     console.log();
   });
   console.log();
