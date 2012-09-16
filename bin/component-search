@@ -14,6 +14,7 @@ var program = require('commander')
 program
   .usage('[query]')
   .option('-v, --verbose', 'verbose component output')
+  .option('-j, --json', 'json component output')
   .parse(process.argv);
 
 // query
@@ -26,6 +27,7 @@ component.search(query, function(err, pkgs){
   if (err) utils.fatal(err.message);
   if (!pkgs.length) return;
   if (program.verbose) verbose(pkgs)
+  else if (program.json) json(pkgs)
   else terse(pkgs);
 });
 
@@ -68,4 +70,19 @@ function verbose(pkgs) {
     console.log();
   });
   console.log();
+}
+
+/**
+ * JSON output.
+ */
+
+function json(pkgs) {
+  var len = pkgs.length;
+  console.log('[');
+  pkgs.forEach(function(pkg, i){
+    if (!pkg) return;
+    process.stdout.write(JSON.stringify(pkg, null, 2));
+    if (i < len - 1) process.stdout.write(',\n');
+  });
+  console.log(']');
 }
