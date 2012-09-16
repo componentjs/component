@@ -71,7 +71,7 @@ function stars(a, b) {
 
 function terse(pkgs) {
   console.log();
-  pkgs.forEach(function(pkg){
+  pkgs.sort(stars).forEach(function(pkg){
     if (!pkg) return;
     var repo = ' \033[0;1m—\033[0;90m ' + pkg.repo.toLowerCase();
     var str = truncate(pkg.description.toLowerCase(), repo);
