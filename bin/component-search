@@ -22,12 +22,12 @@ var query = program.args.join(' ');
 
 component.search(query, function(err, pkgs){
   if (err) utils.fatal(err.message);
-  if (!pkgs || !pkgs.length) return;
+  if (!pkgs.length) return;
   console.log();
   pkgs.forEach(function(pkg){
+    if (!pkg) return;
     var str = pkg.description.toLowerCase();
-    var repo = pkg.username + '/' + pkg.project;
-    str += ' (' + repo + ')';
+    str += ' (' + pkg.repo + ')';
     utils.log(pkg.name, str);
   });
   console.log();
