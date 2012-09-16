@@ -58,6 +58,14 @@ function description(str) {
 }
 
 /**
+ * Sort by stars descending.
+ */
+
+function stars(a, b) {
+  return b.stars - a.stars;
+}
+
+/**
  * Terse output.
  */
 
@@ -78,7 +86,7 @@ function terse(pkgs) {
 
 function verbose(pkgs) {
   console.log();
-  pkgs.forEach(function(pkg){
+  pkgs.sort(stars).forEach(function(pkg){
     if (!pkg) return;
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
