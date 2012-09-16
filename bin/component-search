@@ -75,7 +75,8 @@ function terse(pkgs) {
     if (!pkg) return;
     var repo = ' \033[0;1m—\033[0;90m ' + pkg.repo.toLowerCase();
     var str = truncate(pkg.description.toLowerCase(), repo);
-    utils.log(pkg.name, str + repo);
+    var stars = ' ★ ' + pkg.stars;
+    utils.log(pkg.name, str + repo + stars);
   });
   console.log();
 }
