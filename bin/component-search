@@ -13,7 +13,6 @@ var program = require('commander')
 
 program
   .usage('[query]')
-  .option('-v, --verbose', 'verbose component output')
   .option('-j, --json', 'json component output')
   .parse(process.argv);
 
@@ -26,9 +25,8 @@ var query = program.args.join(' ');
 component.search(query, function(err, pkgs){
   if (err) utils.fatal(err.message);
   if (!pkgs.length) return;
-  if (program.verbose) verbose(pkgs)
-  else if (program.json) json(pkgs)
-  else terse(pkgs);
+  if (program.json) json(pkgs)
+  else verbose(pkgs);
 });
 
 /**
@@ -66,22 +64,6 @@ function stars(a, b) {
 }
 
 /**
- * Terse output.
- */
-
-function terse(pkgs) {
-  console.log();
-  pkgs.sort(stars).forEach(function(pkg){
-    if (!pkg) return;
-    var repo = ' \033[0;1m—\033[0;90m ' + pkg.repo.toLowerCase();
-    var str = truncate(pkg.description.toLowerCase(), repo);
-    var stars = ' ★ ' + pkg.stars;
-    utils.log(pkg.name, str + repo + stars);
-  });
-  console.log();
-}
-
-/**
  * Verbose output.
  */
 
@@ -92,7 +74,7 @@ function verbose(pkgs) {
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
     console.log('  desc: \033[90m%s\033[m', description(pkg.description));
-    console.log('  stars: \033[90m%s\033[m', pkg.stars);
+    console.log('  ★ \033[90m%s\033[m', pkg.stars);
     console.log();
   });
   console.log();
