@@ -6,7 +6,8 @@
 
 var program = require('commander')
   , component = require('..')
-  , utils = component.utils;
+  , utils = component.utils
+  , cols = process.stdout.columns || 80;
 
 // parse argv
 
@@ -26,9 +27,19 @@ component.search(query, function(err, pkgs){
   console.log();
   pkgs.forEach(function(pkg){
     if (!pkg) return;
-    var str = pkg.description.toLowerCase();
-    str += ' (' + pkg.repo + ')';
-    utils.log(pkg.name, str);
+    var repo = ' \033[0;1m—\033[0;90m ' + pkg.repo.toLowerCase();
+    var str = truncate(pkg.description.toLowerCase(), repo);
+    utils.log(pkg.name, str + repo);
   });
   console.log();
 });
+
+/**
+ * Truncate the string if necessary.
+ */
+
+function truncate(str, repo) {
+  var pad = 30 + repo.length;
+  if (str.length < cols - pad) return str;
+  return str.slice(0, cols - pad) + '…';
+}
