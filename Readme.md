@@ -72,6 +72,7 @@ Commands:
   - avoid name squatting through github's naming conventions
   - build your components with `--standalone` to share them with non-component(1) users
   - view documentation from the command line
+  - simple private registry set up (all you need is a file server)
   - fast
     - ~2x faster than npm
     - ~8x faster than volo
