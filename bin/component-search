@@ -6,12 +6,14 @@
 
 var program = require('commander')
   , component = require('..')
-  , utils = component.utils;
+  , utils = component.utils
+  , cols = process.stdout.columns || 80;
 
 // parse argv
 
 program
   .usage('[query]')
+  .option('-j, --json', 'json component output')
   .parse(process.argv);
 
 // query
@@ -22,13 +24,73 @@ var query = program.args.join(' ');
 
 component.search(query, function(err, pkgs){
   if (err) utils.fatal(err.message);
-  if (!pkgs || !pkgs.length) return;
+  if (!pkgs.length) return;
+  if (program.json) json(pkgs)
+  else verbose(pkgs);
+});
+
+/**
+ * Truncate the string if necessary.
+ */
+
+function truncate(str, repo) {
+  var pad = 30 + repo.length;
+  if (str.length < cols - pad) return str;
+  return str.slice(0, cols - pad) + '…';
+}
+
+/**
+ * Wrap description `str`.
+ */
+
+function description(str) {
+  var space;
+  var width = cols - 20;
+  for (var i = 0; i < str.length; ++i) {
+    if (i && i % width == 0) {
+      space = str.indexOf(' ', i);
+      str = str.slice(0, space) + '\n  ' + str.slice(space);
+    }
+  }
+  return str;
+}
+
+/**
+ * Sort by stars descending.
+ */
+
+function stars(a, b) {
+  return b.stars - a.stars;
+}
+
+/**
+ * Verbose output.
+ */
+
+function verbose(pkgs) {
   console.log();
-  pkgs.forEach(function(pkg){
-    var str = pkg.description.toLowerCase();
-    var repo = pkg.username + '/' + pkg.project;
-    str += ' (' + repo + ')';
-    utils.log(pkg.name, str);
+  pkgs.sort(stars).forEach(function(pkg){
+    if (!pkg) return;
+    console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
+    console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
+    console.log('  desc: \033[90m%s\033[m', description(pkg.description));
+    console.log('  ★ \033[90m%s\033[m', pkg.stars);
+    console.log();
   });
   console.log();
-});
+}
+
+/**
+ * JSON output.
+ */
+
+function json(pkgs) {
+  var len = pkgs.length;
+  console.log('[');
+  pkgs.forEach(function(pkg, i){
+    if (!pkg) return;
+    process.stdout.write(JSON.stringify(pkg, null, 2));
+    if (i < len - 1) process.stdout.write(',\n');
+  });
+  console.log(']');
+}
