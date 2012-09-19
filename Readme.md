@@ -51,7 +51,6 @@ Commands:
   create <dir>            create a component skeleton
   search [query]          search with the given query
   convert <file ...>      convert html files to js modules
-  register <user>/<proj>  register a component so others can find it
   info <name> [prop]      output json component information
   changes <name>          output changelog contents
   docs <name>             output readme contents
