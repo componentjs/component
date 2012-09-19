@@ -1,4 +1,14 @@
 
+0.1.0 / 2012-09-18 
+==================
+
+  * add remote search
+  * add ★ to search output
+  * add sorting by stars
+  * add --json to `component-search(1)`
+  * remove `component-register(1)`
+  * change `component-search(1)` to use only verbose output
+
 0.0.7 / 2012-09-14 
 ==================
 
