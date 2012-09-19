@@ -36,8 +36,7 @@
     "component-create": "bin/component-create",
     "component-open": "bin/component-open",
     "component-changes": "bin/component-changes",
-    "component-docs": "bin/component-docs",
-    "component-register": "bin/component-register"
+    "component-docs": "bin/component-docs"
   },
   "main": "index"
 }
