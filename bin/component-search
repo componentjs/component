@@ -49,7 +49,7 @@ function description(str) {
   for (var i = 0; i < str.length; ++i) {
     if (i && i % width == 0) {
       space = str.indexOf(' ', i);
-      str = str.slice(0, space) + '\n  ' + str.slice(space);
+      str = str.slice(0, space) + '\n ' + str.slice(space);
     }
   }
   return str;
