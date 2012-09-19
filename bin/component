@@ -63,9 +63,7 @@ var bin = 'component-' + cmd;
 
 // exec
 
-var proc = spawn(bin, args, { customFds: [1, -1, -1] });
-proc.stdout.pipe(process.stdout);
-proc.stderr.pipe(process.stderr);
+var proc = spawn(bin, args, { stdio: 'inherit' });
 
 proc.on('exit', function(code){
   if (127 == code) utils.fatal('the "' + cmd + '" command does not exist');
