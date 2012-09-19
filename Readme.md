@@ -32,6 +32,30 @@ $ component install component/tip
   complete : component/tip
 ```
 
+## Searching for components
+
+  By adding your component to the [Components List](https://github.com/component/component/wiki/Components) wiki page it will become automatically available to `component-search(1)`. When invoked with no query all components are displayed, otherwise a filtered search, ordered by the number of github "stars":
+
+```
+$ component search ui
+
+  component/dialog
+  url: https://github.com/component/dialog
+  desc: Dialog component
+  ★ 12
+
+  component/notification
+  url: https://github.com/component/notification
+  desc: Notification component
+  ★ 10
+
+  component/overlay
+  url: https://github.com/component/overlay
+  desc: Overlay component
+  ★ 7
+
+```
+
 ## Usage
 
  Via `--help`:
