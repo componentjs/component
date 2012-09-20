@@ -18,7 +18,8 @@
     "component-builder": "0.0.5",
     "string-to-js": "0.0.1",
     "batch": "*",
-    "debug": "*"
+    "debug": "*",
+    "win-spawn": "*"
   },
   "devDependencies": {
     "mocha": "*",

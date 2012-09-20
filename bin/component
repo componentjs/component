@@ -6,7 +6,7 @@
 
 var program = require('commander')
   , utils = require('../lib/utils')
-  , spawn = require('child_process').spawn;
+  , spawn = require('win-spawn');
 
 // usage
 
