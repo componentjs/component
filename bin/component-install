@@ -17,6 +17,7 @@ program
   .option('-d, --dev', 'install development dependencies')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
+  .option('-s, --save', 'save the installed dep(s) to ./component.json')
 
 // examples
 
@@ -54,7 +55,7 @@ var pkgs = program.args;
 // install from ./component.json
 
 if (!pkgs.length) {
-  var conf = require(path.resolve('component.json'));
+  var conf = config();
 
   if (conf.dependencies) {
     pkgs = normalize(conf.dependencies);
@@ -63,6 +64,18 @@ if (!pkgs.length) {
   if (conf.development && program.dev) {
     pkgs = pkgs.concat(normalize(conf.development));
   }
+}
+
+// --save
+
+if (program.save) {
+  var fs = require('fs');
+  var conf = config();
+  conf.dependencies = conf.dependencies || {};
+  pkgs.forEach(function(pkg){
+    conf.dependencies[pkg] = '*';
+  });
+  fs.writeFile('component.json', JSON.stringify(conf, null, 2));
 }
 
 // install
@@ -122,3 +135,14 @@ function report(pkg) {
 process.on('exit', function(){
   console.log();
 });
+
+/**
+ * Load configuration json.
+ *
+ * @return {Object}
+ * @api private
+ */
+
+function config() {
+  return require(path.resolve('component.json'));
+}
