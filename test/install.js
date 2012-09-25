@@ -5,9 +5,9 @@
 
 var exec = require('child_process').exec
   , fs = require('fs')
-  , exists = fs.existsSync
   , assert = require('assert')
-  , path = require('path');
+  , path = require('path')
+  , exists = fs.existsSync || path.existsSync;
 
 describe('component install', function(){
   beforeEach(function(done){
