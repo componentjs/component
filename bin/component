@@ -61,6 +61,6 @@ if (!cmd) {
 
 var bin = 'component-' + cmd;
 
-// exec
+// spawn
 
-var proc = spawn(bin, args, { stdio: 'inherit' });
+var proc = spawn(bin, args, { stdio: 'inherit', customFds: [0, 1, 2] });
