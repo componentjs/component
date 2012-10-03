@@ -112,7 +112,10 @@ program.prompt({
  */
 
 function bool(str) {
-  if (str == 'yes') return true;
+  switch (str) {
+    case 'yes':
+    case 'y': return true;
+  }
 }
 
 /**
