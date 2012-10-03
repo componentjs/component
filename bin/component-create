@@ -112,7 +112,8 @@ program.prompt({
  */
 
 function bool(str) {
-  if (str == 'yes') return true;
+  return 'yes' == str
+    || 'y' == str;
 }
 
 /**
