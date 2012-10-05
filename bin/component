@@ -27,6 +27,7 @@ program.on('--help', function(){
   console.log('    changes <name>          output changelog contents');
   console.log('    docs <name>             output readme contents');
   console.log('    open <name>             open component github repo');
+  console.log('    wiki                    open the components list wiki page');
   console.log('    build                   build the component');
   console.log('    ls                      list installed components');
   console.log();
