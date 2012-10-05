@@ -4,9 +4,7 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , component = require('..')
-  , exec = require('child_process').exec;
+var exec = require('child_process').exec;
 
 // open
 
