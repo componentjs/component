@@ -12,10 +12,10 @@
 ==================
 
   * add new "stdio" child process inherit option. Closes #45
-  * remove special-casing of 127 exit status
-  * fix subcommand execution on windows [ForbesLindesay]
   * update component(1) --help docs
+  * remove special-casing of 127 exit status
   * remove component-register(1) from package.json
+  * fix subcommand execution on windows [ForbesLindesay]
 
 0.1.0 / 2012-09-18 
 ==================
