@@ -1,4 +1,3 @@
-
 # component
 
   Component package manager.
@@ -197,7 +196,7 @@ $ make test
 ## Links
 
  - [Mailing List](https://groups.google.com/group/componentjs)
- - component ["spec"](https://github.com/component/spec/wiki)
+ - component ["spec"](https://github.com/component/component/wiki/Spec)
  - join `#components` on freenode
  - [List](https://github.com/component/component/wiki/Components) of components
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
