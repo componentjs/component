@@ -1,4 +1,13 @@
 
+0.2.0 / 2012-10-06 
+==================
+
+  * add `component-search(1)` `--open` flag to view in browser. Closes #39
+  * add `component-wiki(1)`. Closes #55
+  * add "y" as "yes" support
+  * add `component-install(1)` `--save` support
+  * fix < 0.8.x support  
+
 0.1.1 / 2012-09-19 
 ==================
 
