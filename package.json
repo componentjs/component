@@ -17,9 +17,10 @@
     "superagent": "0.9.3",
     "component-builder": "0.0.5",
     "string-to-js": "0.0.1",
-    "batch": "*",
-    "debug": "*",
-    "win-spawn": "*"
+    "jog": "0.4.0",
+    "batch": "0.7.0",
+    "win-spawn": "0.0.0",
+    "debug": "*"
   },
   "devDependencies": {
     "mocha": "*",
