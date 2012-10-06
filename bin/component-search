@@ -15,7 +15,7 @@ var program = require('commander')
 program
   .usage('[query]')
   .option('-j, --json', 'json component output')
-  .option('-o, --open', 'open matches in your default browser')
+  .option('-o, --open [n]', 'open [n] matches in your default browser [5]', 5)
   .parse(process.argv);
 
 // --open
@@ -83,8 +83,7 @@ function stars(a, b) {
  */
 
 function open(pkgs) {
-  var max = 5;
-  pkgs.slice(0, max).forEach(function(pkg){
+  pkgs.slice(0, program.open).forEach(function(pkg){
     if (!pkg.repo) return console.warn('%s missing "repo"', pkg.name);
     exec('open https://github.com/' + pkg.repo);
   });
