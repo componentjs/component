@@ -95,11 +95,7 @@ Commands:
   - build your components with `--standalone` to share them with non-component(1) users
   - view documentation from the command line
   - simple private registry set up (all you need is a file server)
-  - fast
-    - ~2x faster than npm
-    - ~8x faster than volo
-    - ~8x faster than bower
-    - installs 85 components in ~10s
+  - very fast
 
 ## Using Github as a registry
 
