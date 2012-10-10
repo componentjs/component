@@ -85,10 +85,12 @@ pkgs.forEach(function(pkg){
   var parts = pkg.split('@');
   pkg = parts.shift();
   var version = parts.shift() || 'master';
+
   pkg = component.install(pkg, version, {
     dest: program.out,
     force: program.force,
-    dev: program.dev
+    dev: program.dev,
+    auth: conf.auth
   });
   report(pkg);
   pkg.install();
