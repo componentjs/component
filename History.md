@@ -1,4 +1,11 @@
 
+0.3.0 / 2012-10-10 
+==================
+
+  * add readme template for `component-create(1)` with more boilerplate
+  * add default of `{}` for conf for direct installs
+  * add `auth` support for basic authentication [Dan Williams]
+
 0.2.0 / 2012-10-06 
 ==================
 
