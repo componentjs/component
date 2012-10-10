@@ -23,6 +23,7 @@
     "debug": "*"
   },
   "devDependencies": {
+    "minstache": "0.0.1",
     "mocha": "*",
     "should": "*"
   },

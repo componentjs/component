@@ -11,7 +11,8 @@ var program = require('commander')
   , fs = require('fs')
   , join = path.join
   , read = fs.readFileSync
-  , mkdir = require('mkdirp').sync;
+  , mkdir = require('mkdirp').sync
+  , readme = require('../templates/readme');
 
 // usage
 
@@ -95,7 +96,7 @@ program.prompt({
   write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
-  write(join(dir, 'Readme.md'), '\n# ' + name + '\n\n  ' + obj.desc + '\n\n');
+  write(join(dir, 'Readme.md'), readme(obj));
 
   // .gitignore
   write(join(dir, '.gitignore'), 'components\nbuild\n');
