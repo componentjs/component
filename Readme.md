@@ -197,6 +197,18 @@ $ make test
  - [List](https://github.com/component/component/wiki/Components) of components
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
 
+## Contributors
+
+  - TJ Holowaychuk
+  - Guillermo Rauch
+  - Garrett Johnson
+  - Amir Abu Shareb
+  - Adam Sanderson
+  - Matt Mueller
+  - Forbes Lindesay
+  - Arpad Borsos
+  - Dan Williams
+
 ## License 
 
 (The MIT License)
