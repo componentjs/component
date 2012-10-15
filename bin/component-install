@@ -177,7 +177,7 @@ function install(name, version) {
     });
 
     pkg.once('error', next);
-    report(pkg, { error: last,  });
+    report(pkg, { error: last });
 
     // TODO: add callback
     pkg.install();
