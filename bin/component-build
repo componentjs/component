@@ -19,6 +19,7 @@ program
   .option('-d, --dev', 'build development dependencies')
   .option('-s, --standalone <name>', 'build a stand-alone version of the component')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
+  .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
   .option('-v, --verbose', 'output verbose build information')
 
 // examples
@@ -29,8 +30,8 @@ program.on('--help', function(){
   console.log('    # build to ./build');
   console.log('    $ component build');
   console.log();
-  console.log('    # build to ./dist');
-  console.log('    $ component build -o dist');
+  console.log('    # build to ./dist as assets.js, assets.css');
+  console.log('    $ component build -o dist -f assets');
   console.log();
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
@@ -55,8 +56,8 @@ mkdir.sync(program.out);
 
 // output streams
 
-var js = fs.createWriteStream(path.join(program.out, 'build.js'));
-var css = fs.createWriteStream(path.join(program.out, 'build.css'));
+var js = fs.createWriteStream(path.join(program.out, program.name + '.js'));
+var css = fs.createWriteStream(path.join(program.out, program.name + '.css'));
 
 // build
 
