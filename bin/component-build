@@ -17,7 +17,7 @@ var program = require('commander')
 
 program
   .option('-d, --dev', 'build development dependencies')
-  .option('-s, --standalone [name]', 'build a stand-alone')
+  .option('-s, --standalone <name>', 'build a stand-alone version of the component')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-v, --verbose', 'output verbose build information')
 
