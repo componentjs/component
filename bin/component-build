@@ -31,7 +31,7 @@ program.on('--help', function(){
   console.log('    $ component build');
   console.log();
   console.log('    # build to ./dist as assets.js, assets.css');
-  console.log('    $ component build -o dist -f assets');
+  console.log('    $ component build -o dist -n assets');
   console.log();
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
