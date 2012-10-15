@@ -8,6 +8,7 @@ var program = require('commander')
   , component = require('..')
   , utils = component.utils
   , log = utils.log
+  , url = require('url')
   , path = require('path')
   , conf = {};
 
@@ -79,22 +80,20 @@ if (program.save) {
   fs.writeFile('component.json', JSON.stringify(conf, null, 2));
 }
 
+// implicit remotes
+
+conf = config();
+conf.remotes = conf.remotes || [];
+conf.remotes.push('https://raw.github.com');
+
 // install
 
 console.log();
 pkgs.forEach(function(pkg){
   var parts = pkg.split('@');
-  pkg = parts.shift();
+  var name = parts.shift();
   var version = parts.shift() || 'master';
-
-  pkg = component.install(pkg, version, {
-    dest: program.out,
-    force: program.force,
-    dev: program.dev,
-    auth: conf.auth
-  });
-  report(pkg);
-  pkg.install();
+  install(name, version);
 });
 
 // map deps to args
@@ -107,12 +106,21 @@ function normalize(deps) {
 
 // reporter
 
-function report(pkg) {
+function report(pkg, options) {
+  options = options || {};
   log('install', pkg.name + '@' + pkg.version);
 
   pkg.on('error', function(err){
-    log('error', err.message);
-    process.exit(1);
+    if (404 != err.status) {
+      log('error', err.message);
+      log('error', 'got ' + err.status + ' response');
+      process.exit(1);
+    }
+
+    if (false !== options.error) {
+      log('error', err.message);
+      process.exit(1);
+    }
   });
 
   pkg.on('dep', function(dep){
@@ -138,6 +146,43 @@ function report(pkg) {
 process.on('exit', function(){
   console.log();
 });
+
+/**
+ * Install package `name` at the given `version`
+ * from all specified remotes.
+ *
+ * @param {String} name
+ * @param {String} version
+ * @api private
+ */
+
+function install(name, version) {
+  var i = 0;
+
+  next();
+
+  function next() {
+    var remote = conf.remotes[i++];
+    if (!remote) return;
+
+    var last = 0 == conf.remotes.length;
+    remote = url.parse(remote);
+    remote.href = remote.href.slice(0, -1);
+
+    var pkg = component.install(name, version, {
+      dest: program.out,
+      force: program.force,
+      dev: program.dev,
+      remote: remote.href
+    });
+
+    pkg.once('error', next);
+    report(pkg, { error: last,  });
+
+    // TODO: add callback
+    pkg.install();
+  }
+}
 
 /**
  * Load configuration json.
