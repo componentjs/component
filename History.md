@@ -1,4 +1,12 @@
 
+0.4.0 / 2012-10-15 
+==================
+
+  * add `.remotes` support. Closes #6
+  * add --name option to specify the base name of built files.
+  * change --standalone name to be required. Closes #71
+  * update builder dep, remove --dev cascading. Closes #69
+
 0.3.0 / 2012-10-10 
 ==================
 
