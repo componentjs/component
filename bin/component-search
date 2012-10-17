@@ -51,6 +51,7 @@ function truncate(str, repo) {
  */
 
 function description(str) {
+  if (!str) return '';
   var space;
   var width = cols - 20;
   for (var i = 0; i < str.length; ++i) {
