@@ -12,7 +12,7 @@
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "dependencies": {
     "term-css": "1.0.0",
-    "commander": "1.0.4",
+    "commander": "1.0.5",
     "mkdirp": "0.3.4",
     "superagent": "0.9.3",
     "component-builder": "0.0.7",
