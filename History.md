@@ -1,4 +1,9 @@
 
+0.4.2 / 2012-10-17 
+==================
+
+  * fix silly component-install(1) bug attempting to read ./component.json. Closes #81
+
 0.4.1 / 2012-10-16 
 ==================
 
