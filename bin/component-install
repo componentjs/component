@@ -6,6 +6,8 @@
 
 var program = require('commander')
   , component = require('..')
+  , fs = require('fs')
+  , exists = fs.existsSync
   , utils = component.utils
   , log = utils.log
   , url = require('url')
@@ -82,7 +84,10 @@ if (program.save) {
 
 // implicit remotes
 
-conf = config();
+conf = exists('component.json')
+  ? config()
+  : {};
+
 conf.remotes = conf.remotes || [];
 conf.remotes.push('https://raw.github.com');
 
