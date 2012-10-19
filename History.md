@@ -1,4 +1,10 @@
 
+0.5.0 / 2012-10-19 
+==================
+
+  * add "main" support
+  * fix `component-search(1)` when description is missing. Closes #83 [Tim Oxley]
+
 0.4.2 / 2012-10-17 
 ==================
 
