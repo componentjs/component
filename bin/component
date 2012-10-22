@@ -6,7 +6,10 @@
 
 var program = require('commander')
   , utils = require('../lib/utils')
-  , spawn = require('win-spawn');
+  , spawn = require('win-spawn')
+  , path = require('path')
+  , join = path.join
+  , exists = path.existsSync;
 
 // usage
 
@@ -61,6 +64,11 @@ if (!cmd) {
 // executable
 
 var bin = 'component-' + cmd;
+
+// local
+
+var local = join(__dirname, bin);
+if (exists(local)) bin = local;
 
 // spawn
 
