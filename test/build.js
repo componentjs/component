@@ -30,4 +30,14 @@ describe('component build', function(){
       })
     })
   })
+
+  describe('when COMPONENT_BUILD is omitted', function(){
+    it('should fail', function(done){
+      exec('cd test/fixtures/path && ' + bin + '-build -v', function(err, stdout, stderr){
+        stderr.should.include('error');
+        stderr.should.include('failed to lookup dependency "bar"');
+        done();
+      })
+    })
+  })
 })
