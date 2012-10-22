@@ -1,4 +1,11 @@
 
+0.6.0 / 2012-10-22 
+==================
+
+  * add __COMPONENT_PATH__ support. Closes #30
+  * add `component.paths()` helper function
+  * update builder
+
 0.5.0 / 2012-10-19 
 ==================
 
