@@ -11,12 +11,14 @@ var program = require('commander')
   , fs = require('fs')
   , join = path.join
   , read = fs.readFileSync
+  , readdir = fs.readdirSync
+  , exists = fs.existsSync
   , mkdir = require('mkdirp').sync
   , readme = require('../templates/readme');
 
 // usage
 
-program.usage('<dir>');
+program.usage('[dir]');
 
 // parse
 
@@ -28,19 +30,25 @@ var conf = {};
 
 // dest
 
-var dir = program.args[0];
+var dir = program.args[0] || '.';
 
-// require destination
+// already a component
 
-if (!dir) utils.fatal('<dir> required');
+if (exists(join(dir, 'component.json'))) {
+  utils.fatal(dir + ' is already a component');
+}
 
 /**
  * Verbose write.
  */
 
 function write(path, str) {
-  utils.log('create', path);
-  fs.writeFileSync(path, str);
+  if (exists(path)) {
+    utils.warn('exists', path);
+  } else {
+    utils.log('create', path);
+    fs.writeFileSync(path, str);
+  }
 }
 
 // prompt
