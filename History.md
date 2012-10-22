@@ -1,4 +1,13 @@
 
+0.6.2 / 2012-10-22 
+==================
+
+  * add component-create(1) support for existing dirs and files. Closes #58
+  * add local sub-command resolution
+  * improve some error handling
+  * fix annoying node warning for existsSync()
+  * fix utils.error() stderr
+
 0.6.1 / 2012-10-22 
 ==================
 
