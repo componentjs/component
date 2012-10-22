@@ -8,8 +8,9 @@ var program = require('commander')
   , utils = require('../lib/utils')
   , spawn = require('win-spawn')
   , path = require('path')
+  , fs = require('fs')
   , join = path.join
-  , exists = path.existsSync;
+  , exists = fs.existsSync;
 
 // usage
 
