@@ -70,11 +70,7 @@ var start = new Date;
 
 // COMPONENT_PATH
 
-var paths = process.env.COMPONENT_PATH
-  ? process.env.COMPONENT_PATH.split(':')
-  : null;
-
-if (paths) builder.addLookup(paths);
+builder.addLookup(component.paths());
 
 // --dev
 
