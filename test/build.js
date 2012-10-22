@@ -12,7 +12,7 @@ var exec = require('child_process').exec
 describe('component build', function(){
   describe('when COMPONENT_BUILD is set', function(){
     it('should build', function(done){
-      exec('cd test/fixtures/path && COMPONENT_PATH=lib ' + bin + ' build -v', function(err, stdout){
+      exec('cd test/fixtures/path && COMPONENT_PATH=lib ' + bin + '-build -v', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('build/build.js');
         stdout.should.include('duration');
