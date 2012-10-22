@@ -116,11 +116,7 @@ function report(pkg, options) {
   log('install', pkg.name + '@' + pkg.version);
 
   pkg.on('error', function(err){
-    if (404 != err.status) {
-      log('error', err.message);
-      log('error', 'got ' + err.status + ' response');
-      process.exit(1);
-    }
+    if (404 != err.status) utils.fatal(err.stack);
 
     if (false !== options.error) {
       log('error', err.message);
