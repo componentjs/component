@@ -2,3 +2,6 @@ node_modules
 components
 component.json
 build
+!test/fixtures/path/component.json
+!test/fixtures/path/lib/bar/component.json
+!test/fixtures/path/lib/baz/component.json

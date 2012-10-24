@@ -10,7 +10,7 @@ var exec = require('child_process').exec
   , vm = require('vm')
 
 describe('component build', function(){
-  describe('when COMPONENT_BUILD is set', function(){
+  describe('when COMPONENT_PATH is set', function(){
     it('should build', function(done){
       exec('cd test/fixtures/path && COMPONENT_PATH=lib ' + bin + '-build -v', function(err, stdout){
         if (err) return done(err);
@@ -31,7 +31,7 @@ describe('component build', function(){
     })
   })
 
-  describe('when COMPONENT_BUILD is omitted', function(){
+  describe('when COMPONENT_PATH is omitted', function(){
     it('should fail', function(done){
       exec('cd test/fixtures/path && ' + bin + '-build -v', function(err, stdout, stderr){
         stderr.should.include('error');
