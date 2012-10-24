@@ -209,6 +209,7 @@ $ make test
   - Forbes Lindesay
   - Arpad Borsos
   - Dan Williams
+  - Damián Suárez
 
 ## License 
 
