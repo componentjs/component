@@ -23,7 +23,7 @@ program
 program.on('--help', function(){
   console.log('  Commands:');
   console.log();
-  console.log('    install <name ...>      install one or more components');
+  console.log('    install [name ...]      install one or more components');
   console.log('    create [dir]            create a component skeleton');
   console.log('    search [query]          search with the given query');
   console.log('    convert <file ...>      convert html files to js modules');
