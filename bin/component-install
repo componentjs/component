@@ -17,7 +17,7 @@ var program = require('commander')
 // options
 
 program
-  .usage('[pkg ...]')
+  .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
