@@ -1,4 +1,9 @@
 
+0.6.4 / 2012-10-26 
+==================
+
+  * fix a component-install(1) bug where a 404 would not display an error [damian]
+
 0.6.3 / 2012-10-24 
 ==================
 
