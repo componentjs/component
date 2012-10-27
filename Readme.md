@@ -192,11 +192,13 @@ $ make test
 
 ## Links
 
+ - [List](https://github.com/component/component/wiki/Components) of all available components
+ - [Wiki](https://github.com/component/component/wiki)
  - [Mailing List](https://groups.google.com/group/componentjs)
  - component ["spec"](https://github.com/component/component/wiki/Spec)
  - join `#components` on freenode
  - follow [@component_js](http://twitter.com/component_js) on twitter
- - [List](https://github.com/component/component/wiki/Components) of components
+ - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
 
 ## Contributors
