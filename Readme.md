@@ -1,6 +1,7 @@
-# component
 
-  Component package manager.
+  ![web component logo](http://i49.tinypic.com/e7nj9v.png)
+
+  Component package manager for building a better web.
 
 ## Installation
 
