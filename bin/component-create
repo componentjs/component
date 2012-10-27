@@ -107,6 +107,9 @@ program.prompt({
   // readme
   write(join(dir, 'Readme.md'), readme(obj));
 
+  // changelog
+  write(join(dir, 'History.md'), '');
+
   // .gitignore
   write(join(dir, '.gitignore'), 'components\nbuild\n');
 
