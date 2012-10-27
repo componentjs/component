@@ -75,6 +75,7 @@ program.prompt({
   conf.keywords = [];
   conf.dependencies = {};
   conf.development = {};
+  conf.license = "MIT";
 
   // dir
   console.log();
