@@ -39,6 +39,15 @@ describe('component install', function(){
       })
     })
 
+    it('should add the component to ./component.json', function(done){
+      exec('bin/component install component/emitter', function(err, stdout){
+        if (err) return done(err);
+        var json = require(path.resolve('component.json'));
+        json.dependencies.should.have.property('component/emitter', '*');
+        done();
+      })
+    })
+
     it('should install dependencies', function(done){
       exec('bin/component install component/overlay', function(err, stdout){
         if (err) return done(err);
