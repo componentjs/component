@@ -78,6 +78,7 @@ if (local) {
   if (conf.local) {
     conf.local.forEach(function(pkg){
       var deps = component.dependenciesOf(pkg);
+      if (!deps) utils.fatal('failed to lookup "' + pkg + '" within COMPONENT_PATH');
       pkgs = pkgs.concat(normalize(deps));
     });
   }
