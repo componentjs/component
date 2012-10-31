@@ -35,7 +35,7 @@ describe('component build', function(){
     it('should fail', function(done){
       exec('cd test/fixtures/path && ' + bin + '-build -v', function(err, stdout, stderr){
         stderr.should.include('error');
-        stderr.should.include('failed to lookup dependency "bar"');
+        stderr.should.include('failed to lookup "path"\'s dependency "bar"');
         done();
       })
     })
