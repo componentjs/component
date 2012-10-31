@@ -74,6 +74,13 @@ if (local) {
   if (conf.development && program.dev) {
     pkgs = pkgs.concat(normalize(conf.development));
   }
+
+  if (conf.local) {
+    conf.local.forEach(function(pkg){
+      var deps = component.dependenciesOf(pkg);
+      pkgs = pkgs.concat(normalize(deps));
+    });
+  }
 }
 
 // save to ./component.json
