@@ -71,14 +71,15 @@ Options:
 
 Commands:
 
-  install <name ...>      install one or more components
-  create <dir>            create a component skeleton
+  install [name ...]      install one or more components
+  create [dir]            create a component skeleton
   search [query]          search with the given query
   convert <file ...>      convert html files to js modules
   info <name> [prop]      output json component information
   changes <name>          output changelog contents
   docs <name>             output readme contents
   open <name>             open component github repo
+  wiki                    open the components list wiki page
   build                   build the component
   ls                      list installed components
 

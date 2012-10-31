@@ -22,7 +22,6 @@ program
   .option('-d, --dev', 'install development dependencies')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
-  .option('-s, --save', 'save the installed dep(s) to ./component.json')
 
 // examples
 
@@ -119,7 +118,7 @@ function report(pkg, options) {
   pkg.on('error', function(err){
     if (404 != err.status) utils.fatal(err.stack);
 
-    if (false !== options.error) {
+    if (options.error) {
       error(err.message);
       process.exit(1);
     }
@@ -127,7 +126,7 @@ function report(pkg, options) {
 
   pkg.on('dep', function(dep){
     log('dep', dep.name + '@' + dep.version);
-    report(dep);
+    report(dep, options);
   });
 
   pkg.on('exists', function(dep){
@@ -168,7 +167,7 @@ function install(name, version) {
     if (!remote) return;
 
     // parse remote
-    var last = 0 == conf.remotes.length;
+    var last = i == conf.remotes.length - 1;
     remote = url.parse(remote);
 
     // strip trailing /

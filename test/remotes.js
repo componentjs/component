@@ -53,7 +53,7 @@ describe('component install from remote', function(){
     })
   
     it('should fallback to github', function(done){
-      exec('bin/component install component/emitter', function(err, stdout){
+      exec('bin/component install component/emitter', function(err, stdout, stderr){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('fetch');
