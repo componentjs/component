@@ -56,13 +56,17 @@ program.parse(process.argv);
 
 var pkgs = program.args;
 
-// read / create ./component.json
+// install from ./component.json
+
+var local = 0 == pkgs.length;
+
+// read json
 
 var conf = loadConfig();
 
 // install from ./component.json
 
-if (!pkgs.length) {
+if (local) {
   if (conf.dependencies) {
     pkgs = normalize(conf.dependencies);
   }
@@ -74,11 +78,13 @@ if (!pkgs.length) {
 
 // save to ./component.json
 
-conf.dependencies = conf.dependencies || {};
-pkgs.forEach(function(pkg){
-  conf.dependencies[pkg] = '*';
-});
-saveConfig();
+if (!local) {
+  conf.dependencies = conf.dependencies || {};
+  pkgs.forEach(function(pkg){
+    conf.dependencies[pkg] = '*';
+  });
+  saveConfig();
+}
 
 // implicit remotes
 
