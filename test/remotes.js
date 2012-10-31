@@ -97,8 +97,8 @@ describe('component install from remote', function(){
         exec('bin/component install private-registry/testcomponent', function(err, stdout, stderr){
           if (err) return done(err);
           stderr.should.include('error');
-          stderr.should.include('failed to fetch http://admin:abcd@localhost:3001');
-          stderr.should.include('got 401 response');
+          stderr.should.include('failed to fetch http://admin:abcd@localhost:3001/private-registry/testcomponent/master/component.json');
+          stderr.should.include('got 401 "Unauthorized"');
           assert(!exists('components/private-registry-testcomponent/component.json'), 
             'component should not be installed');
           done();
