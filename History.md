@@ -1,4 +1,17 @@
 
+0.7.0 / 2012-10-31 
+==================
+
+  * add implicit `--save` to `component-install(1)`. Closes #103
+  * add recursive `.local` support to `component-install(1)`
+  * add better local dep failure message
+  * add `-l, --license` to `component-search(1)`. Closes #107
+  * add `component.lookup(pkg)` function
+  * add `component.dependenciesOf(pkg)` function
+  * add History.md to `component-create(1)`. Closes #101
+  * add default .license of "MIT" to `component-create(1)`
+  * update builder
+
 0.6.4 / 2012-10-26 
 ==================
 
