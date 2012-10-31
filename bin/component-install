@@ -13,7 +13,7 @@ var program = require('commander')
   , error = utils.error
   , url = require('url')
   , path = require('path')
-  , conf = {};
+  , resolve = path.resolve
 
 // options
 
@@ -56,11 +56,13 @@ program.parse(process.argv);
 
 var pkgs = program.args;
 
+// read / create ./component.json
+
+var conf = loadConfig();
+
 // install from ./component.json
 
 if (!pkgs.length) {
-  var conf = config();
-
   if (conf.dependencies) {
     pkgs = normalize(conf.dependencies);
   }
@@ -70,23 +72,15 @@ if (!pkgs.length) {
   }
 }
 
-// --save
+// save to ./component.json
 
-if (program.save) {
-  var fs = require('fs');
-  var conf = config();
-  conf.dependencies = conf.dependencies || {};
-  pkgs.forEach(function(pkg){
-    conf.dependencies[pkg] = '*';
-  });
-  fs.writeFile('component.json', JSON.stringify(conf, null, 2));
-}
+conf.dependencies = conf.dependencies || {};
+pkgs.forEach(function(pkg){
+  conf.dependencies[pkg] = '*';
+});
+saveConfig();
 
 // implicit remotes
-
-conf = exists('component.json')
-  ? config()
-  : {};
 
 conf.remotes = conf.remotes || [];
 conf.remotes.push('https://raw.github.com');
@@ -192,12 +186,28 @@ function install(name, version) {
 }
 
 /**
- * Load configuration json.
+ * Read / create ./component.json.
  *
  * @return {Object}
  * @api private
  */
 
-function config() {
-  return require(path.resolve('component.json'));
+function loadConfig() {
+  var path = resolve('component.json');
+  if (exists('component.json')) {
+    return require(path);
+  } else {
+    return {};
+  }
+}
+
+/**
+ * Save configuration.
+ *
+ * @api private
+ */
+
+function saveConfig() {
+  var path = resolve('component.json');
+  fs.writeFileSync(path, JSON.stringify(conf, null, 2));
 }
