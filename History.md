@@ -1,4 +1,10 @@
 
+0.7.1 / 2012-11-02 
+==================
+
+  * add error-handling for getFiles(). Closes #121
+  * add error(res, url) helper
+
 0.7.0 / 2012-10-31 
 ==================
 
