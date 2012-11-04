@@ -66,6 +66,9 @@ var css = fs.createWriteStream(path.join(program.out, program.name + '.css'));
 // build
 
 var builder = new Builder(process.cwd());
+builder.copyAssetsTo(program.out);
+if (program.dev) builder.prefixUrls('./');
+
 var start = new Date;
 
 // COMPONENT_PATH
