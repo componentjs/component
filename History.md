@@ -1,4 +1,11 @@
 
+0.8.0 / 2012-11-04 
+==================
+
+  * add `-p, --prefix <str>` support
+  * add asset copying and url rewriting. Closes #52
+  * add `.images` and `.fonts` support for installation
+
 0.7.1 / 2012-11-02 
 ==================
 
