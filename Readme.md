@@ -214,6 +214,7 @@ $ make test
   - Arpad Borsos
   - Dan Williams
   - Damián Suárez
+  - Tim Oxley
 
 ## License 
 
