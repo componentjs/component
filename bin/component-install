@@ -78,7 +78,7 @@ if (local) {
   if (conf.local) {
     conf.local.forEach(function(pkg){
       try {
-        var deps = component.dependenciesOf(pkg);
+        var deps = component.dependenciesOf(pkg, conf.paths);
         deps.map(normalize).forEach(function(deps){
           pkgs = pkgs.concat(deps);
         });

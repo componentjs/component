@@ -71,11 +71,11 @@ builder.copyAssetsTo(program.out);
 if (program.dev) builder.prefixUrls('./');
 if (program.prefix) builder.prefixUrls(program.prefix);
 
+// lookup paths
+
+if (conf.paths) builder.addLookup(conf.paths);
+
 var start = new Date;
-
-// COMPONENT_PATH
-
-builder.addLookup(component.paths());
 
 // --dev
 

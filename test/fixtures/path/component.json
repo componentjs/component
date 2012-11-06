@@ -3,5 +3,6 @@
   "dependencies": {
     "bar": "*"
   },
-  "scripts": ["index.js"]
+  "scripts": ["index.js"],
+  "paths": ["lib"]
 }
