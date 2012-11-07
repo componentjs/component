@@ -1,4 +1,13 @@
 
+0.9.0 / 2012-11-06 
+==================
+
+  * add `-l, --local` to `component-create(1)`. Closes #119
+  * add module check to `component-build(1)` --standalone dance
+  * add `.paths` lookup path array support. Closes #137
+  * update builder for root main alias fix
+  * remove __COMPONENT_PATH__ support. Closes #137
+
 0.8.0 / 2012-11-04 
 ==================
 
