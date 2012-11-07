@@ -93,7 +93,11 @@ builder.build(function(err, obj){
   if (standalone) js.write(';(function(){\n');
   js.write(obj.require);
   js.write(obj.js);
-  if (standalone) js.write('window.' + name + ' = require("' + conf.name + '");\n');
+  if (standalone) js.write('  if ("undefined" == typeof module) {\n');
+  if (standalone) js.write('    window.' + name + ' = require("' + conf.name + '");\n');
+  if (standalone) js.write('  } else {\n');
+  if (standalone) js.write('    module.exports = require("' + conf.name + '");\n');
+  if (standalone) js.write('  }\n');
   if (standalone) js.write('})();');
 
   if (!program.verbose) return;
