@@ -20,9 +20,11 @@ var program = require('commander')
 
 program.usage('[dir]');
 
-// parse
+// options
 
-program.parse(process.argv);
+program
+  .option('-l, --local', 'create a local private component')
+  .parse(process.argv);
 
 // config
 
@@ -31,6 +33,10 @@ var conf = {};
 // dest
 
 var dir = program.args[0] || '.';
+
+// --local
+
+var local = program.local;
 
 // already a component
 
@@ -51,31 +57,49 @@ function write(path, str) {
   }
 }
 
+// private / public prompts
+
+if (local) {
+  var prompt = {
+    name: 'name: ',
+    desc: 'description: ',
+    js: 'does this component have js? ',
+    css: 'does this component have css? ',
+    html: 'does this component have html? '
+  };
+} else {
+  var prompt = {
+    repo: 'repo (username/project): ',
+    desc: 'description: ',
+    js: 'does this component have js? ',
+    css: 'does this component have css? ',
+    html: 'does this component have html? '
+  };
+}
+
 // prompt
 
-program.prompt({
-  repo: 'repo (username/project): ',
-  desc: 'description: ',
-  js: 'does this component have js? ',
-  css: 'does this component have css? ',
-  html: 'does this component have html? '
-}, function(obj){
-  // repo
-  var repo = obj.repo.split('/');
-  if (2 != repo.length) throw new Error('repo must be <username>/<project>');
+program.prompt(prompt, function(obj){
+  if (local) {
+    var name = obj.name;
+  } else {
+    // repo
+    var repo = obj.repo.split('/');
+    if (2 != repo.length) throw new Error('repo must be <username>/<project>');
 
-  // name
-  var name = repo[1];
+    // name
+    var name = repo[1];
+  }
 
   // populate json
   conf.name = obj.name = name;
-  conf.repo = repo.join('/');
+  if (!local) conf.repo = repo.join('/');
   conf.description = obj.desc;
-  conf.version = "0.0.1";
-  conf.keywords = [];
+  if (!local) conf.version = "0.0.1";
+  if (!local) conf.keywords = [];
   conf.dependencies = {};
   conf.development = {};
-  conf.license = "MIT";
+  if (!local) conf.license = "MIT";
 
   // dir
   console.log();
@@ -105,10 +129,10 @@ program.prompt({
   write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
-  write(join(dir, 'Readme.md'), readme(obj));
+  if (!local) write(join(dir, 'Readme.md'), readme(obj));
 
   // changelog
-  write(join(dir, 'History.md'), '');
+  if (!local) write(join(dir, 'History.md'), '');
 
   // .gitignore
   write(join(dir, '.gitignore'), 'components\nbuild\n');
