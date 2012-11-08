@@ -216,6 +216,12 @@ $ make test
   - Damián Suárez
   - Tim Oxley
 
+## Example applications
+
+  Open source application examples:
+  
+    - [Todo list](https://github.com/component/todo)
+
 ## License 
 
 (The MIT License)
