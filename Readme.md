@@ -220,7 +220,7 @@ $ make test
 
   Open source application examples:
   
-    - [Todo list](https://github.com/component/todo)
+  - [Todo list](https://github.com/component/todo)
 
 ## License 
 
