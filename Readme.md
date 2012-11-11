@@ -1,4 +1,3 @@
-
   ![web component logo](http://i49.tinypic.com/e7nj9v.png)
 
   Component package manager for building a better web.
@@ -6,6 +5,65 @@
 ## Installation
 
      $ npm install -g component
+
+## Features
+
+  - write modular commonjs components
+  - write components that include their own styles, images, scripts, or any combo
+  - no registry publishing or account required, uses github repositories
+  - extensible sub-commands via `component-YOURCOMMAND` git-style
+  - component skeleton creation command
+  - installs dependencies from the command-line or ./component.json
+  - avoid name squatting through github's naming conventions
+  - build your components with `--standalone` to share them with non-component(1) users
+  - view documentation from the command line
+  - simple private registry set up (all you need is a file server)
+  - very fast
+
+## Links
+
+ - [List](https://github.com/component/component/wiki/Components) of all available components
+ - [Wiki](https://github.com/component/component/wiki)
+ - [Mailing List](https://groups.google.com/group/componentjs)
+ - component ["spec"](https://github.com/component/component/wiki/Spec)
+ - join `#components` on freenode
+ - follow [@component_js](http://twitter.com/component_js) on twitter
+ - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
+ - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
+
+## Screencasts
+
+ - [App integration introduction](https://vimeo.com/48054442)
+
+
+## Usage
+
+ Via `--help`:
+
+```
+
+Usage: component <command> [options]
+
+Options:
+
+  -h, --help     output usage information
+  -V, --version  output the version number
+
+Commands:
+
+  install [name ...]      install one or more components
+  create [dir]            create a component skeleton
+  search [query]          search with the given query
+  convert <file ...>      convert html files to js modules
+  info <name> [prop]      output json component information
+  changes <name>          output changelog contents
+  docs <name>             output readme contents
+  open <name>             open component github repo
+  wiki                    open the components list wiki page
+  build                   build the component
+  ls                      list installed components
+
+```
 
 ## Installing packages
 
@@ -55,49 +113,6 @@ $ component search ui
   ★ 7
 
 ```
-
-## Usage
-
- Via `--help`:
-
-```
-
-Usage: component <command> [options]
-
-Options:
-
-  -h, --help     output usage information
-  -V, --version  output the version number
-
-Commands:
-
-  install [name ...]      install one or more components
-  create [dir]            create a component skeleton
-  search [query]          search with the given query
-  convert <file ...>      convert html files to js modules
-  info <name> [prop]      output json component information
-  changes <name>          output changelog contents
-  docs <name>             output readme contents
-  open <name>             open component github repo
-  wiki                    open the components list wiki page
-  build                   build the component
-  ls                      list installed components
-
-```
-
-## Features
-
-  - write modular commonjs components
-  - write components that include their own styles, images, scripts, or any combo
-  - no registry publishing or account required, uses github repositories
-  - extensible sub-commands via `component-YOURCOMMAND` git-style
-  - component skeleton creation command
-  - installs dependencies from the command-line or ./component.json
-  - avoid name squatting through github's naming conventions
-  - build your components with `--standalone` to share them with non-component(1) users
-  - view documentation from the command line
-  - simple private registry set up (all you need is a file server)
-  - very fast
 
 ## Using Github as a registry
 
@@ -186,21 +201,6 @@ $ make test
   really translated to the client. My hope is that other communities will re-implement this
   simple tool in their language of choice so that we can all consume components
   easily.
-
-## Screencasts
-
- - [App integration introduction](https://vimeo.com/48054442)
-
-## Links
-
- - [List](https://github.com/component/component/wiki/Components) of all available components
- - [Wiki](https://github.com/component/component/wiki)
- - [Mailing List](https://groups.google.com/group/componentjs)
- - component ["spec"](https://github.com/component/component/wiki/Spec)
- - join `#components` on freenode
- - follow [@component_js](http://twitter.com/component_js) on twitter
- - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
- - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
 
 ## Contributors
 
