@@ -16,6 +16,7 @@
   - installs dependencies from the command-line or ./component.json
   - avoid name squatting through github's naming conventions
   - build your components with `--standalone` to share them with non-component(1) users
+  - discovery of useful packages is simple with a robust search
   - view documentation from the command line
   - simple private registry set up (all you need is a file server)
   - very fast
@@ -34,7 +35,6 @@
 ## Screencasts
 
  - [App integration introduction](https://vimeo.com/48054442)
-
 
 ## Usage
 
