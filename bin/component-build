@@ -37,10 +37,6 @@ program.on('--help', function(){
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
   console.log();
-  console.log('    # add lookup paths');
-  console.log('    $ COMPONENT_PATH=lib');
-  console.log('    $ component build');
-  console.log();
 });
 
 // parse argv
