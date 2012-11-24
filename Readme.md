@@ -34,6 +34,7 @@
 
 ## Screencasts
 
+ - [Creating web components](https://vimeo.com/53730178)
  - [App integration introduction](https://vimeo.com/48054442)
 
 ## Usage
