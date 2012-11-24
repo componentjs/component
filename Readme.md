@@ -19,7 +19,8 @@
   - discovery of useful packages is simple with a robust search
   - view documentation from the command line
   - simple private registry set up (all you need is a file server)
-  - very fast
+  - very fast installs (~200ms per component)
+  - very fast search (~300ms)
 
 ## Links
 
