@@ -1,4 +1,11 @@
 
+0.9.1 / 2012-11-28 
+==================
+
+  * add increase of installation performance 50% via gzip
+  * add increase of search performance 50% via gzip
+  * update builder
+
 0.9.0 / 2012-11-06 
 ==================
 
