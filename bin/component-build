@@ -75,7 +75,12 @@ var start = new Date;
 
 // --dev
 
-if (program.dev) builder.development();
+if (program.dev) {
+  builder.development();
+  builder.addSourceURLs();
+}
+
+// build
 
 if (program.verbose) console.log();
 builder.build(function(err, obj){
