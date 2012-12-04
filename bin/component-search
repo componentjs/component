@@ -122,3 +122,12 @@ function json(pkgs) {
   });
   console.log(']');
 }
+
+/**
+ * Handle EPIPE for pagers.
+ */
+
+process.stdout.on('error', function(err){
+  if ('EPIPE' == err.code) return;
+  throw err;
+});
