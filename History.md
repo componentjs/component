@@ -1,4 +1,11 @@
 
+0.10.0 / 2012-12-04 
+==================
+
+  * add source url support when in --dev mode
+  * fix component-search(1) EPIPE with pagers. Closes #122
+  * remove component-open(1)
+
 0.9.1 / 2012-11-28 
 ==================
 
