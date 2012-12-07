@@ -19,7 +19,7 @@
     "string-to-js": "0.0.1",
     "jog": "0.4.0",
     "batch": "0.2.1",
-    "win-spawn": "0.0.0",
+    "win-fork": "1.0.0",
     "debug": "*"
   },
   "devDependencies": {
