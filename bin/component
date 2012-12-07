@@ -6,7 +6,7 @@
 
 var program = require('commander')
   , utils = require('../lib/utils')
-  , spawn = require('win-spawn')
+  , spawn = require('win-fork')
   , path = require('path')
   , fs = require('fs')
   , join = path.join
