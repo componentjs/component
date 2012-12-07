@@ -4,7 +4,18 @@
 
 ## Installation
 
+  With [node](http://nodejs.org) previously installed:
+
      $ npm install -g component
+     
+  With node binary on OSX:
+  
+     $ (cd /usr/local && \
+        curl -L# http://nodejs.org/dist/v0.8.15/node-v0.8.15-darwin-x86.tar.gz \
+        | tar -zx --strip 1) \
+       && npm install -g component \
+       && printf "installed component(1) %s\n" $(component --version)
+
 
 ## Features
 
