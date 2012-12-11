@@ -38,6 +38,7 @@
  - [List](https://github.com/component/component/wiki/Components) of all available components
  - [Wiki](https://github.com/component/component/wiki)
  - [Mailing List](https://groups.google.com/group/componentjs)
+ - [Google+ Community](https://plus.google.com/u/0/communities/109771441994395167277)
  - component ["spec"](https://github.com/component/component/wiki/Spec)
  - join `#components` on freenode
  - follow [@component_js](http://twitter.com/component_js) on twitter
