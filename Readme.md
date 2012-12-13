@@ -50,6 +50,11 @@
  - [Creating web components](https://vimeo.com/53730178)
  - [App integration introduction](https://vimeo.com/48054442)
 
+## Articles 
+
+  - building a [date picker component](http://tjholowaychuk.com/post/37832588021/building-a-date-picker-component)
+  - original [component blog post](http://tjholowaychuk.com/post/27984551477/components)
+
 ## Usage
 
  Via `--help`:
