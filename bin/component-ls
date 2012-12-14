@@ -20,6 +20,6 @@ console.log();
 fs.readdirSync('components').forEach(function(pkg){
   var json = path.resolve('components', pkg, 'component.json');
   var obj = require(json);
-  log(obj.name, obj.version);
+  log(obj.name, obj.version, 36, 18);
 });
 console.log();
