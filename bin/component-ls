@@ -5,21 +5,75 @@
  */
 
 var program = require('commander')
-  , component = require('..')
-  , log = component.utils.log
+  , archy = require('archy')
   , path = require('path')
-  , fs = require('fs');
+  , fs = require('fs')
+  , exists = fs.existsSync
+  , resolve = path.resolve;
 
 // parse argv
 
 program.parse(process.argv);
 
-// list
+// output tree
 
+var tree = tree('component.json');
 console.log();
-fs.readdirSync('components').forEach(function(pkg){
-  var json = path.resolve('components', pkg, 'component.json');
-  var obj = require(json);
-  log(obj.name, obj.version, 36, 18);
-});
-console.log();
+console.log(indent(archy(tree)));
+
+/**
+ * Return the dependency tree of the given config `file`.
+ *
+ * TODO: all this should be in ./lib or the builder,
+ * but the builder doesn't really make sense here
+ *
+ * @param {String} file
+ * @param {Array} dirs
+ * @return {Object}
+ */
+
+function tree(file, dirs){
+  var conf = require(resolve(file));
+  var deps = Object.keys(conf.dependencies || {});
+  var node = {};
+
+  // local deps
+  if (conf.local) deps = deps.concat(conf.local);
+
+  // lookup dirs
+  dirs = (dirs || ['components']).concat(conf.paths);
+
+  // label
+  node.label = '\033[36m' + conf.name + '\033[m';
+  node.label += ' \033[90m' + (conf.version || '') + '\033[m';
+
+  // dependencies
+  node.nodes = deps.map(function(dep){
+    var dep = dep.replace('/', '-');
+    var file = lookup(dep, dirs);
+    if (!file) throw new Error('failed to resolve location of "' + dep + '"');
+    return tree(file, dirs);
+  });
+
+  return node;
+}
+
+/**
+ * Lookup package `name` in `dirs`.
+ */
+
+function lookup(name, dirs) {
+  for (var i = 0; i < dirs.length; ++i) {
+    var dir = dirs[i];
+    var file = resolve(dir, name, 'component.json');
+    if (exists(file)) return file;
+  }
+}
+
+/**
+ * Indent `str`.
+ */
+
+function indent(str) {
+  return str.replace(/^/gm, '  ');
+}
