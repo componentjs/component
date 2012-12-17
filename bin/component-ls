@@ -5,11 +5,11 @@
  */
 
 var program = require('commander')
+  , component = require('..')
   , archy = require('archy')
   , path = require('path')
-  , fs = require('fs')
-  , exists = fs.existsSync
-  , resolve = path.resolve;
+  , resolve = path.resolve
+  , lookup = component.lookup
 
 // parse argv
 
@@ -24,15 +24,12 @@ console.log(indent(archy(tree)));
 /**
  * Return the dependency tree of the given config `file`.
  *
- * TODO: all this should be in ./lib or the builder,
- * but the builder doesn't really make sense here
- *
  * @param {String} file
- * @param {Array} dirs
+ * @param {Array} paths
  * @return {Object}
  */
 
-function tree(file, dirs){
+function tree(file, paths){
   var conf = require(resolve(file));
   var deps = Object.keys(conf.dependencies || {});
   var node = {};
@@ -40,8 +37,8 @@ function tree(file, dirs){
   // local deps
   if (conf.local) deps = deps.concat(conf.local);
 
-  // lookup dirs
-  dirs = (dirs || ['components']).concat(conf.paths);
+  // lookup paths
+  paths = (paths || ['components']).concat(conf.paths);
 
   // label
   node.label = '\033[36m' + conf.name + '\033[m';
@@ -50,24 +47,13 @@ function tree(file, dirs){
   // dependencies
   node.nodes = deps.map(function(dep){
     var dep = dep.replace('/', '-');
-    var file = lookup(dep, dirs);
+    var file = lookup(dep, paths);
     if (!file) throw new Error('failed to resolve location of "' + dep + '"');
-    return tree(file, dirs);
+    file = resolve(file, 'component.json');
+    return tree(file, paths);
   });
 
   return node;
-}
-
-/**
- * Lookup package `name` in `dirs`.
- */
-
-function lookup(name, dirs) {
-  for (var i = 0; i < dirs.length; ++i) {
-    var dir = dirs[i];
-    var file = resolve(dir, name, 'component.json');
-    if (exists(file)) return file;
-  }
 }
 
 /**
