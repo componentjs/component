@@ -13,7 +13,9 @@ var program = require('commander')
 
 // parse argv
 
-program.parse(process.argv);
+program
+  .option('-d, --depth <n>', 'set the depth to <n>', Infinity)
+  .parse(process.argv);
 
 // output tree
 
@@ -29,7 +31,8 @@ console.log(indent(archy(tree)));
  * @return {Object}
  */
 
-function tree(file, paths){
+function tree(file, paths, depth){
+  depth = depth || 0;
   var conf = require(resolve(file));
   var deps = Object.keys(conf.dependencies || {});
   var node = {};
@@ -44,13 +47,16 @@ function tree(file, paths){
   node.label = '\033[36m' + conf.name + '\033[m';
   node.label += ' \033[90m' + (conf.version || '') + '\033[m';
 
+  // --depth n
+  if (++depth > program.depth) return node;
+
   // dependencies
   node.nodes = deps.map(function(dep){
     var dep = dep.replace('/', '-');
     var file = lookup(dep, paths);
     if (!file) throw new Error('failed to resolve location of "' + dep + '"');
     file = resolve(file, 'component.json');
-    return tree(file, paths);
+    return tree(file, paths, depth);
   });
 
   return node;
