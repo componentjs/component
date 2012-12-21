@@ -149,8 +149,7 @@ program.prompt(prompt, function(obj){
  */
 
 function bool(str) {
-  return 'yes' == str
-    || 'y' == str;
+  return /^y(es)?/i.test(str);
 }
 
 /**
