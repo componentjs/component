@@ -7,9 +7,9 @@
   With [node](http://nodejs.org) previously installed:
 
      $ npm install -g component
-     
+
   With node binary on OSX:
-  
+
      $ (cd /usr/local && \
         curl -L# http://nodejs.org/dist/v0.8.15/node-v0.8.15-darwin-x86.tar.gz \
         | tar -zx --strip 1) \
@@ -33,6 +33,10 @@
   - very fast installs (50 components in ~4.5s)
   - very fast search (~300ms)
 
+## Extensions
+
+ - [component-graph(1)] dependency graphs for component projects
+
 ## Links
 
  - [List](https://github.com/component/component/wiki/Components) of all available components
@@ -50,7 +54,7 @@
  - [Creating web components](https://vimeo.com/53730178)
  - [App integration introduction](https://vimeo.com/48054442)
 
-## Articles 
+## Articles
 
   - building a [date picker component](http://tjholowaychuk.com/post/37832588021/building-a-date-picker-component)
   - original [component blog post](http://tjholowaychuk.com/post/27984551477/components)
@@ -92,7 +96,7 @@ Commands:
 
 ```
 $ component install component/tip
-  
+
    install : component/tip@master
        dep : component/emitter@master
    install : component/emitter@master
@@ -158,7 +162,7 @@ $ component search ui
 
 ```
 name: popover
-description: Popover UI component 
+description: Popover UI component
 does this component have js? yes
 does this component have css? yes
 does this component have html? yes
@@ -237,10 +241,10 @@ $ make test
 ## Example applications
 
   Open source application examples:
-  
+
   - [Todo list](https://github.com/component/todo)
 
-## License 
+## License
 
 (The MIT License)
 
