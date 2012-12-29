@@ -91,15 +91,25 @@ builder.build(function(err, obj){
     : conf.name;
 
   css.write(obj.css);
+
   if (standalone) js.write(';(function(){\n');
   js.write(obj.require);
   js.write(obj.js);
-  if (standalone) js.write('  if ("undefined" == typeof module) {\n');
-  if (standalone) js.write('    window.' + name + ' = require("' + conf.name + '");\n');
-  if (standalone) js.write('  } else {\n');
-  if (standalone) js.write('    module.exports = require("' + conf.name + '");\n');
-  if (standalone) js.write('  }\n');
-  if (standalone) js.write('})();');
+
+  if (standalone) {
+    var umd = [
+      'if (typeof exports == "object") {',
+      '  module.exports = require("' + conf.name + '");',
+      '} else if (typeof define == "function" && define.amd) {',
+      '  define(require("' + conf.name + '"));',
+      '} else {',
+      '  window["' + name + '"] = require("' + conf.name + '");',
+      '}'
+    ];
+
+    js.write(umd.join('\n'));
+    js.write('})();');
+  }
 
   if (!program.verbose) return;
   var duration = new Date - start;
