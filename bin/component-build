@@ -51,14 +51,14 @@ var conf = require(path.resolve('component.json'));
 
 var standalone = program.standalone;
 
+// output paths
+
+var jsPath = path.join(program.out, program.name + '.js');
+var cssPath = path.join(program.out, program.name + '.css');
+
 // mkdir -p
 
 mkdir.sync(program.out);
-
-// output streams
-
-var js = fs.createWriteStream(path.join(program.out, program.name + '.js'));
-var css = fs.createWriteStream(path.join(program.out, program.name + '.css'));
 
 // build
 
@@ -85,16 +85,16 @@ if (program.dev) {
 if (program.verbose) console.log();
 builder.build(function(err, obj){
   if (err) utils.fatal(err.message);
+  var js = '';
+  var css = obj.css.trim();
 
   var name = 'string' == typeof standalone
     ? standalone
     : conf.name;
 
-  css.write(obj.css);
-
-  if (standalone) js.write(';(function(){\n');
-  js.write(obj.require);
-  js.write(obj.js);
+  if (standalone) js += ';(function(){\n';
+  js += obj.require;
+  js += obj.js;
 
   if (standalone) {
     var umd = [
@@ -107,16 +107,22 @@ builder.build(function(err, obj){
       '}'
     ];
 
-    js.write(umd.join('\n'));
-    js.write('})();');
+    js += umd.join('\n');
+    js += '})();';
   }
+
+  // css
+  if (css) fs.writeFile(cssPath, css);
+
+  // js
+  fs.writeFile(jsPath, js);
 
   if (!program.verbose) return;
   var duration = new Date - start;
-  log('write', js.path);
-  log('write', css.path);
-  log('js', (obj.js.length / 1024 | 0) + 'kb');
-  log('css', (obj.css.length / 1024 | 0) + 'kb');
+  log('write', jsPath);
+  log('write', cssPath);
+  log('js', (js.length / 1024 | 0) + 'kb');
+  if (css) log('css', (css.length / 1024 | 0) + 'kb');
   log('duration', duration + 'ms');
   console.log();
 });
