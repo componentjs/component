@@ -1,11 +1,10 @@
-
 0.11.0 / 2012-12-30
 ==================
 
   * add AMD support to --standalone. Closes #139
   * add component-ls(1) --depth support
-  * add in <path> to getLocalJSON error
-  * add in <url> message to JSON parsing errors
+  * add in `<path>` to getLocalJSON error
+  * add in `<url>` message to JSON parsing errors
   * add g+ community link
   * change component-ls(1) to use tree view. Closes #204
   * remove empty build.css output. Closes #80
