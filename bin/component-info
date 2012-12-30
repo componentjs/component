@@ -20,7 +20,7 @@ program.on('--help', function(){
   console.log('    $ component info component/tip');
   console.log();
   console.log('    # output version only');
-  console.log('    $ component info component/tip keywords');
+  console.log('    $ component info component/tip version');
   console.log();
 });
 
