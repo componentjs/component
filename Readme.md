@@ -33,10 +33,6 @@
   - very fast installs (50 components in ~4.5s)
   - very fast search (~300ms)
 
-## Extensions
-
- - [component-graph(1)](https://github.com/component/component-graph) dependency graphs for component projects
-
 ## Links
 
  - [List](https://github.com/component/component/wiki/Components) of all available components
@@ -243,6 +239,10 @@ $ make test
   Open source application examples:
 
   - [Todo list](https://github.com/component/todo)
+
+## Extensions
+
+ - [component-graph(1)](https://github.com/component/component-graph) dependency graphs for component projects
 
 ## License
 
