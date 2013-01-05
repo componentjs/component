@@ -35,7 +35,7 @@
 
 ## Extensions
 
- - [component-graph(1)] dependency graphs for component projects
+ - [component-graph(1)](https://github.com/component/component-graph) dependency graphs for component projects
 
 ## Links
 
