@@ -40,10 +40,10 @@ describe('component install', function(){
     })
 
     it('should add the component to ./component.json', function(done){
-      exec('bin/component install component/emitter', function(err, stdout){
+      exec('bin/component install component/emitter@0.0.4', function(err, stdout){
         if (err) return done(err);
         var json = require(path.resolve('component.json'));
-        json.dependencies.should.have.property('component/emitter', '*');
+        json.dependencies.should.have.property('component/emitter', '0.0.4');
         done();
       })
     })

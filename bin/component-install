@@ -94,7 +94,8 @@ if (local) {
 if (!local) {
   conf.dependencies = conf.dependencies || {};
   pkgs.forEach(function(pkg){
-    conf.dependencies[pkg] = '*';
+    pkg = parsePackage(pkg);
+    conf.dependencies[pkg.name] = pkg.version || '*';
   });
   saveConfig();
 }
@@ -108,11 +109,19 @@ conf.remotes.push('https://raw.github.com');
 
 console.log();
 pkgs.forEach(function(pkg){
-  var parts = pkg.split('@');
-  var name = parts.shift();
-  var version = parts.shift() || 'master';
-  install(name, version);
+  pkg = parsePackage(pkg);
+  install(pkg.name, pkg.version || 'master');
 });
+
+// parse package identifier
+
+function parsePackage(pkg) {
+  var parts = pkg.split('@');
+  return {
+    name: parts.shift(),
+    version: parts.shift()
+  };
+}
 
 // map deps to args
 
