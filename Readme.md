@@ -16,6 +16,7 @@
        && npm install -g component \
        && printf "installed component(1) %s\n" $(component --version)
 
+  NOTE: tested with node 0.8.x
 
 ## Features
 
