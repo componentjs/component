@@ -23,6 +23,19 @@ describe('component install from remote', function(){
   })
 
   before(function(done){
+    mkdir('test/private-registry/testdependencies/master', done);
+  })
+
+  before(function(done){
+    fs.writeFile('test/private-registry/testdependencies/master/component.json', JSON.stringify({
+      name: 'testdependencies',
+      repo: 'private-registry/testdependencies',
+      remotes: ['http://localhost:3000'],
+      dependencies: {'private-registry/testcomponent': "*"}
+    }), done);
+  })
+
+  before(function(done){
     app.use(express.static(__dirname));
     app.listen(3000, done);
   })
@@ -60,6 +73,22 @@ describe('component install from remote', function(){
         stdout.should.include('complete');
         var json = require(path.resolve('components/component-emitter/component.json'));
         json.name.should.equal('emitter');
+        done();
+      })
+    })
+
+    it('should install private dependencies', function(done){
+      exec('bin/component install private-registry/testdependencies', function(err, stdout, stderr){
+        if (err) return done(err);
+        stdout.should.include('install');
+        stdout.should.include('dep');
+        stdout.should.include('complete');
+        var json = require(path.resolve('components/private-registry-testdependencies/component.json'));
+        json.name.should.equal('testdependencies');
+        json.repo.should.equal('private-registry/testdependencies');
+        json = require(path.resolve('components/private-registry-testcomponent/component.json'));
+        json.name.should.equal('testcomponent');
+        json.repo.should.equal('private-registry/testcomponent');
         done();
       })
     })
