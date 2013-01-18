@@ -23,20 +23,33 @@ describe('component install from remote', function(){
   })
 
   before(function(done){
+    mkdir('test/private-registry/testdependencies/master', done);
+  })
+
+  before(function(done){
+    fs.writeFile('test/private-registry/testdependencies/master/component.json', JSON.stringify({
+      name: 'testdependencies',
+      repo: 'private-registry/testdependencies',
+      remotes: ['http://localhost:4000'],
+      dependencies: {'private-registry/testcomponent': "*"}
+    }), done);
+  })
+
+  before(function(done){
     app.use(express.static(__dirname));
-    app.listen(3000, done);
+    app.listen(4000, done);
   })
 
   before(function(done){
     auth.use(express.basicAuth('admin', '1234'));
     auth.use(express.static(__dirname));
-    auth.listen(3001, done);
+    auth.listen(4001, done);
   })
 
   describe('without authentication', function(){
     beforeEach(function(done){
       fs.writeFile('component.json', JSON.stringify({
-        remotes: ['http://localhost:3000']
+        remotes: ['http://localhost:4000']
       }), done);
     })
 
@@ -51,7 +64,7 @@ describe('component install from remote', function(){
         done();
       })
     })
-  
+
     it('should fallback to github', function(done){
       exec('bin/component install component/emitter', function(err, stdout, stderr){
         if (err) return done(err);
@@ -63,13 +76,29 @@ describe('component install from remote', function(){
         done();
       })
     })
+
+    it('should install private dependencies', function(done){
+      exec('bin/component install private-registry/testdependencies', function(err, stdout, stderr){
+        if (err) return done(err);
+        stdout.should.include('install');
+        stdout.should.include('dep');
+        stdout.should.include('complete');
+        var json = require(path.resolve('components/private-registry-testdependencies/component.json'));
+        json.name.should.equal('testdependencies');
+        json.repo.should.equal('private-registry/testdependencies');
+        json = require(path.resolve('components/private-registry-testcomponent/component.json'));
+        json.name.should.equal('testcomponent');
+        json.repo.should.equal('private-registry/testcomponent');
+        done();
+      })
+    })
   })
 
   describe('with authentication', function(){
     describe('url notation', function(done){
       before(function(done){
         fs.writeFile('component.json', JSON.stringify({
-          remotes: ['http://admin:1234@localhost:3001']
+          remotes: ['http://admin:1234@localhost:4001']
         }), done);
       })
 
@@ -89,7 +118,7 @@ describe('component install from remote', function(){
     describe('and bad credentials', function(){
       beforeEach(function(done){
         fs.writeFile('component.json', JSON.stringify({
-          remotes: ['http://admin:abcd@localhost:3001']
+          remotes: ['http://admin:abcd@localhost:4001']
         }), done);
       })
 
@@ -97,9 +126,9 @@ describe('component install from remote', function(){
         exec('bin/component install private-registry/testcomponent', function(err, stdout, stderr){
           if (err) return done(err);
           stderr.should.include('error');
-          stderr.should.include('failed to fetch http://admin:abcd@localhost:3001/private-registry/testcomponent/master/component.json');
+          stderr.should.include('failed to fetch http://admin:abcd@localhost:4001/private-registry/testcomponent/master/component.json');
           stderr.should.include('got 401 "Unauthorized"');
-          assert(!exists('components/private-registry-testcomponent/component.json'), 
+          assert(!exists('components/private-registry-testcomponent/component.json'),
             'component should not be installed');
           done();
         })

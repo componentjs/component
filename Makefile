@@ -8,6 +8,10 @@ test:
 		--timeout 10s \
 		--slow 3s \
 		--bail \
-		--reporter spec
+		--reporter spec \
+		$(SCRIPTS)
 
-.PHONY: test
+test-remotes:
+	@$(MAKE) test SCRIPTS=test/remotes.js
+
+.PHONY: test test-remotes

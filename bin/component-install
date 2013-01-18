@@ -140,7 +140,7 @@ function report(pkg, options) {
   pkg.on('error', function(err){
     if (404 != err.status) utils.fatal(err.stack);
 
-    if (options.error) {
+    if (err.fatal) {
       error(err.message);
       process.exit(1);
     }
@@ -180,37 +180,18 @@ process.on('exit', function(){
  */
 
 function install(name, version) {
-  var i = 0;
+  // kick off installation
+  var pkg = component.install(name, version, {
+    dest: program.out,
+    force: program.force,
+    dev: program.dev,
+    remotes: conf.remotes
+  });
 
-  next();
+  report(pkg);
 
-  function next() {
-    var remote = conf.remotes[i++];
-    if (!remote) return;
-
-    // parse remote
-    var last = i == conf.remotes.length - 1;
-    remote = url.parse(remote);
-
-    // strip trailing /
-    remote.href = remote.href.slice(0, -1);
-
-    // kick of installation
-    var pkg = component.install(name, version, {
-      dest: program.out,
-      force: program.force,
-      dev: program.dev,
-      remote: remote.href
-    });
-
-    // only error on the last remote otherwise
-    // we assume it may be fetchable
-    pkg.once('error', next);
-    report(pkg, { error: !last });
-
-    // TODO: add callback
-    pkg.install();
-  }
+  // TODO: add callback
+  pkg.install();
 }
 
 /**
