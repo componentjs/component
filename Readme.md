@@ -218,7 +218,7 @@ $ make test
   The concept of components themselves are nothing new, Drupal
   for example has been doing this for years, however it seemed the concept was never
   really translated to the client. My hope is that other communities will re-implement this
-  simple tool in their language of choice so that we can all consume components
+  simple tool in their language of choice (or use this one) so that we can all consume components
   easily.
 
 ## Contributors
