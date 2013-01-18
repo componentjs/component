@@ -234,6 +234,7 @@ $ make test
   - Dan Williams
   - Damián Suárez
   - Tim Oxley
+  - Jeremy Worboys
 
 ## Example applications
 
