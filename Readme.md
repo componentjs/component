@@ -241,6 +241,8 @@ $ make test
   Open source application examples:
 
   - [Todo list](https://github.com/component/todo)
+  - [Component.io](https://github.com/component/component.io)
+  - [Posty](https://github.com/visionmedia/posty)
 
 ## Extensions
 
