@@ -101,7 +101,7 @@ builder.build(function(err, obj){
       'if (typeof exports == "object") {',
       '  module.exports = require("' + conf.name + '");',
       '} else if (typeof define == "function" && define.amd) {',
-      '  define(require("' + conf.name + '"));',
+      '  define(function () { return require("' + conf.name + '"); });',
       '} else {',
       '  window["' + name + '"] = require("' + conf.name + '");',
       '}'
