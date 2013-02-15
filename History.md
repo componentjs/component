@@ -1,4 +1,10 @@
 
+0.12.0 / 2013-02-15 
+==================
+
+  * add -c, --copy option to copy files instead of symlinking  
+  * fix AMD support for modules exporting functions 
+
 0.11.1 / 2013-02-01
 ==================
 
