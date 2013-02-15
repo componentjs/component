@@ -22,7 +22,7 @@ program
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
-  .option('-c, --copy', 'opt to copy files instead of adding symlinks')
+  .option('-c, --copy', 'copy files instead of linking')
 
 // examples
 
