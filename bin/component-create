@@ -126,7 +126,7 @@ program.prompt(prompt, function(obj){
   }
 
   // makefile
-  if(!local) write(join(dir, 'Makefile'), createMakefile(obj));
+  if (!local) write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
   if (!local) write(join(dir, 'Readme.md'), readme(obj));
