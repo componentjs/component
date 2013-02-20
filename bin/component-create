@@ -126,7 +126,7 @@ program.prompt(prompt, function(obj){
   }
 
   // makefile
-  write(join(dir, 'Makefile'), createMakefile(obj));
+  if (!local) write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
   if (!local) write(join(dir, 'Readme.md'), readme(obj));
@@ -135,7 +135,7 @@ program.prompt(prompt, function(obj){
   if (!local) write(join(dir, 'History.md'), '');
 
   // .gitignore
-  write(join(dir, '.gitignore'), 'components\nbuild\n');
+  if (!local) write(join(dir, '.gitignore'), 'components\nbuild\n');
 
   // write component.json
   write(join(dir, 'component.json'), JSON.stringify(conf, null, 2));
