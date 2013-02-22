@@ -83,13 +83,11 @@ if (conf.paths) builder.addLookup(conf.paths);
 if (program.use) {
   var modules = program.use.split(',');
   modules.forEach(function(mod){
-    // check for absolute path or local module
-    var abs = exists(mod) || exists(mod + '.js');
-    mod = abs ?
-      path.join(process.cwd(), mod) :
-      path.join(process.cwd(), 'node_modules', mod);
+    var resolved = path.resolve(mod)
+      , real = exists(resolved) || exists(resolved + '.js')
+      , module = path.resolve('node_modules', mod);
 
-    builder.use(require(mod));
+    builder.use(real ? require(resolved) : require(module));
   });
 }
 
