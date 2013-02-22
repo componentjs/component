@@ -11,6 +11,7 @@ var program = require('commander')
   , log = component.utils.log
   , path = require('path')
   , fs = require('fs')
+  , exists = fs.existsSync || path.existsSync
   , mkdir = require('mkdirp');
 
 // options
@@ -23,6 +24,7 @@ program
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
   .option('-c, --copy', 'copy files instead of linking')
+  .option('-r, --require <name>', 'require the given builder middleware')
 
 // examples
 
@@ -37,6 +39,10 @@ program.on('--help', function(){
   console.log();
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
+  console.log();
+  console.log('    # build with middleware by requiring a module');
+  console.log('    # separate with commas if necessary');
+  console.log('    $ component build -r jade-builder');
   console.log();
 });
 
@@ -72,6 +78,16 @@ if (program.prefix) builder.prefixUrls(program.prefix);
 // lookup paths
 
 if (conf.paths) builder.addLookup(conf.paths);
+
+// require middleware plugins
+if (program.require) {
+  var required = program.require.split(',');
+  required.forEach(function(mod){
+    var abs = exists(mod) || exists(mod + '.js');
+    if (abs) mod = path.join(process.cwd(), mod);
+    builder.use(require(mod));
+  });
+}
 
 var start = new Date;
 
