@@ -28,4 +28,23 @@ describe('component build', function(){
       done();
     })
   })
+
+  it('should require middleware with relative path', function(done){
+    exec('cd test/fixtures/path && ' + bin + '-build -v -u ../plugin', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('middleware fired!');
+      stdout.should.include('builder config fired!');
+      done();
+    })
+  })
+  
+  it('should require middleware with absolute path', function(done){
+    var plugin = path.join(__dirname, 'fixtures', 'plugin');
+    exec('cd test/fixtures/path && ' + bin + '-build -v -u ' + plugin, function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('middleware fired!');
+      stdout.should.include('builder config fired!');
+      done();
+    })
+  })
 })
