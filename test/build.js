@@ -30,7 +30,7 @@ describe('component build', function(){
   })
 
   it('should require middleware', function(done){
-    exec('cd test/fixtures/path && ' + bin + '-build -v -r ../plugin', function(err, stdout){
+    exec('cd test/fixtures/path && ' + bin + '-build -v -u ../plugin', function(err, stdout){
       if (err) return done(err);
       stdout.should.include('middleware fired!');
       stdout.should.include('builder config fired!');

@@ -24,7 +24,7 @@ program
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
   .option('-c, --copy', 'copy files instead of linking')
-  .option('-r, --require <name>', 'require the given builder middleware')
+  .option('-u, --use <name>', 'use the given script(s) or module(s) as builder middleware')
 
 // examples
 
@@ -80,9 +80,9 @@ if (program.prefix) builder.prefixUrls(program.prefix);
 if (conf.paths) builder.addLookup(conf.paths);
 
 // require middleware plugins
-if (program.require) {
-  var required = program.require.split(',');
-  required.forEach(function(mod){
+if (program.use) {
+  var modules = program.use.split(',');
+  modules.forEach(function(mod){
     // check for absolute path or local module
     var abs = exists(mod) || exists(mod + '.js');
     mod = abs ?
