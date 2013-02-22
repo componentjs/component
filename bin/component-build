@@ -83,8 +83,12 @@ if (conf.paths) builder.addLookup(conf.paths);
 if (program.require) {
   var required = program.require.split(',');
   required.forEach(function(mod){
+    // check for absolute path or local module
     var abs = exists(mod) || exists(mod + '.js');
-    if (abs) mod = path.join(process.cwd(), mod);
+    mod = abs ?
+      path.join(process.cwd(), mod) :
+      path.join(process.cwd(), 'node_modules', mod);
+
     builder.use(require(mod));
   });
 }
