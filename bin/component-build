@@ -24,7 +24,7 @@ program
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
   .option('-c, --copy', 'copy files instead of linking')
-  .option('-u, --use <name>', 'use the given script(s) or module(s) as builder middleware')
+  .option('-u, --use <name>', 'use the given build plugin(s)')
 
 // examples
 
@@ -40,9 +40,8 @@ program.on('--help', function(){
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
   console.log();
-  console.log('    # build with middleware by requiring a module');
-  console.log('    # separate with commas if necessary');
-  console.log('    $ component build -r jade-builder');
+  console.log('    # build with plugins');
+  console.log('    $ component build -r foo,bar,baz');
   console.log();
 });
 
