@@ -93,7 +93,7 @@ describe('component install', function(){
       json.name.should.equal('tip');
       var json = require(path.resolve('components/component-popover/component.json'));
       json.name.should.equal('popover');
-      assert(!exists('components/component-inherit'), 'dev deps should be installed');
+      assert(!exists('components/component-inherit'), 'dev deps should not be installed');
       done();
     })
   })
@@ -110,7 +110,7 @@ describe('component install', function(){
       json.name.should.equal('tip');
       var json = require(path.resolve('components/component-popover/component.json'));
       json.name.should.equal('popover');
-      assert(exists('components/component-inherit'), 'dev deps should not be installed');
+      assert(exists('components/component-inherit'), 'dev deps should be installed');
       done();
     })
   })
