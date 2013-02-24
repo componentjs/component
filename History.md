@@ -1,4 +1,11 @@
 
+0.13.0 / 2013-02-24 
+==================
+
+  * add: only one in-flight request per component (~50% perf increase). Closes #47
+  * add --use flag
+  * remove makefile and .gitignore from component-create local components
+
 0.12.0 / 2013-02-15 
 ==================
 
