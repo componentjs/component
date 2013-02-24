@@ -135,6 +135,7 @@ function normalize(deps) {
 
 function report(pkg, options) {
   options = options || {};
+  if (pkg.inFlight) return;
   log('install', pkg.name + '@' + pkg.version);
 
   pkg.on('error', function(err){
