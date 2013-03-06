@@ -5,7 +5,10 @@
  */
 
 var program = require('commander')
-  , component = require('..');
+  , component = require('..')
+  , fs = require('fs')
+  , exists = fs.existsSync
+  , utils = component.utils;
 
 // usage
 
@@ -27,6 +30,10 @@ program.on('--help', function(){
 // parse argv
 
 program.parse(process.argv);
+
+// component.json required
+
+if (!exists('component.json')) utils.fatal('missing component.json');
 
 // package
 

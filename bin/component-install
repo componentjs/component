@@ -13,7 +13,7 @@ var program = require('commander')
   , error = utils.error
   , url = require('url')
   , path = require('path')
-  , resolve = path.resolve
+  , resolve = path.resolve;
 
 // options
 
@@ -59,6 +59,10 @@ var pkgs = program.args;
 // install from ./component.json
 
 var local = 0 == pkgs.length;
+
+// component.json required
+
+if (local && !exists('component.json')) utils.fatal('missing component.json');
 
 // read json
 

@@ -49,6 +49,10 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
+// component.json required
+
+if (!exists('component.json')) utils.fatal('missing component.json');
+
 // load json
 
 var conf = require(path.resolve('component.json'));

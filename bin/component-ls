@@ -10,12 +10,19 @@ var program = require('commander')
   , path = require('path')
   , resolve = path.resolve
   , lookup = component.lookup
+  , fs = require('fs')
+  , exists = fs.existsSync
+  , utils = component.utils;
 
 // parse argv
 
 program
   .option('-d, --depth <n>', 'set the depth to <n>', Infinity)
   .parse(process.argv);
+
+// component.json required
+
+if (!exists('component.json')) utils.fatal('missing component.json');
 
 // output tree
 
