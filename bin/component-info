@@ -5,7 +5,8 @@
  */
 
 var program = require('commander')
-  , component = require('..');
+  , component = require('..')
+  , utils = component.utils;
 
 // usage
 
@@ -31,6 +32,10 @@ program.parse(process.argv);
 // package
 
 var pkg = program.args.shift();
+
+// required
+
+if (!pkg) utils.fatal('<name> required');
 
 // props
 
