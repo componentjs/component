@@ -20,6 +20,7 @@ var program = require('commander')
 program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
+  .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
 
@@ -107,6 +108,15 @@ if (!local) {
 // implicit remotes
 
 conf.remotes = conf.remotes || [];
+
+// explicit remotes
+
+if (program.remotes) {
+  conf.remotes = program.remotes.split(',').concat(conf.remotes);
+}
+
+// default to github
+
 conf.remotes.push('https://raw.github.com');
 
 // install
