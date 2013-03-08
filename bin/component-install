@@ -102,7 +102,9 @@ if (!local) {
     pkg = parsePackage(pkg);
     conf.dependencies[pkg.name] = pkg.version || '*';
   });
-  saveConfig();
+  if (exists('component.json')) {
+    saveConfig();
+  }
 }
 
 // implicit remotes
