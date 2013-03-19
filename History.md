@@ -1,4 +1,13 @@
 
+0.13.1 / 2013-03-19 
+==================
+
+  * update builder
+  * fix component-info(1)
+  * fix: install: do not create component.json if it doesn't exist
+  * fix fatal detection
+  * add explicit remotes using `-r <url>`
+
 0.13.0 / 2013-02-24 
 ==================
 
