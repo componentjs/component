@@ -73,7 +73,7 @@ if (exists(local)) bin = local;
 // spawn
 
 var proc = spawn(bin, args, { stdio: 'inherit', customFds: [0, 1, 2] });
-// Pass the exit code upon 'close' of the child process
-proc.on('close', function(code) {
+
+proc.on('close', function(code){
   process.exit(code);
 });
