@@ -1,4 +1,11 @@
 
+0.13.2 / 2013-03-26 
+==================
+
+  * change error handling to treat non-404s as fatals
+  * fix exit status of component(1)  
+  * fix current .remote usage in Package 
+
 0.13.1 / 2013-03-19 
 ==================
 
