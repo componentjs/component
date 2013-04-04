@@ -108,6 +108,7 @@ program.prompt(prompt, function(obj){
 
   // js
   if (bool(obj.js)) {
+    conf.main = "index.js";
     conf.scripts = ["index.js"];
     write(join(dir, 'index.js'), '');
   }
