@@ -126,7 +126,7 @@ builder.build(function(err, obj){
       '} else if (typeof define == "function" && define.amd) {',
       '  define(function(){ return require("' + conf.name + '"); });',
       '} else {',
-      '  window["' + name + '"] = require("' + conf.name + '");',
+      '  this["' + name + '"] = require("' + conf.name + '");',
       '}'
     ];
 
