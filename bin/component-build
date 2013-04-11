@@ -78,10 +78,6 @@ builder.copyAssetsTo(program.out);
 if (program.dev) builder.prefixUrls('./');
 if (program.prefix) builder.prefixUrls(program.prefix);
 
-// lookup paths
-
-if (conf.paths) builder.addLookup(conf.paths);
-
 // require middleware plugins
 if (program.use) {
   var modules = program.use.split(',');
