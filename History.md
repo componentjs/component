@@ -1,4 +1,15 @@
 
+0.14.0 / 2013-04-23 
+==================
+
+  * add .main to component-create(1) generated component.json for clarity
+  * add component-info(1) tests
+  * add Package#url() default of first remote
+  * remove .addLookup() from component-build(1), now performed in Builder
+  * update builder
+  * fix a call to fn() that should be done()
+  * fix UMD: use "this" instead of window for global
+
 0.13.2 / 2013-03-26 
 ==================
 
