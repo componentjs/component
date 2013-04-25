@@ -213,14 +213,6 @@ Then run:
 $ make test
 ```
 
-## Shout-outs
-
-  The concept of components themselves are nothing new, Drupal
-  for example has been doing this for years, however it seemed the concept was never
-  really translated to the client. My hope is that other communities will re-implement this
-  simple tool in their language of choice (or use this one) so that we can all consume components
-  easily.
-
 ## Contributors
 
   - TJ Holowaychuk
@@ -241,8 +233,9 @@ $ make test
 
   Open source application examples:
 
-  - [Todo list](https://github.com/component/todo)
-  - [Component.io](https://github.com/component/component.io)
+  - Example using [script tags](https://github.com/component/script-tag-example) for integrating component with existing non-commonjs applications or frameworks
+  - [Todo list](https://github.com/component/todo) example comprised of private and public components
+  - [Component.io](https://github.com/component/component.io) website
   - [Posty](https://github.com/visionmedia/posty)
 
 ## Extensions
