@@ -25,6 +25,7 @@ program
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
   .option('-c, --copy', 'copy files instead of linking')
   .option('-u, --use <name>', 'use the given build plugin(s)')
+  .option('-e, --excluderequire', 'exclude require from build')
 
 // examples
 
@@ -60,6 +61,10 @@ var conf = require(path.resolve('component.json'));
 // standalone
 
 var standalone = program.standalone;
+
+// exclude require implementation
+
+var excluderequire = program.excluderequire;
 
 // output paths
 
@@ -112,7 +117,7 @@ builder.build(function(err, obj){
     : conf.name;
 
   if (standalone) js += ';(function(){\n';
-  js += obj.require;
+  if (!excluderequire) js += obj.require;
   js += obj.js;
 
   if (standalone) {
