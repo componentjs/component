@@ -77,7 +77,6 @@ Commands:
   convert <file ...>      convert html files to js modules
   info <name> [prop]      output json component information
   changes <name>          output changelog contents
-  docs <name>             output readme contents
   wiki                    open the components list wiki page
   build                   build the component
   ls                      list installed components

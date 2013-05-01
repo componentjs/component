@@ -39,8 +39,7 @@
     "component-search": "bin/component-search",
     "component-create": "bin/component-create",
     "component-changes": "bin/component-changes",
-    "component-wiki": "bin/component-wiki",
-    "component-docs": "bin/component-docs"
+    "component-wiki": "bin/component-wiki"
   },
   "main": "index",
   "engines": {

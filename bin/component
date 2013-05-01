@@ -29,7 +29,6 @@ program.on('--help', function(){
   console.log('    convert <file ...>      convert html files to js modules');
   console.log('    info <name> [prop]      output json component information');
   console.log('    changes <name>          output changelog contents');
-  console.log('    docs <name>             output readme contents');
   console.log('    wiki                    open the components list wiki page');
   console.log('    build                   build the component');
   console.log('    ls                      list installed components');
