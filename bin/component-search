@@ -132,7 +132,7 @@ function json(pkgs) {
 function demo(pkg){
   if ('gh-pages' != pkg.demo) return pkg.demo;
   var parts = pkg.repo.split('/');
-  return 'https://'
+  return 'http://'
     + parts[0]
     + '.github.io/'
     + parts[1]
