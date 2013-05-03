@@ -16,7 +16,7 @@ program
   .usage('[query]')
   .option('-j, --json', 'json component output')
   .option('-o, --open', 'open matches in your default browser')
-  .option('-l, --license', 'output the package license')
+  .option('-v, --verbose', 'verbose package output')
   .parse(process.argv);
 
 // --open
@@ -102,7 +102,8 @@ function verbose(pkgs) {
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
     console.log('  desc: \033[90m%s\033[m', description(pkg.description));
-    if (program.license) console.log('  license: \033[90m%s\033[m', pkg.license || 'none');
+    if (program.verbose) console.log('  version: \033[90m%s\033[m', pkg.version);
+    if (program.verbose) console.log('  license: \033[90m%s\033[m', pkg.license || 'none');
     console.log('  ★ \033[90m%s\033[m', pkg.stars);
     console.log();
   });
