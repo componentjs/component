@@ -161,18 +161,20 @@ function report(pkg, options) {
     }
   });
 
-  pkg.on('dep', function(dep){
-    log('dep', dep.name + '@' + dep.version);
-    report(dep, options);
-  });
+  if (program.verbose) {
+    pkg.on('dep', function(dep){
+      log('dep', dep.name + '@' + dep.version);
+      report(dep, options);
+    });
 
-  pkg.on('exists', function(dep){
-    log('exists', dep.name + '@' + dep.version);
-  });
+    pkg.on('exists', function(dep){
+      log('exists', dep.name + '@' + dep.version);
+    });
 
-  pkg.on('file', function(file){
-    log('fetch', pkg.name + ':' + file);
-  });
+    pkg.on('file', function(file){
+      log('fetch', pkg.name + ':' + file);
+    });
+  }
 
   pkg.on('end', function(){
     log('complete', pkg.name);
