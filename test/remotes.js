@@ -69,7 +69,6 @@ describe('component install from remote', function(){
       exec('bin/component install component/emitter', function(err, stdout, stderr){
         if (err) return done(err);
         stdout.should.include('install');
-        stdout.should.include('fetch');
         stdout.should.include('complete');
         var json = require(path.resolve('components/component-emitter/component.json'));
         json.name.should.equal('emitter');
