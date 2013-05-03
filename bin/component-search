@@ -16,7 +16,7 @@ program
   .usage('[query]')
   .option('-j, --json', 'json component output')
   .option('-o, --open', 'open matches in your default browser')
-  .option('-v, --verbose', 'verbose package output')
+  .option('-v, --verbose', 'verbose output')
   .parse(process.argv);
 
 // --open

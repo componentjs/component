@@ -23,6 +23,7 @@ program
   .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
+  .option('-v, --verbose', 'verbose output')
 
 // examples
 
