@@ -20,6 +20,7 @@
     "batch": "0.2.1",
     "win-fork": "1.0.0",
     "archy": "0.0.2",
+    "netrc": "~0.1.0",
     "debug": "*"
   },
   "devDependencies": {

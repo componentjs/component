@@ -198,6 +198,24 @@ does this component have html? yes
   profile or session while developing component, otherwise `./bin/component`
   will have a hard time finding the sub-commands.
 
+## Using private components
+
+  `component(1)` uses [~/.netrc](http://man.cx/netrc(4), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
+
+```
+machine raw.github.com
+  login visionmedia
+  password pass123
+```
+
+  You may also use [GitHub OAuth Tokens](https://help.github.com/articles/creating-an-oauth-token-for-command-line-use) instead of your username and password. If my token were `testing123` my `~/.netrc` file would look like the following:
+
+```
+machine raw.github.com
+  login testing123
+  password x-oauth-basic
+```
+
 ## Running tests
 
 Make sure dependencies are installed:
