@@ -245,6 +245,7 @@ $ make test
   - Tim Oxley
   - Jeremy Worboys
   - Nick Jackson
+  - Cameron Bytheway
 
 ## Example applications
 
