@@ -159,6 +159,8 @@ function report(pkg, options) {
       error(err.message);
       process.exit(1);
     }
+
+    error(err.message);
   });
 
   if (program.verbose) {
