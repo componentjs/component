@@ -21,7 +21,7 @@ program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
   .option('-r, --remotes <urls>', 'remotes to try installing from')
-  .option('-o, --out <dir>', 'output components to the given <dir>')
+  .option('-o, --out <dir>', 'output components to the given <dir>', 'components')
   .option('-f, --force', 'force installation even if previously installed')
   .option('-v, --verbose', 'verbose output')
 
@@ -199,6 +199,8 @@ process.on('exit', function(){
  */
 
 function install(name, version) {
+  touch(program.out);
+
   // kick off installation
   var pkg = component.install(name, version, {
     dest: program.out,
@@ -211,6 +213,21 @@ function install(name, version) {
 
   // TODO: add callback
   pkg.install();
+}
+
+/**
+ * Touch `path` when present.
+ *
+ * @param {String} path
+ * @api private
+ */
+
+function touch(path) {
+  try {
+    fs.utimesSync(path, new Date, new Date);
+  } catch (err) {
+    // ignore
+  }
 }
 
 /**

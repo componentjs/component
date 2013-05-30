@@ -76,7 +76,6 @@ mkdir.sync(program.out);
 var builder = new Builder(process.cwd());
 if (program.copy) builder.copyFiles();
 builder.copyAssetsTo(program.out);
-if (program.dev) builder.prefixUrls('./');
 if (program.prefix) builder.prefixUrls(program.prefix);
 
 // require middleware plugins
