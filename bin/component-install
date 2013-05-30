@@ -98,10 +98,12 @@ if (local) {
 // save to ./component.json
 
 if (!local) {
-  conf.dependencies = conf.dependencies || {};
+  var key = program.dev ? 'development' : 'dependencies';
+
+  conf[key] = conf[key] || {};
   pkgs.forEach(function(pkg){
     pkg = parsePackage(pkg);
-    conf.dependencies[pkg.name] = pkg.version || '*';
+    conf[key][pkg.name] = pkg.version || '*';
   });
 
   if (exists('component.json')) saveConfig();
