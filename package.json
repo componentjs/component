@@ -10,6 +10,7 @@
     "module"
   ],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "repository": "git://github.com/component/component.git",
   "dependencies": {
     "commander": "1.0.5",
     "mkdirp": "0.3.4",
