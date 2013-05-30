@@ -1,4 +1,10 @@
 
+0.16.1 / 2013-05-30 
+==================
+
+ * add mtime update of output directory on install. Closes #344
+ * fix component-install(1) --dev, manip .development not .dependencies Closes #177
+
 0.16.0 / 2013-05-13 
 ==================
 
