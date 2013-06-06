@@ -162,7 +162,7 @@ function report(pkg, options) {
       process.exit(1);
     }
 
-    error(err.message);
+    utils.warn('warning', err.message);
   });
 
   if (program.verbose) {
