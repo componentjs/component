@@ -1,4 +1,26 @@
 
+0.16.2 / 2013-05-31 
+==================
+
+ * add dev url prefixing back
+
+0.16.1 / 2013-05-30 
+==================
+
+ * add mtime update of output directory on install. Closes #344
+ * fix component-install(1) --dev, manip .development not .dependencies Closes #177
+
+0.16.0 / 2013-05-13 
+==================
+
+  * add netrc support
+  * add `component-install(1)` --verbose
+  * add .demo, closes #254
+  * add -v, --verbose to component-search(1) with license / version. Closes #317
+  * add `--no-require` to `component-build(1)` 
+  * remove component-docs(1)
+  * fix: inFlight components do not emit `end` events
+
 0.15.1 / 2013-04-26 
 ==================
 

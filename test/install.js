@@ -27,6 +27,14 @@ describe('component install', function(){
   })
 
   describe('[name]', function(){
+    it('should show an error message if the component is named incorrectly', function(done) {
+      exec('bin/component install component-emitter', function(err, stdout) {
+        if(err) return done(err);
+        stdout.should.include('install');
+        done();
+      })
+    })
+
     it('should install a single component', function(done){
       exec('bin/component install component/emitter', function(err, stdout){
         if (err) return done(err);
