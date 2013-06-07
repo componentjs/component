@@ -45,4 +45,13 @@ describe('component build', function(){
       done();
     })
   })
+
+  it('should exclude the js file if no scripts, and the css file if no styles', function(done){
+    exec('cd test/fixtures/no-js-css && ' + bin + '-build -v', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.not.include('js :');
+      stdout.should.not.include('css :');
+      done();
+    });
+  });
 })
