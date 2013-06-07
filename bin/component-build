@@ -108,40 +108,42 @@ builder.build(function(err, obj){
   var js = '';
   var css = obj.css.trim();
 
-  var name = 'string' == typeof standalone
-    ? standalone
-    : conf.name;
+  if (obj.js.trim()) {
+    var name = 'string' == typeof standalone
+      ? standalone
+      : conf.name;
 
-  if (standalone) js += ';(function(){\n';
-  if (program.require) js += obj.require;
-  js += obj.js;
+    if (standalone) js += ';(function(){\n';
+    if (program.require) js += obj.require;
+    js += obj.js;
 
-  if (standalone) {
-    var umd = [
-      'if (typeof exports == "object") {',
-      '  module.exports = require("' + conf.name + '");',
-      '} else if (typeof define == "function" && define.amd) {',
-      '  define(function(){ return require("' + conf.name + '"); });',
-      '} else {',
-      '  this["' + name + '"] = require("' + conf.name + '");',
-      '}'
-    ];
+    if (standalone) {
+      var umd = [
+        'if (typeof exports == "object") {',
+        '  module.exports = require("' + conf.name + '");',
+        '} else if (typeof define == "function" && define.amd) {',
+        '  define(function(){ return require("' + conf.name + '"); });',
+        '} else {',
+        '  this["' + name + '"] = require("' + conf.name + '");',
+        '}'
+      ];
 
-    js += umd.join('\n');
-    js += '})();';
+      js += umd.join('\n');
+      js += '})();';
+    }
   }
 
   // css
   if (css) fs.writeFile(cssPath, css);
 
   // js
-  fs.writeFile(jsPath, js);
+  if (js) fs.writeFile(jsPath, js);
 
   if (!program.verbose) return;
   var duration = new Date - start;
   log('write', jsPath);
   log('write', cssPath);
-  log('js', (js.length / 1024 | 0) + 'kb');
+  if (js) log('js', (js.length / 1024 | 0) + 'kb');
   if (css) log('css', (css.length / 1024 | 0) + 'kb');
   log('duration', duration + 'ms');
   console.log();
