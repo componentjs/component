@@ -16,5 +16,5 @@ module.exports = function anonymous(obj) {
     return '';
   };
 
-  return "\n# " + escape(obj.name) + "\n\n  " + escape(obj.desc) + "\n\n## Installation\n\n    $ component install " + escape(obj.repo) + "\n\n## API\n\n   \n\n## License\n\n  MIT\n"
+  return "\n# " + escape(obj.name) + "\n\n  " + escape(obj.desc) + "\n\n## Installation\n\n  Install with [component(1)](http://component.io):\n\n    $ component install " + escape(obj.repo) + "\n\n## API\n\n\n\n## License\n\n  MIT\n"
 }
