@@ -20,6 +20,7 @@ var program = require('commander')
 program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
+  .option('-c, --concurrency <num>', 'file download concurrency')
   .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-o, --out <dir>', 'output components to the given <dir>', 'components')
   .option('-f, --force', 'force installation even if previously installed')
@@ -162,7 +163,7 @@ function report(pkg, options) {
       process.exit(1);
     }
 
-    error(err.message);
+    utils.warn('warning', err.message);
   });
 
   if (program.verbose) {
@@ -208,7 +209,8 @@ function install(name, version) {
     dest: program.out,
     force: program.force,
     dev: program.dev,
-    remotes: conf.remotes
+    remotes: conf.remotes,
+    concurrency: program.concurrency
   });
 
   report(pkg);

@@ -18,11 +18,12 @@
     "component-builder": "0.8.3",
     "string-to-js": "0.0.1",
     "jog": "0.4.0",
-    "batch": "0.2.1",
+    "batch": "0.3.2",
     "win-fork": "1.0.0",
     "archy": "0.0.2",
     "netrc": "~0.1.0",
-    "debug": "*"
+    "debug": "*",
+    "rimraf": "~2.1.4"
   },
   "devDependencies": {
     "express": "3.0.0",
