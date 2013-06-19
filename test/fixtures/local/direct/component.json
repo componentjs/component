@@ -1,0 +1,17 @@
+{
+  "name": "direct",
+  "description": "Local component dependency for main application",
+  "version": "0.0.1",
+  "dependencies": {},
+  "local": [
+    "first",
+    "second"
+  ],
+  "paths": [
+    "../others"
+  ],
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

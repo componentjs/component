@@ -1,0 +1,12 @@
+{
+  "name": "second",
+  "description": "Local dependency of a local component",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/emitter": "*"
+  },
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

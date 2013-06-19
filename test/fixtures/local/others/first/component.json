@@ -1,0 +1,12 @@
+{
+  "name": "first",
+  "description": "Local dependency of a local component",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/overlay": "*"
+  },
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
