@@ -1,4 +1,11 @@
 
+0.16.4 / 2013-06-18 
+==================
+
+ * fix build of empty js files when no js is present
+ * fix installation of local dependencies via lookup paths
+ * fix removal of semi-installed components
+
 0.16.3 / 2013-06-06 
 ==================
 
