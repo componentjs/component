@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , component = require('..')
-  , archy = require('archy')
-  , path = require('path')
-  , resolve = path.resolve
-  , lookup = component.lookup
-  , fs = require('fs')
-  , exists = fs.existsSync
-  , utils = component.utils;
+var program = require('commander');
+var component = require('..');
+var archy = require('archy');
+var path = require('path');
+var resolve = path.resolve;
+var lookup = component.lookup;
+var fs = require('fs');
+var exists = fs.existsSync;
+var utils = component.utils;
 
 // parse argv
 

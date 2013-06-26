@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , component = require('..')
-  , utils = component.utils;
+var program = require('commander');
+var component = require('..');
+var utils = component.utils;
 
 // usage
 

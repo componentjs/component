@@ -4,16 +4,16 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , component = require('..')
-  , fs = require('fs')
-  , exists = fs.existsSync
-  , utils = component.utils
-  , log = utils.log
-  , error = utils.error
-  , url = require('url')
-  , path = require('path')
-  , resolve = path.resolve;
+var program = require('commander');
+var component = require('..');
+var fs = require('fs');
+var exists = fs.existsSync;
+var utils = component.utils;
+var log = utils.log;
+var error = utils.error;
+var url = require('url');
+var path = require('path');
+var resolve = path.resolve;
 
 // options
 

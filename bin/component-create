@@ -4,17 +4,17 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , component = require('..')
-  , utils = component.utils
-  , path = require('path')
-  , fs = require('fs')
-  , join = path.join
-  , read = fs.readFileSync
-  , readdir = fs.readdirSync
-  , exists = fs.existsSync
-  , mkdir = require('mkdirp').sync
-  , readme = require('../templates/readme');
+var program = require('commander');
+var component = require('..');
+var utils = component.utils;
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
+var read = fs.readFileSync;
+var readdir = fs.readdirSync;
+var exists = fs.existsSync;
+var mkdir = require('mkdirp').sync;
+var readme = require('../templates/readme');
 
 // usage
 

@@ -4,14 +4,14 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , str2js = require('string-to-js')
-  , component = require('..')
-  , utils = component.utils
-  , path = require('path')
-  , fs = require('fs')
-  , join = path.join
-  , read = fs.readFileSync;
+var program = require('commander');
+var str2js = require('string-to-js');
+var component = require('..');
+var utils = component.utils;
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
+var read = fs.readFileSync;
 
 // usage
 

@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , exec = require('child_process').exec;
+var program = require('commander');
+var exec = require('child_process').exec;
 
 // parse argv
 

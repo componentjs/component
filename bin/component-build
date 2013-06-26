@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , Builder = require('component-builder')
-  , component = require('..')
-  , utils = component.utils
-  , log = component.utils.log
-  , path = require('path')
-  , fs = require('fs')
-  , exists = fs.existsSync || path.existsSync
-  , mkdir = require('mkdirp');
+var program = require('commander');
+var Builder = require('component-builder');
+var component = require('..');
+var utils = component.utils;
+var log = component.utils.log;
+var path = require('path');
+var fs = require('fs');
+var exists = fs.existsSync || path.existsSync;
+var mkdir = require('mkdirp');
 
 // options
 

@@ -4,13 +4,13 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , utils = require('../lib/utils')
-  , spawn = require('win-fork')
-  , path = require('path')
-  , fs = require('fs')
-  , join = path.join
-  , exists = fs.existsSync;
+var program = require('commander');
+var utils = require('../lib/utils');
+var spawn = require('win-fork');
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
+var exists = fs.existsSync;
 
 // usage
 
