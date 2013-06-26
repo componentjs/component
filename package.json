@@ -1,6 +1,6 @@
 {
   "name": "component",
-  "version": "0.16.4",
+  "version": "0.16.5",
   "description": "Component package manager consuming git repositories",
   "keywords": [
     "component",
