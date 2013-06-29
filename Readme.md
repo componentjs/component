@@ -132,7 +132,7 @@ $ component search ui
 
 ```
 
-## Using Github as a registry
+## Using GitHub as a registry
 
   By using GitHub as the registry, `component(1)` is automatically
   available to you without further explicit knowledge or work
@@ -154,7 +154,7 @@ $ component search ui
 
   The `component-create(1)` command can create a component
   project skeleton for you by filling out the prompts. Once
-  this repo is published to Github, you're all done!
+  this repo is published to GitHub, you're all done!
 
 ```
 name: popover
@@ -183,7 +183,7 @@ does this component have html? yes
   should be converted to a `require()`-able module. It is recommended that public
   components shared within the community use regular HTML templates, and regular
   CSS stylesheets to maximize contributions, however if you wish to use alternate
-  technologies just make sure to compile them before publishing them to Github.
+  technologies just make sure to compile them before publishing them to GitHub.
 
   For the recommended use-case of regular HTML, the `component-convert(1)` command
   will translate a regular HTML file to its `require()`-able JavaScript counterpart.
@@ -206,14 +206,6 @@ does this component have html? yes
 machine raw.github.com
   login visionmedia
   password pass123
-```
-
-  You may also use [GitHub OAuth Tokens](https://help.github.com/articles/creating-an-oauth-token-for-command-line-use) instead of your username and password. If my token were `testing123` my `~/.netrc` file would look like the following:
-
-```
-machine raw.github.com
-  login testing123
-  password x-oauth-basic
 ```
 
 ## Running tests
