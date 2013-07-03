@@ -74,6 +74,16 @@ describe('component install', function(){
         done();
       })
     })
+    it('should download files completely', function(done){
+      exec('bin/component install timoxley/font-awesome@3.2.1', function(err, stdout){
+        if (err) return done(err);
+        var stats = fs.statSync(path.resolve('components/timoxley-font-awesome/font/fontawesome-webfont.woff'));
+        stats.size.should.equal(43572);
+        stdout.should.include('install');
+        stdout.should.include('complete');
+        done();
+      })
+    })
   })
 
   describe('[name...]', function(){
