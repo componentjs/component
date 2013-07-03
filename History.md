@@ -1,4 +1,11 @@
 
+0.16.6 / 2013-07-02 
+==================
+
+ * update superagent
+ * fix node 0.8 issues when installing partial files
+ * remove OAuth in .netrc instructions
+
 0.16.5 / 2013-06-26 
 ==================
 
