@@ -74,6 +74,7 @@ describe('component install', function(){
         done();
       })
     })
+
     it('should download files completely', function(done){
       exec('bin/component install timoxley/font-awesome@3.2.1', function(err, stdout){
         if (err) return done(err);
