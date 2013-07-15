@@ -10,7 +10,9 @@ var spawn = require('win-fork');
 var path = require('path');
 var fs = require('fs');
 var join = path.join;
+var stat = fs.statSync;
 var exists = fs.existsSync;
+var resolve = path.resolve;
 
 // usage
 
@@ -60,10 +62,22 @@ if (!cmd) program.help();
 
 var bin = 'component-' + cmd;
 
-// local
+// local or resolve to absolute executable path
 
 var local = join(__dirname, bin);
-if (exists(local)) bin = local;
+
+if (exists(local)) {
+  bin = local;
+} else {
+  bin = process.env.PATH.split(':').reduce(function(binary, p) {
+    p = resolve(p, bin);
+    return exists(p) && stat(p).isFile() ? p : binary;
+  }, bin);
+}
+
+// display help if bin does not exist
+
+if (!exists(bin)) program.help();
 
 // spawn
 
