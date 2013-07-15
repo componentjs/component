@@ -54,11 +54,7 @@ if ('add' == cmd) cmd = 'install';
 
 // display help
 
-if (!cmd) {
-  process.stdout.write(program.helpInformation());
-  program.emit('--help');
-  process.exit();
-}
+if (!cmd) program.help();
 
 // executable
 
