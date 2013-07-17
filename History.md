@@ -1,4 +1,10 @@
 
+0.16.8 / 2013-07-17 
+==================
+
+ * fix dups reported in install output. Closes #372
+ * fix corrupt downloads with quick superagent replacement. Closes #374
+
 0.16.7 / 2013-07-05 
 ==================
 
