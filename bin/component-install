@@ -105,10 +105,6 @@ if (program.remotes) {
   conf.remotes = program.remotes.split(',').concat(conf.remotes);
 }
 
-// default to github
-
-conf.remotes.push('https://raw.github.com');
-
 // install
 
 console.log();
@@ -205,7 +201,7 @@ function install(name, version) {
     dest: program.out,
     force: program.force,
     dev: program.dev,
-    remotes: conf.remotes,
+    remotes: conf.remotes.concat('https://raw.github.com'), // default to github
     concurrency: 10
   });
 
