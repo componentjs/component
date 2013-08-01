@@ -247,6 +247,7 @@ $ make test
   - [Todo list](https://github.com/component/todo) example comprised of private and public components
   - [Component.io](https://github.com/component/component.io) website
   - [Posty](https://github.com/visionmedia/posty)
+  - [NoFlo](noflojs.org) flow-based programming environment
 
 ## Extensions
 
