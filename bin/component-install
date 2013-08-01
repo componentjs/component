@@ -175,10 +175,7 @@ function report(pkg, options) {
       var key = program.dev ? 'development' : 'dependencies';
 
       conf[key] = conf[key] || {};
-      pkgs.forEach(function(pkg){
-        pkg = parsePackage(pkg);
-        conf[key][pkg.name] = pkg.version || '*';
-      });
+      conf[key][pkg.name] = pkg.version === 'master' ? '*' : pkg.version;
 
       if (exists('component.json')) saveConfig();
     }
