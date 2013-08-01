@@ -95,20 +95,6 @@ if (local) {
   }
 }
 
-// save to ./component.json
-
-if (!local) {
-  var key = program.dev ? 'development' : 'dependencies';
-
-  conf[key] = conf[key] || {};
-  pkgs.forEach(function(pkg){
-    pkg = parsePackage(pkg);
-    conf[key][pkg.name] = pkg.version || '*';
-  });
-
-  if (exists('component.json')) saveConfig();
-}
-
 // implicit remotes
 
 conf.remotes = conf.remotes || [];
@@ -182,6 +168,20 @@ function report(pkg, options) {
 
   pkg.on('end', function(){
     log('complete', pkg.name);
+
+    // save to ./component.json
+
+    if (!local) {
+      var key = program.dev ? 'development' : 'dependencies';
+
+      conf[key] = conf[key] || {};
+      pkgs.forEach(function(pkg){
+        pkg = parsePackage(pkg);
+        conf[key][pkg.name] = pkg.version || '*';
+      });
+
+      if (exists('component.json')) saveConfig();
+    }
   });
 }
 
