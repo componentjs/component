@@ -23,6 +23,7 @@ program
   .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-o, --out <dir>', 'output components to the given <dir>', 'components')
   .option('-f, --force', 'force installation even if previously installed')
+  .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
   .option('-v, --verbose', 'verbose output')
 
 // examples
@@ -105,10 +106,6 @@ if (program.remotes) {
   conf.remotes = program.remotes.split(',').concat(conf.remotes);
 }
 
-// default to github
-
-conf.remotes.push('https://raw.github.com');
-
 // install
 
 console.log();
@@ -175,10 +172,7 @@ function report(pkg, options) {
       var key = program.dev ? 'development' : 'dependencies';
 
       conf[key] = conf[key] || {};
-      pkgs.forEach(function(pkg){
-        pkg = parsePackage(pkg);
-        conf[key][pkg.name] = pkg.version || '*';
-      });
+      conf[key][pkg.name] = pkg.version === 'master' ? '*' : pkg.version;
 
       if (exists('component.json')) saveConfig();
     }
@@ -208,7 +202,8 @@ function install(name, version) {
     dest: program.out,
     force: program.force,
     dev: program.dev,
-    remotes: conf.remotes,
+    proxy: program.proxy,
+    remotes: conf.remotes.concat('https://raw.github.com'), // default to github
     concurrency: 10
   });
 

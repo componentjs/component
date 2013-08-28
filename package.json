@@ -23,7 +23,8 @@
     "archy": "0.0.2",
     "netrc": "~0.1.0",
     "debug": "*",
-    "rimraf": "~2.1.4"
+    "rimraf": "~2.1.4",
+    "superagent-proxy": "0.0.1"
   },
   "devDependencies": {
     "express": "3.0.0",
