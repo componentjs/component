@@ -45,6 +45,7 @@
  - follow [@component_js](http://twitter.com/component_js) on twitter
  - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
+ - In-browser component [builder](http://component-kelonye.rhcloud.com/)
 
 ## Screencasts
 
