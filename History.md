@@ -1,4 +1,13 @@
 
+0.17.2 / 2013-09-03 
+==================
+
+ * add superagent-proxy
+ * add warning for missing bin
+ * fix: bump version of netrc
+ * fix: keep default gh remote from being added each install command.
+ * fix: wait for packages to install successfully before writing component.json -- Should solve #386
+
 0.17.0 / 2013-07-19 
 ==================
 
