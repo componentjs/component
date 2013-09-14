@@ -5,10 +5,10 @@
  */
 
 var program = require('commander');
-var exec = require('child_process').exec;
 var component = require('..');
 var utils = component.utils;
 var cols = process.stdout.columns || 80;
+var openSite = require('open');
 
 // parse argv
 
@@ -88,7 +88,7 @@ function open(pkgs) {
   var max = 5;
   pkgs.slice(0, max).forEach(function(pkg){
     if (!pkg.repo) return console.warn('%s missing "repo"', pkg.name);
-    exec('open https://github.com/' + pkg.repo);
+    openSite('https://github.com/' + pkg.repo);
   });
 }
 
