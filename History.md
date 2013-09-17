@@ -1,4 +1,10 @@
 
+0.17.6 / 2013-09-17 
+==================
+
+ * revert superagent enabling for now
+ * add use of "open" for component-wiki
+
 0.17.5 / 2013-09-13 
 ==================
 
