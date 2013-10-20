@@ -46,6 +46,7 @@
  - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
  - In-browser component [builder](http://component-kelonye.rhcloud.com/)
+ - component [dependency visualizer](http://component-graph.herokuapp.com/component/dom)
 
 ## Screencasts
 
