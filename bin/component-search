@@ -102,7 +102,7 @@ function verbose(pkgs) {
     console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
     console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
     console.log('  desc: \033[90m%s\033[m', description(pkg.description));
-    if (program.verbose) console.log('  demo: \033[90m%s\033[m', pkg.demo || 'none');
+    if (program.verbose && pkg.demo) console.log('  demo: \033[90m%s\033[m', pkg.demo);
     if (program.verbose) console.log('  version: \033[90m%s\033[m', pkg.version);
     if (program.verbose) console.log('  license: \033[90m%s\033[m', pkg.license || 'none');
     console.log('  ★ \033[90m%s\033[m', pkg.stars);
