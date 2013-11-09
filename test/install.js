@@ -85,6 +85,17 @@ describe('component install', function(){
         done();
       })
     })
+
+    it('should also download json files', function (done) {
+      exec('bin/component install Swatinem/t', function(err, stdout){
+        if (err) return done(err);
+        var exists = fs.existsSync(path.resolve('components/Swatinem-t/lib/definitions.json'));
+        exists.should.be.true;
+        stdout.should.include('install');
+        stdout.should.include('complete');
+        done();
+      })
+    })
   })
 
   describe('[name...]', function(){
