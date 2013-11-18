@@ -10,6 +10,8 @@ var utils = component.utils;
 var path = require('path');
 var fs = require('fs');
 var join = path.join;
+var basename = path.basename;
+var extname = path.extname;
 var read = fs.readFileSync;
 var readdir = fs.readdirSync;
 var exists = fs.existsSync;
@@ -107,23 +109,32 @@ program.prompt(prompt, function(obj){
   mkdir(dir);
 
   // js
-  if (bool(obj.js)) {
+  if (yes(obj.js)) {
     conf.main = "index.js";
     conf.scripts = ["index.js"];
     write(join(dir, 'index.js'), '');
+  } else if(!no(obj.js)) {
+    conf.main = obj.js;
+    conf.scripts = [obj.js];
+    write(join(dir, obj.js), '');
   }
 
   // html
-  if (bool(obj.html)) {
-    conf.scripts = conf.scripts || [];
-    conf.scripts.push('template.js');
+  if (yes(obj.html)) {
+    conf.templates = ['template.html'];
     write(join(dir, 'template.html'), '');
+  } else if(!no(obj.html)) {
+    conf.templates = [obj.html];
+    write(join(dir, obj.html), '');
   }
 
   // css
-  if (bool(obj.css)) {
+  if (yes(obj.css)) {
     conf.styles = [name + '.css'];
     write(join(dir, name + '.css'), '');
+  } else if(!no(obj.css)) {
+    conf.styles = [obj.css];
+    write(join(dir, obj.css), '');
   }
 
   // makefile
@@ -146,11 +157,15 @@ program.prompt(prompt, function(obj){
 });
 
 /**
- * Boolean from `str`.
+ * Booleans from `str`.
  */
 
-function bool(str) {
+function yes(str) {
   return /^y(es)?/i.test(str);
+}
+
+function no(str) {
+  return /^n(o)?/i.test(str);
 }
 
 /**
@@ -159,19 +174,19 @@ function bool(str) {
 
 function createMakefile(obj) {
   var buf = '\n';
+  var tpl = basename(obj.html, extname(obj.html));
 
   // build target
   buf += 'build: components';
-  if (bool(obj.js)) buf += ' index.js';
-  if (bool(obj.css)) buf += ' ' + obj.name + '.css';
-  if (bool(obj.html)) buf += ' template.js';
-  buf += '\n\t@component build --dev\n\n';
+  if (yes(obj.js)) buf += ' index.js';
+  else if (!no(obj.js)) buf += ' ' + obj.js;
 
-  // template.js target
-  if (bool(obj.html)) {
-    buf += 'template.js: template.html\n';
-    buf += '\t@component convert $<\n\n';
-  }
+  if (yes(obj.css)) buf += ' ' + obj.name + '.css';
+  else if (!no(obj.css)) buf += ' ' + obj.css;
+
+  if (yes(obj.html)) buf += ' template.html';
+  else if (!no(obj.html)) buf += ' ' + obj.html;
+  buf += '\n\t@component build --dev\n\n';
 
   // components target
   buf += 'components: component.json\n';
