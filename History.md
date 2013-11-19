@@ -1,31 +1,31 @@
 
-0.18.0 / 2013-10-17 
+0.18.0 / 2013-10-17
 ==================
 
  * update builder for json support
 
-0.17.6 / 2013-09-17 
+0.17.6 / 2013-09-17
 ==================
 
  * revert superagent enabling for now
  * add use of "open" for component-wiki
 
-0.17.5 / 2013-09-13 
+0.17.5 / 2013-09-13
 ==================
 
  * add superagent use back for netrc
 
-0.17.4 / 2013-09-12 
+0.17.4 / 2013-09-12
 ==================
 
  * update builder
 
-0.17.3 / 2013-09-06 
+0.17.3 / 2013-09-06
 ==================
 
  * update builder (require function change)
 
-0.17.2 / 2013-09-03 
+0.17.2 / 2013-09-03
 ==================
 
  * add superagent-proxy
@@ -34,80 +34,80 @@
  * fix: keep default gh remote from being added each install command.
  * fix: wait for packages to install successfully before writing component.json -- Should solve #386
 
-0.17.0 / 2013-07-19 
+0.17.0 / 2013-07-19
 ==================
 
  * update builder
 
-0.16.8 / 2013-07-17 
+0.16.8 / 2013-07-17
 ==================
 
  * fix dups reported in install output. Closes #372
  * fix corrupt downloads with quick superagent replacement. Closes #374
 
-0.16.7 / 2013-07-05 
+0.16.7 / 2013-07-05
 ==================
 
  * update superagent for unzip fixes
 
-0.16.6 / 2013-07-02 
+0.16.6 / 2013-07-02
 ==================
 
  * update superagent
  * fix node 0.8 issues when installing partial files
  * remove OAuth in .netrc instructions
 
-0.16.5 / 2013-06-26 
+0.16.5 / 2013-06-26
 ==================
 
  * update superagent
  * fixing resolve bug for node 0.10+
 
-0.16.4 / 2013-06-18 
+0.16.4 / 2013-06-18
 ==================
 
  * fix build of empty js files when no js is present
  * fix installation of local dependencies via lookup paths
  * fix removal of semi-installed components
 
-0.16.3 / 2013-06-06 
+0.16.3 / 2013-06-06
 ==================
 
  * update builder
 
-0.16.2 / 2013-05-31 
+0.16.2 / 2013-05-31
 ==================
 
  * add dev url prefixing back
 
-0.16.1 / 2013-05-30 
+0.16.1 / 2013-05-30
 ==================
 
  * add mtime update of output directory on install. Closes #344
  * fix component-install(1) --dev, manip .development not .dependencies Closes #177
 
-0.16.0 / 2013-05-13 
+0.16.0 / 2013-05-13
 ==================
 
   * add netrc support
   * add `component-install(1)` --verbose
   * add .demo, closes #254
   * add -v, --verbose to component-search(1) with license / version. Closes #317
-  * add `--no-require` to `component-build(1)` 
+  * add `--no-require` to `component-build(1)`
   * remove component-docs(1)
   * fix: inFlight components do not emit `end` events
 
-0.15.1 / 2013-04-26 
+0.15.1 / 2013-04-26
 ==================
 
   * update builder for root-level main alias fix
 
-0.15.0 / 2013-04-24 
+0.15.0 / 2013-04-24
 ==================
 
   * update builder
 
-0.14.0 / 2013-04-23 
+0.14.0 / 2013-04-23
 ==================
 
   * add .main to component-create(1) generated component.json for clarity
@@ -118,14 +118,14 @@
   * fix a call to fn() that should be done()
   * fix UMD: use "this" instead of window for global
 
-0.13.2 / 2013-03-26 
+0.13.2 / 2013-03-26
 ==================
 
   * change error handling to treat non-404s as fatals
-  * fix exit status of component(1)  
-  * fix current .remote usage in Package 
+  * fix exit status of component(1)
+  * fix current .remote usage in Package
 
-0.13.1 / 2013-03-19 
+0.13.1 / 2013-03-19
 ==================
 
   * update builder
@@ -134,18 +134,18 @@
   * fix fatal detection
   * add explicit remotes using `-r <url>`
 
-0.13.0 / 2013-02-24 
+0.13.0 / 2013-02-24
 ==================
 
   * add: only one in-flight request per component (~50% perf increase). Closes #47
   * add --use flag
   * remove makefile and .gitignore from component-create local components
 
-0.12.0 / 2013-02-15 
+0.12.0 / 2013-02-15
 ==================
 
-  * add -c, --copy option to copy files instead of symlinking  
-  * fix AMD support for modules exporting functions 
+  * add -c, --copy option to copy files instead of symlinking
+  * fix AMD support for modules exporting functions
 
 0.11.1 / 2013-02-01
 ==================
