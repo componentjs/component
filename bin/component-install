@@ -22,7 +22,7 @@ program
   .option('-d, --dev', 'install development dependencies')
   .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-f, --force', 'force installation even if previously installed')
-  .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
+  .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
   .option('-v, --verbose', 'verbose output')
 
 // examples
