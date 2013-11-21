@@ -24,7 +24,8 @@
     "netrc": "~0.1.3",
     "debug": "*",
     "rimraf": "~2.1.4",
-    "superagent-proxy": "0.1.0",
+    "proxy-agent": "~0.0.2",
+    "superagent-proxy": "~0.2.0",
     "open": "0.0.4"
   },
   "devDependencies": {
