@@ -130,6 +130,7 @@ program.prompt(prompt, function(obj){
   if (!local) write(join(dir, 'Makefile'), createMakefile(obj));
 
   // readme
+  obj.year = new Date().getUTCFullYear().toString();
   if (!local) write(join(dir, 'Readme.md'), readme(obj));
 
   // changelog
