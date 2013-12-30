@@ -1,4 +1,15 @@
 
+0.19.0 / 2013-12-30
+==================
+
+ * add .netrc auth logic back
+ * add proxy support
+ * add full MIT license to component-create(1)
+ * update component-builder for alias removal
+ * change component-install to use installer.js
+ * remove component-install(1) --out flag. Closes #389
+ * change component-search(1) to only display "demo: ..." when present
+
 0.18.0 / 2013-10-17
 ==================
 
