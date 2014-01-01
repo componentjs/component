@@ -101,7 +101,6 @@ process.on('exit', function(){
 
 if (local) {
   installer.install(function(err) {
-    console.log('installed');
     if (err) utils.fatal(err.message);
   });
 } else {
