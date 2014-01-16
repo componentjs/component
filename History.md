@@ -1,4 +1,10 @@
 
+0.19.4 / 2014-01-16
+==================
+
+ * update installer for casing fix
+ * update builder for casing fix
+
 0.19.3 / 2014-01-07
 ==================
 
