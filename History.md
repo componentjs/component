@@ -1,4 +1,10 @@
 
+0.19.5 / 2014-01-16
+==================
+
+ * update installer for lookup casing fix
+ * fix casing in .lookup()
+
 0.19.4 / 2014-01-16
 ==================
 
