@@ -122,7 +122,7 @@ builder.build(function(err, obj){
         'if (typeof exports == "object") {',
         '  module.exports = require("' + conf.name + '");',
         '} else if (typeof define == "function" && define.amd) {',
-        '  define(function(){ return require("' + conf.name + '"); });',
+        '  define([], function(){ return require("' + conf.name + '"); });',
         '} else {',
         '  this["' + name + '"] = require("' + conf.name + '");',
         '}'

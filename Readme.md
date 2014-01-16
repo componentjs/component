@@ -55,8 +55,8 @@
 
 ## Articles
 
-  - building a [date picker component](http://tjholowaychuk.com/post/37832588021/building-a-date-picker-component)
-  - original [component blog post](http://tjholowaychuk.com/post/27984551477/components)
+  - building a [date picker component](http://tjholowaychuk.tumblr.com/post/37832588021/building-a-date-picker-component)
+  - original [component blog post](http://tjholowaychuk.tumblr.com/post/27984551477/components)
 
 ## Usage
 
