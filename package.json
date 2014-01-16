@@ -27,7 +27,7 @@
     "proxy-agent": "~0.0.2",
     "superagent-proxy": "~0.2.0",
     "open": "0.0.4",
-    "component-installer": "0.0.3"
+    "component-installer": "~0.0.4"
   },
   "devDependencies": {
     "express": "3.0.0",
