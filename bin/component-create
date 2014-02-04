@@ -115,8 +115,7 @@ program.prompt(prompt, function(obj){
 
   // html
   if (bool(obj.html)) {
-    conf.scripts = conf.scripts || [];
-    conf.scripts.push('template.js');
+    conf.templates = ['template.html'];
     write(join(dir, 'template.html'), '');
   }
 
