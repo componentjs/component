@@ -1,4 +1,11 @@
 
+0.19.6 / 2014-02-06
+==================
+
+ * update component-installer to remove lowercasing
+ * update "superagent-proxy" to v0.3.0
+ * update "proxy-agent" to v1.1.0
+
 0.19.5 / 2014-01-16
 ==================
 
