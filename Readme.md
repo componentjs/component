@@ -202,7 +202,7 @@ does this component have html? yes
 
 ## Using private components
 
-  `component(1)` uses [~/.netrc](http://man.cx/netrc(4), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
+  `component(1)` uses [~/.netrc](http://man.cx/netrc(4)), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
 
 ```
 machine raw.github.com
