@@ -1,3 +1,4 @@
+/*
 
 var exec = require('child_process').exec
   , express = require('express')
@@ -150,3 +151,5 @@ describe('component install from remote', function(){
     exec('rm -fr test/private-registry', done);
   })
 })
+
+*/
