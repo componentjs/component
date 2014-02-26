@@ -5,7 +5,9 @@
  */
 
 var program = require('commander');
-var Builder = require('component-builder');
+var resolver = require('component-resolver');
+var flatten = require('component-flatten');
+var Builder = require('component-builder2');
 var component = require('..');
 var utils = component.utils;
 var log = component.utils.log;
@@ -71,51 +73,25 @@ var cssPath = path.join(program.out, program.name + '.css');
 
 mkdir.sync(program.out);
 
-// build
+// resolve
+resolver(process.cwd(), {
+  development: program.dev,
+  verbose: true,
+  install: true
+}, function (err, tree) {
+  if (err) throw err;
 
-var builder = new Builder(process.cwd());
-if (program.copy) builder.copyFiles();
-builder.copyAssetsTo(program.out);
-if (program.dev) builder.prefixUrls('./');
-if (program.prefix) builder.prefixUrls(program.prefix);
+  var branches = flatten(tree);
 
-// require middleware plugins
-if (program.use) {
-  var modules = program.use.split(',');
-  modules.forEach(function(mod){
-    var resolved = path.resolve(mod)
-      , real = exists(resolved) || exists(resolved + '.js')
-      , module = path.resolve('node_modules', mod);
-
-    builder.use(real ? require(resolved) : require(module));
-  });
-}
-
-var start = new Date;
-
-// --dev
-
-if (program.dev) {
-  builder.development();
-  builder.addSourceURLs();
-}
-
-// build
-
-if (program.verbose) console.log();
-builder.build(function(err, obj){
-  if (err) utils.fatal(err.message);
-  var js = '';
-  var css = obj.css.trim();
-
-  if (obj.js.trim()) {
-    var name = 'string' == typeof standalone
-      ? standalone
-      : conf.name;
-
-    if (standalone) js += ';(function(){\n';
-    if (program.require) js += obj.require;
-    js += obj.js;
+  // build js
+  Builder.scripts(branches, {
+    dev: program.dev,
+  })
+  .use('scripts', Builder.plugins.js())
+  .use('json', Builder.plugins.json())
+  .use('templates', Builder.plugins.string())
+  .toStr(function (err, string) {
+    if (err) throw err;
 
     if (standalone) {
       var umd = [
@@ -130,21 +106,34 @@ builder.build(function(err, obj){
 
       js += umd.join('\n');
       js += '})();';
+    } else {
+      // autorequire
+      string += '\n\nrequire("' + conf.name + '");';
     }
-  }
+    fs.writeFile(jsPath, string);
+  })
 
-  // css
-  if (css) fs.writeFile(cssPath, css);
+  // build css
+  Builder.styles(branches, {
+    dev: program.dev
+  })
+  .use('styles',
+    Builder.plugins.css(),
+    Builder.plugins.urlRewriter(program.prefix))
+  .toStr(function (err, string) {
+    if (err) throw err;
+    fs.writeFile(cssPath, string);
+  })
 
-  // js
-  if (js) fs.writeFile(jsPath, js);
-
-  if (!program.verbose) return;
-  var duration = new Date - start;
-  log('write', jsPath);
-  log('write', cssPath);
-  if (js) log('js', (js.length / 1024 | 0) + 'kb');
-  if (css) log('css', (css.length / 1024 | 0) + 'kb');
-  log('duration', duration + 'ms');
-  console.log();
-});
+  // build files
+  var fileplugin = program.copy
+    ? Builder.plugins.copy()
+    : Builder.plugins.symlink();
+  Builder.files(branches, {
+    dev: program.dev,
+    dest: program.out,
+  })
+  .use('images', fileplugin)
+  .use('fonts', fileplugin)
+  .use('files', fileplugin);
+})

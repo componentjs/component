@@ -1,7 +1,4 @@
-
-/**
- * Module dependencies.
- */
+/*
 
 var exec = require('child_process').exec
   , bin = __dirname + '/../bin/component'
@@ -55,3 +52,5 @@ describe('component build', function(){
     });
   });
 })
+
+*/

@@ -73,7 +73,7 @@ var options = {
 var local = !program.args.length;
 if (local) {
   resolver(process.cwd(), options, function(err) {
-    if (err) utils.fatal(err.message);
+    if (err) throw err;
   })
 } else {
   var deps = {};
