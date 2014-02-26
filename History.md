@@ -1,4 +1,9 @@
 
+0.19.7 / 2014-02-25
+==================
+
+ * update github URLs in package.js to https://raw.githubusercontent.com
+
 0.19.6 / 2014-02-06
 ==================
 

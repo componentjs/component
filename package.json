@@ -1,6 +1,6 @@
 {
   "name": "component",
-  "version": "0.19.6",
+  "version": "0.19.7",
   "description": "Component package manager consuming git repositories",
   "keywords": [
     "component",
@@ -27,7 +27,8 @@
     "proxy-agent": "~1.1.0",
     "superagent-proxy": "~0.3.0",
     "open": "0.0.4",
-    "component-installer": "~0.0.6"
+    "component-installer": "~0.0.6",
+    "component-package": "~0.0.4"
   },
   "devDependencies": {
     "express": "3.0.0",
@@ -51,5 +52,8 @@
   "main": "index",
   "engines": {
     "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "make test"
   }
 }
