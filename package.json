@@ -1,6 +1,6 @@
 {
-  "name": "component",
-  "version": "0.19.6",
+  "name": "component-dev",
+  "version": "0.1.0",
   "description": "Component package manager consuming git repositories",
   "keywords": [
     "component",
@@ -53,5 +53,8 @@
   "main": "index",
   "engines": {
     "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "make test"
   }
 }
