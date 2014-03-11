@@ -78,6 +78,7 @@ var remotes = conf.remotes || [];
 if (program.dev) installer.development();
 if (program.proxy) installer.proxy(program.proxy);
 if (program.remotes) remotes = program.remotes.split(',').concat(conf.remotes);
+if (program.force) installer.force();
 
 remotes.forEach(function(remote) {
   installer.remote(remote);

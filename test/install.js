@@ -87,9 +87,9 @@ describe('component install', function(){
     })
 
     it('should also download json files', function (done) {
-      exec('bin/component install Swatinem/t', function(err, stdout){
+      exec('bin/component install swatinem/t', function(err, stdout){
         if (err) return done(err);
-        var exists = fs.existsSync(path.resolve('components/Swatinem-t/lib/definitions.json'));
+        var exists = fs.existsSync(path.resolve('components/swatinem-t/lib/definitions.json'));
         exists.should.be.true;
         stdout.should.include('install');
         stdout.should.include('complete');
@@ -143,6 +143,16 @@ describe('component install', function(){
       var json = require(path.resolve('components/component-popover/component.json'));
       json.name.should.equal('popover');
       assert(exists('components/component-assert'), 'dev deps should be installed');
+      done();
+    })
+  })
+
+  it('should force remote fetching of component when --force is used', function(done){
+    exec('bin/component install -f', function(err, stdout){
+      if (err) return done(err);
+      stdout.should.include('install');
+      stdout.should.include('complete');
+      stdout.should.not.include('exists');
       done();
     })
   })
