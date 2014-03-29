@@ -1,4 +1,11 @@
 
+0.19.8 / 2014-03-29
+==================
+
+ * fix force install option #485
+ * fix dependencies installed via not being added to component.json #466
+ * bump deps
+
 0.19.7 / 2014-02-25
 ==================
 
