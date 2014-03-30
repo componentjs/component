@@ -18,7 +18,6 @@ describe('component', function(){
       stdout.should.include('create');
       stdout.should.include('search');
       stdout.should.include('info');
-      stdout.should.include('convert');
       stdout.should.include('ls');
       done();
     })
