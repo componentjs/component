@@ -3,8 +3,11 @@
 ==================
 
 * remove:
+  - `component-create` - https://github.com/component/create.js
   - `component-convert`
   - `component-wiki`
+  - `component-info`
+  - `component-changes`
  * add:
   - `component-crawl`
 

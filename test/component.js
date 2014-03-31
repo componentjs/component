@@ -15,9 +15,7 @@ describe('component', function(){
       stdout.should.include('--help');
       stdout.should.include('Commands:');
       stdout.should.include('install');
-      stdout.should.include('create');
       stdout.should.include('search');
-      stdout.should.include('info');
       stdout.should.include('ls');
       done();
     })

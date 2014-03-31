@@ -33,24 +33,19 @@
   },
   "devDependencies": {
     "express": "3.0.0",
-    "minstache": "0.0.1",
     "mocha": "*",
     "should": "*"
   },
   "bin": {
     "component": "bin/component",
-    "component-info": "bin/component-info",
     "component-help": "bin/component-help",
     "component-install": "bin/component-install",
-    "component-ls": "bin/component-ls",
-    "component-convert": "bin/component-convert",
     "component-build": "bin/component-build",
     "component-search": "bin/component-search",
-    "component-create": "bin/component-create",
-    "component-changes": "bin/component-changes",
-    "component-wiki": "bin/component-wiki"
+    "component-crawl": "bin/component-crawl",
+    "component-ls": "bin/component-ls"
   },
-  "main": "index",
+  "main": "lib/component",
   "engines": {
     "node": ">= 0.8.0"
   },
