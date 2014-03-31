@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
-var open = require('open');
-
-open('https://github.com/component/component/wiki/Components');

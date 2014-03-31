@@ -4,6 +4,7 @@
 
 * remove:
   - `component-convert`
+  - `component-wiki`
 
 0.19.8 / 2014-03-29
 ==================
