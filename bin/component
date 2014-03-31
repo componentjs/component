@@ -34,6 +34,7 @@ program.on('--help', function(){
   console.log('    wiki                    open the components list wiki page');
   console.log('    build                   build the component');
   console.log('    ls                      list installed components');
+  console.log('    crawl                   crawl a github user/organization for components');
   console.log();
   process.exit();
 });

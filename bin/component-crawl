@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var request = require('superagent');
+var program = require('commander');
+var utils = require('../lib/utils');
+
+var endpoint = process.env.COMPONENT_CRAWLER_ENDPOINT
+  || 'http://component-crawler.herokuapp.com/';
+
+program.usage('<user|organization>...');
+
+program.parse(process.argv);
+
+var users = program.args;
+if (!users.length) utils.fatal('<user|organization> required.');
+
+users.forEach(function (user) {
+  request
+  .patch(endpoint + user)
+  .end(function (err, res) {
+    if (err) throw err;
+    if (!res.ok) utils.fatal('failed to crawl "%s".', user);
+    utils.log('crawling', user);
+  });
+});
