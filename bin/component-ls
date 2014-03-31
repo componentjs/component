@@ -12,7 +12,7 @@ var resolve = path.resolve;
 var lookup = component.lookup;
 var fs = require('fs');
 var exists = fs.existsSync;
-var utils = component.utils;
+var utils = require('component-consoler');
 
 // parse argv
 

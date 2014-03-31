@@ -6,7 +6,7 @@
 
 var program = require('commander');
 var component = require('..');
-var utils = component.utils;
+var utils = require('component-consoler');
 var cols = process.stdout.columns || 80;
 var openSite = require('open');
 

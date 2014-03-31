@@ -6,7 +6,7 @@
 
 var request = require('superagent');
 var program = require('commander');
-var utils = require('../lib/utils');
+var utils = require('component-consoler');
 
 var endpoint = process.env.COMPONENT_CRAWLER_ENDPOINT
   || 'http://component-crawler.herokuapp.com/';
