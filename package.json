@@ -14,7 +14,7 @@
   "dependencies": {
     "component-resolver": "*",
     "component-consoler": "^1.0.0",
-    "component-ls": "^1.0.0",
+    "component-ls": "^2.0.0",
     "commander": "1.0.5",
     "mkdirp": "~0.3.4",
     "superagent": "~0.15.4",

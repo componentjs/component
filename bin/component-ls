@@ -1,3 +1,19 @@
 #!/usr/bin/env node
 
-require('component-ls');
+var program = require('commander');
+var resolve = require('component-resolver');
+var utils = require('component-consoler');
+var ls = require('component-ls');
+
+// parse argv
+
+program
+  .option('-d, --depth <n>', 'set the depth to <n>', Infinity)
+  .parse(process.argv);
+
+// output tree
+
+resolve(process.cwd(), function (err, tree) {
+  if (err) utils.fatal(err);
+  ls(tree);
+})
