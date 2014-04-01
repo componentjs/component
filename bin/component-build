@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var Builder = require('component-builder');
+var resolve = require('component-resolver');
+var build = require('component-builder2');
 var utils = require('component-consoler');
 var program = require('commander');
 var mkdir = require('mkdirp');
@@ -17,15 +18,14 @@ var log = utils.log;
 // options
 
 program
-  .option('-d, --dev', 'build development dependencies')
-  .option('-s, --standalone <name>', 'build a stand-alone version of the component')
+  .usage('component build [scripts] [styles] [files]')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
-  .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
-  .option('-c, --copy', 'copy files instead of linking')
-  .option('-u, --use <name>', 'use the given build plugin(s)')
+  .option('-d, --dev', 'build development dependencies')
+  .option('-s, --umd <name>', 'build a stand-alone version of the component')
   .option('-R, --no-require', 'exclude require from build')
-  .option('-v, --verbose', 'verbose output')
+  .option('-p, --prefix <str>', 'prefix css asset urls with <str>', '')
+  .option('-c, --copy', 'copy files instead of linking')
 
 // examples
 
@@ -38,11 +38,11 @@ program.on('--help', function(){
   console.log('    # build to ./dist as assets.js, assets.css');
   console.log('    $ component build -o dist -n assets');
   console.log();
-  console.log('    # build standalone as window.$');
-  console.log('    $ component build --standalone $');
+  console.log('    # build as UMD defaulting to window.$');
+  console.log('    $ component build --umd $');
   console.log();
-  console.log('    # build with plugins');
-  console.log('    $ component build -u foo,bar,baz');
+  console.log('    # build only .js');
+  console.log('    $ component build scripts');
   console.log();
 });
 
@@ -50,17 +50,33 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
+var args = program.args;
+
+// object of which files to build
+var builds;
+if (!args.length) {
+  builds = {
+    scripts: true,
+    styles: true,
+    files: true,
+  };
+} else {
+  builds = {
+    scripts: !!~args.indexOf('scripts')
+      || !!~args.indexOf('js'),
+    styles: !!~args.indexOf('styles')
+      || !!~args.indexOf('css'),
+    files: !!~args.indexOf('files'),
+  };
+}
+
 // component.json required
 
 if (!exists('component.json')) utils.fatal('missing component.json');
 
-// load json
+// standalone name
 
-var conf = require(path.resolve('component.json'));
-
-// standalone
-
-var standalone = program.standalone;
+var standalone = program.umd;
 
 // output paths
 
@@ -71,80 +87,95 @@ var cssPath = path.join(program.out, program.name + '.css');
 
 mkdir.sync(program.out);
 
-// build
+// resolve
 
-var builder = new Builder(process.cwd());
-if (program.copy) builder.copyFiles();
-builder.copyAssetsTo(program.out);
-if (program.dev) builder.prefixUrls('./');
-if (program.prefix) builder.prefixUrls(program.prefix);
+var start = Date.now();
 
-// require middleware plugins
-if (program.use) {
-  var modules = program.use.split(',');
-  modules.forEach(function(mod){
-    var resolved = path.resolve(mod)
-      , real = exists(resolved) || exists(resolved + '.js')
-      , module = path.resolve('node_modules', mod);
+resolve(process.cwd(), {
+  development: program.dev,
+  install: true,
+  verbose: true,
+}, function (err, tree) {
+  if (err) utils.fatal(err);
 
-    builder.use(real ? require(resolved) : require(module));
-  });
-}
+  var now = Date.now();
+  log('build', 'resolved in ' + (now - start) + 'ms');
+  start = now;
 
-var start = new Date;
+  if (builds.scripts) {
+    build.scripts(tree, {
+      development: program.dev,
+      require: false,
+    })
+    .use('scripts',
+      build.plugins.es6modules(),
+      build.plugins.js())
+    .use('json',
+      build.plugins.json())
+    .use('templates',
+      build.plugins.string())
+    .end(function (err, js) {
+      if (err) utils.fatal(err);
+      if (!js) return;
 
-// --dev
+      var canonical = tree.canonical;
 
-if (program.dev) {
-  builder.development();
-  builder.addSourceURLs();
-}
+      if (standalone) {
+        var name = typeof standalone === 'string'
+          ? name
+          : canonical;
 
-// build
+        js = '(function(){\n\n'
+          + build.scripts.require
+          + js
+          + 'if (typeof exports == "object") {',
+          + '  module.exports = require("' + canonical + '");',
+          + '} else if (typeof define == "function" && define.amd) {',
+          +'  define([], function(){ return require("' + canonical + '"); });',
+          + '} else {',
+          + '  this["' + name + '"] = require("' + canonical + '");',
+          + '}'
+          + '})()';
+      } else {
+        if (program.require) js = build.scripts.require + js;
+        js += 'require("' + canonical + '")\n';
+      }
 
-if (program.verbose) console.log();
-builder.build(function(err, obj){
-  if (err) utils.fatal(err.message);
-  var js = '';
-  var css = obj.css.trim();
-
-  if (obj.js.trim()) {
-    var name = 'string' == typeof standalone
-      ? standalone
-      : conf.name;
-
-    if (standalone) js += ';(function(){\n';
-    if (program.require) js += obj.require;
-    js += obj.js;
-
-    if (standalone) {
-      var umd = [
-        'if (typeof exports == "object") {',
-        '  module.exports = require("' + conf.name + '");',
-        '} else if (typeof define == "function" && define.amd) {',
-        '  define([], function(){ return require("' + conf.name + '"); });',
-        '} else {',
-        '  this["' + name + '"] = require("' + conf.name + '");',
-        '}'
-      ];
-
-      js += umd.join('\n');
-      js += '})();';
-    }
+      fs.writeFile(jsPath, js);
+      log('build', jsPath + ' in ' + (Date.now() - start) + 'ms');
+      log('js', (js.length / 1024 | 0) + 'kb');
+    })
   }
 
-  // css
-  if (css) fs.writeFile(cssPath, css);
+  if (builds.styles) {
+    build.styles(tree, {
+      development: program.dev,
+    })
+    .use('styles', build.plugins.urlRewriter(program.prefix || ''))
+    .end(function (err, css) {
+      if (err) utils.fatal(err);
+      if (!css) return;
 
-  // js
-  if (js) fs.writeFile(jsPath, js);
+      fs.writeFile(cssPath, css);
+      log('build', cssPath + ' in ' + (Date.now() - start) + 'ms');
+      log('jcss', (css.length / 1024 | 0) + 'kb');
+    })
+  }
 
-  if (!program.verbose) return;
-  var duration = new Date - start;
-  log('write', jsPath);
-  log('write', cssPath);
-  if (js) log('js', (js.length / 1024 | 0) + 'kb');
-  if (css) log('css', (css.length / 1024 | 0) + 'kb');
-  log('duration', duration + 'ms');
-  console.log();
-});
+  if (builds.files) {
+    var filePlugin = program.copy
+      ? build.plugins.copy()
+      : build.plugins.symlink();
+    build.styles(tree, {
+      development: program.dev,
+    })
+    .use('images', filePlugin)
+    .use('fonts', filePlugin)
+    .use('files', filePlugin)
+    .end(function (err) {
+      if (err) utils.fatal(err);
+
+      log('build', 'files in ' + (Date.now() - start) + 'ms');
+    })
+  }
+})

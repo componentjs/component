@@ -1,8 +1,8 @@
 {
   "name": "foo",
-  "dependencies": {
-    "bar": "*"
-  },
+  "locals": [
+    "bar"
+  ],
   "scripts": ["index.js"],
   "paths": ["lib"]
 }

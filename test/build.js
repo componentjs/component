@@ -11,8 +11,9 @@ var exec = require('child_process').exec
 
 describe('component build', function(){
   it('should build', function(done){
-    exec('cd test/fixtures/path && ' + bin + '-build -v', function(err, stdout){
+    exec('cd test/fixtures/path && ' + bin + '-build', function(err, stdout){
       if (err) return done(err);
+      console.log(stdout)
       stdout.should.include('build/build.js');
       stdout.should.include('duration');
       stdout.should.include('css');
@@ -29,25 +30,8 @@ describe('component build', function(){
     })
   })
 
-  it('should require middleware with relative path', function(done){
-    exec('cd test/fixtures/path && ' + bin + '-build -v -u ../plugin', function(err, stdout){
-      if (err) return done(err);
-      stdout.should.include('middleware fired!');
-      done();
-    })
-  })
-
-  it('should require middleware with absolute path', function(done){
-    var plugin = path.join(__dirname, 'fixtures', 'plugin');
-    exec('cd test/fixtures/path && ' + bin + '-build -v -u ' + plugin, function(err, stdout){
-      if (err) return done(err);
-      stdout.should.include('middleware fired!');
-      done();
-    })
-  })
-
   it('should exclude the js file if no scripts, and the css file if no styles', function(done){
-    exec('cd test/fixtures/no-js-css && ' + bin + '-build -v', function(err, stdout){
+    exec('cd test/fixtures/no-js-css && ' + bin + '-build', function(err, stdout){
       if (err) return done(err);
       stdout.should.not.include('js :');
       stdout.should.not.include('css :');
