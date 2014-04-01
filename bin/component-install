@@ -4,19 +4,16 @@
  * Module dependencies.
  */
 
-var program = require('commander');
-var component = require('..');
-var Installer = require('component-installer');
+var resolve = require('component-resolver');
 var utils = require('component-consoler');
+var program = require('commander');
+var semver = require('semver');
+var path = require('path');
 var fs = require('fs');
 var exists = fs.existsSync;
 var write = fs.writeFileSync;
-var log = utils.log;
-var error = utils.error;
 var fatal = utils.fatal;
-var url = require('url');
-var path = require('path');
-var resolve = path.resolve;
+var log = utils.log;
 
 /**
  * Options.
@@ -25,10 +22,7 @@ var resolve = path.resolve;
 program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
-  .option('-r, --remotes <urls>', 'remotes to try installing from')
-  .option('-f, --force', 'force installation even if previously installed')
-  .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
-  .option('-v, --verbose', 'verbose output')
+  // .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
   .parse(process.argv);
 
 /**
@@ -47,9 +41,6 @@ program.on('--help', function(){
   console.log('    # install several components');
   console.log('    $ component install component/tip component/popover');
   console.log();
-  console.log('    # shell brace expansion ftw');
-  console.log('    $ component install component/{tip,popover,dialog}');
-  console.log();
   console.log('    # install a specific tag / sha');
   console.log('    $ component install component/tip@8bf1ffc3f');
   console.log();
@@ -58,110 +49,71 @@ program.on('--help', function(){
   console.log();
 });
 
-/**
- * Local requires `component.json`.
- */
-
-var local = !program.args.length;
-var json = resolve('component.json');
-var hasJson = exists(json);
-if (local && !hasJson) fatal('missing component.json');
-var conf = hasJson ? require(json) : {};
+var dependencies = program.args;
+var jsonPath = path.resolve('component.json');
+var hasJson = exists(jsonPath);
 
 /**
  * Installer.
  */
 
-var installer = new Installer(process.cwd());
-var remotes = conf.remotes || [];
+var options = {
+  development: program.dev,
+  install: true,
+  verbose: true,
+};
 
-if (program.dev) installer.development();
-if (program.proxy) installer.proxy(program.proxy);
-if (program.remotes) remotes = program.remotes.split(',').concat(conf.remotes);
-if (program.force) installer.force();
-
-remotes.forEach(function(remote) {
-  installer.remote(remote);
-});
-
-/**
- * Logging.
- */
-
-console.log();
-
-installer.on('package', report);
-
-process.on('exit', function(){
-  console.log();
-});
-
-/**
- * Install.
- */
-
-if (local) {
-  installer.install(function(err) {
-    if (err) utils.fatal(err.message);
+// Install everything in the dependency tree
+if (!dependencies.length) {
+  if (!hasJson) fatal('missing component.json');
+  resolve(process.cwd(), options, function (err) {
+    if (err) fatal(err);
+    log('install', 'complete');
   });
-} else {
-  program.args.forEach(function(pkg) {
-    var parts = pkg.split('@');
-    var name = parts[0];
-    var version = parts[1];
-    installer.installPackage(name, version || 'master');
-  });
+  return;
 }
 
-/**
- * Report on a `pkg` as it's installed.
- *
- * @param {Package} pkg
- */
+var json = hasJson && require(jsonPath);
 
-function report(pkg) {
-  if (pkg.inFlight) return;
-  log('install', pkg.slug);
+var deps = {};
+dependencies = dependencies.map(function (dependency) {
+  var frags = dependency.split('@');
+  var name = frags[0].toLowerCase();
+  if (!~name.indexOf('/')) utils.fatal('"' + name + '" is not a valid dependency');
+  var version = frags[1];
+  deps[name] = version || '*';
+  return [name, version];
+});
 
-  pkg.on('error', function(err){
-    if (err.fatal) {
-      error(err.message);
-      process.exit(1);
+resolve({
+  dependencies: deps
+}, options, function (err, tree) {
+  if (err) fatal(err);
+  log('install', 'complete');
+  if (!json) return;
+
+  json.dependencies = json.dependencies || {};
+
+  dependencies.forEach(function (dep) {
+    var name = dep[0];
+    var version = dep[1];
+    // if the dependency, don't install.
+    // not sure if this is correct behavior.
+    if (json.dependencies[name]) return;
+    // if we're installing "any" version,
+    // add a corresponding ^ or ~ to the current version
+    if (!version) {
+      var node = tree.dependencies[name];
+      if (!node.version) {
+        version = '*'; // this means master
+      } else if (semver.gte(node.version, '1.0.0')) {
+        version = '^' + node.version;
+      } else {
+        version = '~' + node.version;
+      }
     }
-    utils.warn('warning', err.message);
+    json.dependencies[name] = version;
   });
 
-  if (program.verbose) {
-    pkg.on('dep', function(dep){
-      log('dep', dep.slug);
-      report(dep);
-    });
-
-    pkg.on('file', function(file){
-      log('fetch', pkg.name + ':' + file);
-    });
-  }
-
-  pkg.on('exists', function(dep){
-    if (program.verbose){
-      log('exists', dep.slug);
-    }
-    saveToComponentJson();
-  });
-
-  pkg.on('end', function(){
-    log('complete', pkg.name);
-
-    saveToComponentJson();
-  });
-
-  function saveToComponentJson(){
-    // save to ./component.json
-    if (!local) {
-      var key = program.dev ? 'development' : 'dependencies';
-      conf[key] = conf[key] || {};
-      conf[key][pkg.name] = pkg.version === 'master' ? '*' : pkg.version;
-      if (hasJson) write(json, JSON.stringify(conf, null, 2));
-    }
-  }
-}
+  write(jsonPath, JSON.stringify(json, null, 2));
+})

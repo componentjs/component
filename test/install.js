@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var exec = require('child_process').exec
-  , fs = require('fs')
-  , assert = require('assert')
-  , path = require('path')
-  , exists = fs.existsSync || path.existsSync;
+var exec = require('child_process').exec;
+var fs = require('fs');
+var assert = require('assert');
+var path = require('path');
+var exists = fs.existsSync || path.existsSync;
 
 describe('component install', function(){
   beforeEach(function(done){
@@ -17,11 +17,11 @@ describe('component install', function(){
   beforeEach(function(done){
     fs.writeFile('component.json', JSON.stringify({
       dependencies: {
-        "component/tip": "*",
-        "component/popover": "*"
+        "component/tip": "1.0.0",
+        "component/popover": "1.1.0"
       },
       development: {
-        "component/assert": "*"
+        "component/assert": "0.3.0"
       }
     }), done);
   })
@@ -29,18 +29,17 @@ describe('component install', function(){
   describe('[name]', function(){
     it('should show an error message if the component is named incorrectly', function(done) {
       exec('bin/component install component-emitter', function(err, stdout) {
-        if(err) return done(err);
-        stdout.should.include('install');
+        assert(err);
         done();
       })
     })
 
     it('should install a single component', function(done){
-      exec('bin/component install component/emitter', function(err, stdout){
+      exec('bin/component install component/emitter@1.0.0', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('complete');
-        var json = require(path.resolve('components/component-emitter/component.json'));
+        var json = require(path.resolve('components/component/emitter/1.0.0/component.json'));
         json.name.should.equal('emitter');
         done();
       })
@@ -56,13 +55,13 @@ describe('component install', function(){
     })
 
     it('should install dependencies', function(done){
-      exec('bin/component install component/overlay', function(err, stdout){
+      exec('bin/component install component/overlay@0.1.1', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('complete');
-        var json = require(path.resolve('components/component-emitter/component.json'));
+        var json = require(path.resolve('components/component/emitter/1.0.0/component.json'));
         json.name.should.equal('emitter');
-        var json = require(path.resolve('components/component-overlay/component.json'));
+        var json = require(path.resolve('components/component/overlay/0.1.1/component.json'));
         json.name.should.equal('overlay');
         done();
       })
@@ -76,10 +75,9 @@ describe('component install', function(){
     })
 
     it('should download files completely', function(done){
-      exec('bin/component install timoxley/font-awesome@3.2.1', function(err, stdout){
+      exec('bin/component install fortawesome/font-awesome@4.0.3', function(err, stdout){
         if (err) return done(err);
-        var stats = fs.statSync(path.resolve('components/timoxley-font-awesome/font/fontawesome-webfont.woff'));
-        stats.size.should.equal(43572);
+        var stats = fs.statSync(path.resolve('components/fortawesome/font-awesome/v4.0.3/fonts/fontawesome-webfont.woff'));
         stdout.should.include('install');
         stdout.should.include('complete');
         done();
@@ -87,9 +85,9 @@ describe('component install', function(){
     })
 
     it('should also download json files', function (done) {
-      exec('bin/component install swatinem/t', function(err, stdout){
+      exec('bin/component install swatinem/t@0.0.1', function(err, stdout){
         if (err) return done(err);
-        var exists = fs.existsSync(path.resolve('components/swatinem-t/lib/definitions.json'));
+        var exists = fs.existsSync(path.resolve('components/swatinem/t/0.0.1/lib/definitions.json'));
         exists.should.be.true;
         stdout.should.include('install');
         stdout.should.include('complete');
@@ -100,16 +98,14 @@ describe('component install', function(){
 
   describe('[name...]', function(){
     it('should install the multiple components', function(done){
-      exec('bin/component install component/overlay component/zepto', function(err, stdout){
+      exec('bin/component install component/domify@1.0.0 component/is-module@1.0.0', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('complete');
-        var json = require(path.resolve('components/component-emitter/component.json'));
-        json.name.should.equal('emitter');
-        var json = require(path.resolve('components/component-overlay/component.json'));
-        json.name.should.equal('overlay');
-        var json = require(path.resolve('components/component-zepto/component.json'));
-        json.name.should.equal('zepto-component');
+        var json = require(path.resolve('components/component/domify/1.0.0/component.json'));
+        json.name.should.equal('domify');
+        var json = require(path.resolve('components/component/is-module/1.0.0/component.json'));
+        json.name.should.equal('is-module');
         done();
       })
     })
@@ -120,13 +116,11 @@ describe('component install', function(){
       if (err) return done(err);
       stdout.should.include('install');
       stdout.should.include('complete');
-      var json = require(path.resolve('components/component-emitter/component.json'));
-      json.name.should.equal('emitter');
-      var json = require(path.resolve('components/component-tip/component.json'));
+      var json = require(path.resolve('components/component/tip/1.0.0/component.json'));
       json.name.should.equal('tip');
-      var json = require(path.resolve('components/component-popover/component.json'));
+      var json = require(path.resolve('components/component/popover/1.1.0/component.json'));
       json.name.should.equal('popover');
-      assert(!exists('components/component-assert'), 'dev deps should not be installed');
+      assert(!exists('components/component/assert/0.3.0'), 'dev deps should not be installed');
       done();
     })
   })
@@ -136,33 +130,21 @@ describe('component install', function(){
       if (err) return done(err);
       stdout.should.include('install');
       stdout.should.include('complete');
-      var json = require(path.resolve('components/component-emitter/component.json'));
-      json.name.should.equal('emitter');
-      var json = require(path.resolve('components/component-tip/component.json'));
+      var json = require(path.resolve('components/component/tip/1.0.0/component.json'));
       json.name.should.equal('tip');
-      var json = require(path.resolve('components/component-popover/component.json'));
+      var json = require(path.resolve('components/component/popover/1.1.0/component.json'));
       json.name.should.equal('popover');
-      assert(exists('components/component-assert'), 'dev deps should be installed');
-      done();
-    })
-  })
-
-  it('should force remote fetching of component when --force is used', function(done){
-    exec('bin/component install -f', function(err, stdout){
-      if (err) return done(err);
-      stdout.should.include('install');
-      stdout.should.include('complete');
-      stdout.should.not.include('exists');
+      assert(exists('components/component/assert/0.3.0'), 'dev deps should be installed');
       done();
     })
   })
 
   it('should be aliased as "add"', function(done){
-    exec('bin/component add component/emitter', function(err, stdout){
+    exec('bin/component add component/emitter@1.0.0', function(err, stdout){
       if (err) return done(err);
       stdout.should.include('install');
       stdout.should.include('complete');
-      var json = require(path.resolve('components/component-emitter/component.json'));
+      var json = require(path.resolve('components/component/emitter/1.0.0/component.json'));
       json.name.should.equal('emitter');
       done();
     })
