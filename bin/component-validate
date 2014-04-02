@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var resolve = require('component-resolver');
+var fatal = require('component-consoler').fatal;
+
+program.parse(process.argv);
+
+resolve(process.cwd(), {
+  // no need to resolve dependencies
+  dependencies: false,
+  verbose: true,
+}, function (err, tree) {
+  if (err) fatal(err);
+})

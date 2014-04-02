@@ -37,7 +37,8 @@
     "component-search": "bin/component-search",
     "component-crawl": "bin/component-crawl",
     "component-ls": "bin/component-ls",
-    "component-pin": "bin/component-pin"
+    "component-pin": "bin/component-pin",
+    "component-validate": "bin/component-validate"
   },
   "main": "lib/component",
   "engines": {
