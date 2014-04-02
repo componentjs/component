@@ -1,8 +1,18 @@
 
+1.0.0-rc2 /
+======================
+
+ * add:
+
+    - `component-pin`
+    - `component-validate`
+    - `component-duplicates`
+
 1.0.0-rc1 / 2014-04-01
 ======================
 
 * add:
+
     - `component-install` semver support
     - `component-install` now handles redirects (not w/ semver resolution, however)
     - `component-crawl`
@@ -13,6 +23,7 @@
     - `component-build scripts` - other generator improvements from [builder2](http://github.com/component/builder2.js)
     - `component-build scripts` - now autorequires by default
 * remove:
+
     - `component-create` - moved to [component-create](https://github.com/component/create.js)
     - `component-convert`
     - `component-wiki`
@@ -21,8 +32,11 @@
     - `component-install --force`
     - `component-install` custom remotes (for now, need adapter APIs in [remotes](http://github.com/component/remotes.js))
     - `component-install` proxy - temporarily removed/untested, will be added again later
+
  * changed:
+
     - `component-build scripts --umd` from `--standalone`
+
  * updated to comply with the latest [specs](https://github.com/component/spec/blob/master/component.json/specifications.md)
 
 0.19.8 / 2014-03-29
