@@ -8,6 +8,7 @@ var resolve = require('component-resolver');
 var utils = require('component-consoler');
 var Build = require('component-build');
 var program = require('commander');
+var mkdir = require('mkdirp');
 var path = require('path');
 var fs = require('fs');
 
