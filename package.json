@@ -22,7 +22,8 @@
     "superagent": "~0.17.0",
     "win-fork": "~1.1.1",
     "debug": "*",
-    "open": "~0.0.4"
+    "open": "~0.0.4",
+    "co": "^3.0.0"
   },
   "devDependencies": {
     "mocha": "1",
@@ -35,7 +36,8 @@
     "component-build": "bin/component-build",
     "component-search": "bin/component-search",
     "component-crawl": "bin/component-crawl",
-    "component-ls": "bin/component-ls"
+    "component-ls": "bin/component-ls",
+    "component-pin": "bin/component-pin"
   },
   "main": "lib/component",
   "engines": {

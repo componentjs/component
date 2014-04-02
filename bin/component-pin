@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+var fatal = require('component-consoler').fatal;
+var resolve = require('component-resolver');
+var program = require('commander');
+var pin = require('component-pin');
+var co = require('co');
+
+program.parse(process.argv);
+
+resolve(process.cwd(), {
+  development: true,
+  install: true,
+  verbose: true,
+}, function (err, tree) {
+  if (err) fatal(err);
+
+  co(pin(tree, {
+    verbose: true,
+  }))(function (err) {
+    if (err) fatal(err);
+  })
+})
