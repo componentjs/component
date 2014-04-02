@@ -38,7 +38,8 @@
     "component-crawl": "bin/component-crawl",
     "component-ls": "bin/component-ls",
     "component-pin": "bin/component-pin",
-    "component-validate": "bin/component-validate"
+    "component-validate": "bin/component-validate",
+    "component-duplicates": "bin/component-duplicates"
   },
   "main": "lib/component",
   "engines": {

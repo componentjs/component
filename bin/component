@@ -30,8 +30,9 @@ program.on('--help', function(){
   console.log('    search [query]          search with the given query');
   console.log('    crawl                   crawl a github user/organization for components');
   console.log('    ls                      list installed components');
-  console.log('    pin                     pin ranged dependencies to the highest installed, compatible version')
-  console.log('    validate                validate component.json\'s for specifications compliance')
+  console.log('    pin                     pin ranged dependencies to the highest installed, compatible version');
+  console.log('    validate                validate component.json\'s for specifications compliance');
+  console.log('    duplicates              check for multiple versions of dependencies');
   console.log();
   process.exit();
 });

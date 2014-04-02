@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var resolve = require('component-resolver');
+var flatten = require('component-flatten');
+var utils = require('component-consoler');
+var program = require('commander');
+
+program
+  .option('-d, --dev', 'check development dependencies as well')
+  .parse(process.argv);
+
+resolve(process.cwd(), {
+  development: program.dev,
+  install: true,
+  verbose: true,
+}, function (err, tree) {
+  if (err) utils.fatal(err);
+
+  var dupes = flatten(tree).duplicates;
+  var names = Object.keys(dupes);
+  if (!names.length) return utils.log('duplicates', 'no duplicates found!');
+
+  names.forEach(function (name) {
+    var deps = dupes[name];
+    var versions = Object.keys(deps);
+    utils.warn('duplicates', '"' + name + '" has ' + versions.length + ' versions in this build:');
+    versions.forEach(function (version) {
+      var node = deps[version];
+      utils.warn('version', '  ' + version);
+      node.dependents.forEach(function (dependent) {
+        utils.warn('dependent', '    ' + dependent.canonical);
+      })
+    })
+    console.error();
+  });
+});
