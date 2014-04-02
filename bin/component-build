@@ -5,8 +5,8 @@
  */
 
 var resolve = require('component-resolver');
-var build = require('component-builder2');
 var utils = require('component-consoler');
+var Build = require('component-build');
 var program = require('commander');
 var mkdir = require('mkdirp');
 var path = require('path');
@@ -22,9 +22,10 @@ program
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
   .option('-d, --dev', 'build development dependencies')
-  .option('-s, --umd <name>', 'build a stand-alone version of the component')
+  .option('-s, --umd <name>', 'build a UMD-wrapped version of the component with the given global name')
   .option('-R, --no-require', 'exclude require from build')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>', '')
+  .option('-b, --browsers <string>', 'browsers to support with autoprefixer')
   .option('-c, --copy', 'copy files instead of linking')
 
 // examples
@@ -102,79 +103,38 @@ resolve(process.cwd(), {
   log('build', 'resolved in ' + (now - start) + 'ms');
   start = now;
 
+  var build = Build(tree);
+  build.set('development', program.dev);
+  build.set('require', program.require);
+  build.set('umd', program.umd || '');
+  build.set('prefix', program.prefix || '');
+  build.set('browsers', program.browsers || '');
+
   if (builds.scripts) {
-    build.scripts(tree, {
-      development: program.dev,
-      require: false,
-    })
-    .use('scripts',
-      build.plugins.es6modules(),
-      build.plugins.js())
-    .use('json',
-      build.plugins.json())
-    .use('templates',
-      build.plugins.string())
-    .end(function (err, js) {
+    build.scripts(function (err, js) {
       if (err) utils.fatal(err);
       if (!js) return;
-
-      var canonical = tree.canonical;
-
-      if (standalone) {
-        var name = typeof standalone === 'string'
-          ? name
-          : canonical;
-
-        js = '(function(){\n\n'
-          + build.scripts.require
-          + js
-          + 'if (typeof exports == "object") {',
-          + '  module.exports = require("' + canonical + '");',
-          + '} else if (typeof define == "function" && define.amd) {',
-          +'  define([], function(){ return require("' + canonical + '"); });',
-          + '} else {',
-          + '  this["' + name + '"] = require("' + canonical + '");',
-          + '}'
-          + '})()';
-      } else {
-        if (program.require) js = build.scripts.require + js;
-        js += 'require("' + canonical + '")\n';
-      }
-
       fs.writeFile(jsPath, js);
-      log('build', jsPath + ' in ' + (Date.now() - start) + 'ms');
-      log('js', (js.length / 1024 | 0) + 'kb');
+      log('build', jsPath + ' in '
+        + (Date.now() - start) + 'ms - '
+        + (js.length / 1024 | 0) + 'kb');
     })
   }
 
   if (builds.styles) {
-    build.styles(tree, {
-      development: program.dev,
-    })
-    .use('styles', build.plugins.urlRewriter(program.prefix || ''))
-    .end(function (err, css) {
+    build.styles(function (err, css) {
       if (err) utils.fatal(err);
       if (!css) return;
-
       fs.writeFile(cssPath, css);
-      log('build', cssPath + ' in ' + (Date.now() - start) + 'ms');
-      log('jcss', (css.length / 1024 | 0) + 'kb');
+      log('build', cssPath + ' in '
+        + (Date.now() - start) + 'ms - '
+        + (css.length / 1024 | 0) + 'kb');
     })
   }
 
   if (builds.files) {
-    var filePlugin = program.copy
-      ? build.plugins.copy()
-      : build.plugins.symlink();
-    build.styles(tree, {
-      development: program.dev,
-    })
-    .use('images', filePlugin)
-    .use('fonts', filePlugin)
-    .use('files', filePlugin)
-    .end(function (err) {
+    build.files(function (err) {
       if (err) utils.fatal(err);
-
       log('build', 'files in ' + (Date.now() - start) + 'ms');
     })
   }
