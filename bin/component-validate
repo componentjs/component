@@ -10,6 +10,6 @@ resolve(process.cwd(), {
   // no need to resolve dependencies
   dependencies: false,
   verbose: true,
-}, function (err, tree) {
+}, function (err) {
   if (err) fatal(err);
 })

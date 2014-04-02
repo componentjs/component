@@ -38,16 +38,6 @@ component.search(query, function(err, pkgs){
 });
 
 /**
- * Truncate the string if necessary.
- */
-
-function truncate(str, repo) {
-  var pad = 30 + repo.length;
-  if (str.length < cols - pad) return str;
-  return str.slice(0, cols - pad) + '…';
-}
-
-/**
  * Wrap description `str`.
  */
 

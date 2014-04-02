@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 
-var utils = require('component-consoler');
 var program = require('commander');
 var spawn = require('win-fork');
 var path = require('path');

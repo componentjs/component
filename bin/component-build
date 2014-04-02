@@ -75,10 +75,6 @@ if (!args.length) {
 
 if (!exists('component.json')) utils.fatal('missing component.json');
 
-// standalone name
-
-var standalone = program.umd;
-
 // output paths
 
 var jsPath = path.join(program.out, program.name + '.js');
