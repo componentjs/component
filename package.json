@@ -12,9 +12,9 @@
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "repository": "component/component",
   "dependencies": {
-    "component-resolver": "*",
+    "component-resolver": "^1.0.0",
     "component-consoler": "^1.0.0",
-    "component-build": "~0.0.0",
+    "component-build": "^1.0.0",
     "component-ls": "^2.0.0",
     "commander": "^2.2.0",
     "semver": "^2.2.1",
@@ -22,11 +22,11 @@
     "superagent": "~0.17.0",
     "win-fork": "~1.1.1",
     "debug": "*",
-    "open": "0.0.4"
+    "open": "~0.0.4"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "mocha": "1",
+    "should": "3"
   },
   "bin": {
     "component": "bin/component",
@@ -39,7 +39,7 @@
   },
   "main": "lib/component",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "make test"
