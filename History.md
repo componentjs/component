@@ -11,7 +11,7 @@ The primary goal of this release is to update `component-search` to use the craw
 
 The primary goal of this release is to test the new commands.
 
- * add:
+* add:
 
     - `component-duplicates`
     - `component-open`
@@ -20,7 +20,7 @@ The primary goal of this release is to test the new commands.
     - `component-update`
     - `component-validate`
 
-  * reintroduce `--standalone` to `component-build`
+* reintroduce `--standalone` to `component-build`
 
 1.0.0-rc1 / 2014-04-01
 ======================
@@ -50,11 +50,11 @@ The primary goal of this release is to test `component install` and `component b
     - `component-install` custom remotes (for now, need adapter APIs in [remotes](http://github.com/component/remotes.js))
     - `component-install` proxy - temporarily removed/untested, will be added again later
 
- * changed:
+* changed:
 
     - `component-build scripts --umd` from `--standalone`
 
- * updated to comply with the latest [specs](https://github.com/component/spec/blob/master/component.json/specifications.md)
+* updated to comply with the latest [specs](https://github.com/component/spec/blob/master/component.json/specifications.md)
 
 0.19.8 / 2014-03-29
 ==================
