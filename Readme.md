@@ -11,19 +11,11 @@ date documentation for component.
 
 ## Installation
 
-  With [node](http://nodejs.org) previously installed:
+  First, you need [node](https://nodejs.org) v0.10+ installed. If you do not have it installed, visit [node's download page](http://nodejs.org/download/).
+
+  With [node](http://nodejs.org) installed, run the following command:
 
      $ npm install -g component
-  
-  With node binary on OSX:
-
-     $ (cd /usr/local && \
-        curl -L# http://nodejs.org/dist/v0.11.9/node-v0.11.9-darwin-x86.tar.gz \
-        | tar -zx --strip 1) \
-       && npm install -g component \
-       && printf "installed component(1) %s\n" $(component --version)
-
-  NOTE: tested with node >= 0.10.0
 
 ## Features
 
