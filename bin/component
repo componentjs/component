@@ -36,6 +36,8 @@ program.on('--help', function(){
   console.log();
   console.log('  For more help, go to the Component Guide at https://github.com/component/guide. Quickly access this page by executing `component open guide`.');
   console.log();
+  console.log('  If you\'re having issues with Component, try running commands with `DEBUG=component*`. For example, `DEBUG=component* component install`.');
+  console.log();
   process.exit();
 });
 
