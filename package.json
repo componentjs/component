@@ -39,7 +39,8 @@
     "component-ls": "bin/component-ls",
     "component-pin": "bin/component-pin",
     "component-validate": "bin/component-validate",
-    "component-duplicates": "bin/component-duplicates"
+    "component-duplicates": "bin/component-duplicates",
+    "component-open": "bin/component-open"
   },
   "main": "lib/component",
   "engines": {

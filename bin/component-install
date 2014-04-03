@@ -47,6 +47,7 @@ program.on('--help', function(){
   console.log('    # install regular & development deps in .');
   console.log('    $ component install -d');
   console.log();
+  process.exit();
 });
 
 var dependencies = program.args;

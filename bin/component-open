@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+var fatal = require('component-consoler').fatal;
+var resolve = require('path').resolve;
+var program = require('commander');
+var open = require('open');
+
+program
+  .usage('[repo]')
+
+program.on('--help', function(){
+  console.log('  Commands:');
+  console.log();
+  console.log('    # open http://component.io');
+  console.log('    $ component open');
+  console.log();
+  console.log('    # open the Component Guide');
+  console.log('    $ component open gudie');
+  console.log();
+  console.log('    # open component/emitter\'s github page');
+  console.log('    $ component open component/emitter');
+  console.log();
+  console.log('    # open the current component\'s github page');
+  console.log('    $ component open .');
+  console.log();
+  process.exit();
+});
+
+program.parse(process.argv);
+
+var args = program.args;
+if (args.length > 1) fatal('you may only open one repo at a time');
+
+if (!args.length) return open('http://component.io/');
+
+var repo = args[0];
+
+if (repo === 'guide') return open('https://github.com/component/guide');
+
+if (repo === '.') {
+  // to do: check if this file actually exists
+  var json;
+  try {
+    json = require(resolve('component.json'));
+  } catch (err) {
+    fatal('error opening the component.json in this directory');
+  }
+  repo = json.repository || json.repo;
+  if (!repo) fatal('this component.json does not have a .repository field');
+}
+
+if (!~repo.indexOf('/')) fatal('invalid repository name');
+open('https://github.com/' + repo);

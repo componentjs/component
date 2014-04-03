@@ -46,6 +46,7 @@ program.on('--help', function(){
   console.log('    # build only .js');
   console.log('    $ component build scripts');
   console.log();
+  process.exit();
 });
 
 // parse argv
