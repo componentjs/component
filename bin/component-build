@@ -40,8 +40,8 @@ program.on('--help', function(){
   console.log('    # build to ./dist as assets.js, assets.css');
   console.log('    $ component build -o dist -n assets');
   console.log();
-  console.log('    # build as UMD defaulting to window.$');
-  console.log('    $ component build --umd $');
+  console.log('    # build as standalone as window.$');
+  console.log('    $ component build --standalone $');
   console.log();
   console.log('    # build only .js');
   console.log('    $ component build scripts');
