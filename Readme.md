@@ -2,21 +2,28 @@
 
   Component package manager for building a better web. [![Build Status](https://travis-ci.org/component/component.png)](https://travis-ci.org/component/component)
 
+> **Please note**: As of 1 April 2014, component v1.0.0 release candidates have been pushed to master. Several 
+major new features have been added and the project has been greatly reorganized. You may need to upgrade your
+version of node and/or npm to avoid breakage. Please see the detailed [changelog](https://github.com/component/guide/blob/master/component-v1.md) in the 
+[Guide](https://github.com/component/guide) wiki pages for more info. This README is in the process of being
+revised, so please note that info here may not be accurate. The Guide pages will eventually hold the most up to
+date documentation for component.
+
 ## Installation
 
   With [node](http://nodejs.org) previously installed:
 
      $ npm install -g component
-
+  
   With node binary on OSX:
 
      $ (cd /usr/local && \
-        curl -L# http://nodejs.org/dist/v0.8.15/node-v0.8.15-darwin-x86.tar.gz \
+        curl -L# http://nodejs.org/dist/v0.11.9/node-v0.11.9-darwin-x86.tar.gz \
         | tar -zx --strip 1) \
        && npm install -g component \
        && printf "installed component(1) %s\n" $(component --version)
 
-  NOTE: tested with node 0.8.x
+  NOTE: tested with node >= 0.10.0
 
 ## Features
 
@@ -37,16 +44,20 @@
 ## Links
 
  - [List](https://github.com/component/component/wiki/Components) of all available components
- - [Wiki](https://github.com/component/component/wiki)
  - [Mailing List](https://groups.google.com/group/componentjs)
  - [Google+ Community](https://plus.google.com/u/0/communities/109771441994395167277)
- - component ["spec"](https://github.com/component/component/wiki/Spec)
  - join `#components` on freenode
  - follow [@component_js](http://twitter.com/component_js) on twitter
- - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
+
+## Old (v0.1.x), may not be up to date:
+
+ - [Wiki](https://github.com/component/component/wiki)
+ - component ["spec"](https://github.com/component/component/wiki/Spec)
  - [F.A.Q](https://github.com/component/component/wiki/F.A.Q)
+ - [Building better components](https://github.com/component/component/wiki/Building-better-components) tips
  - In-browser component [builder](http://component-kelonye.rhcloud.com/)
  - component [dependency visualizer](http://component-graph.herokuapp.com/component/dom)
+  
 
 ## Screencasts
 
