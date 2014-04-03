@@ -1,15 +1,31 @@
 
-1.0.0-rc2 /
+For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/component-v1.md.
+
+1.0.0-rc3 /
 ======================
+
+The primary goal of this release is to update `component-search` to use the crawled `component.json`s as well as update documentation.
+
+1.0.0-rc2 / 2014-04-03
+======================
+
+The primary goal of this release is to test the new commands.
 
  * add:
 
-    - `component-pin`
-    - `component-validate`
     - `component-duplicates`
+    - `component-open`
+    - `component-outdated`
+    - `component-pin`
+    - `component-update`
+    - `component-validate`
+
+  * reintroduce `--standalone` to `component-build`
 
 1.0.0-rc1 / 2014-04-01
 ======================
+
+The primary goal of this release is to test `component install` and `component build` and remove features we've decided to remove.
 
 * add:
 
@@ -22,6 +38,7 @@
     - `component-build scripts` - es6 module support
     - `component-build scripts` - other generator improvements from [builder2](http://github.com/component/builder2.js)
     - `component-build scripts` - now autorequires by default
+
 * remove:
 
     - `component-create` - moved to [component-create](https://github.com/component/create.js)
