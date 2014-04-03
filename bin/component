@@ -33,6 +33,7 @@ program.on('--help', function(){
   console.log('    validate                validate component.json\'s for specifications compliance');
   console.log('    duplicates              check for multiple versions of dependencies');
   console.log('    open                    open a repo\'s github page');
+  console.log('    update                  update pinned depedencies to the highest available version')
   console.log();
   console.log('  For more help, go to the Component Guide at https://github.com/component/guide. Quickly access this page by executing `component open guide`.');
   console.log();

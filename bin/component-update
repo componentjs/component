@@ -2,24 +2,24 @@
 
 var fatal = require('component-consoler').fatal;
 var resolve = require('component-resolver');
+var update = require('component-updater');
 var program = require('commander');
-var pin = require('component-pin');
 var co = require('co');
 
 program
-  .option('-d, --dev', 'pin development dependencies')
+  .option('-d, --dev', 'update development dependencies')
   .parse(process.argv);
 
 var options = {
   development: program.dev,
-  install: true,
+  dependencies: false,
   verbose: true,
 };
 
 resolve(process.cwd(), options, function (err, tree) {
   if (err) fatal(err);
 
-  co(pin(tree, options))(function (err) {
+  co(update(tree, options))(function (err) {
     if (err) fatal(err);
   })
 })

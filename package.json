@@ -16,6 +16,8 @@
     "component-consoler": "^1.0.0",
     "component-build": "^1.0.0",
     "component-ls": "^2.0.0",
+    "component-updater": "^1.0.0",
+    "component-pin": "^1.0.0",
     "commander": "^2.2.0",
     "semver": "^2.2.1",
     "mkdirp": "~0.3.5",
@@ -40,7 +42,8 @@
     "component-pin": "bin/component-pin",
     "component-validate": "bin/component-validate",
     "component-duplicates": "bin/component-duplicates",
-    "component-open": "bin/component-open"
+    "component-open": "bin/component-open",
+    "component-update": "bin/component-update"
   },
   "main": "lib/component",
   "engines": {
