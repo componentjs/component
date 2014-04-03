@@ -15,7 +15,7 @@ program.on('--help', function(){
   console.log('    $ component open');
   console.log();
   console.log('    # open the Component Guide');
-  console.log('    $ component open gudie');
+  console.log('    $ component open guide');
   console.log();
   console.log('    # open component/emitter\'s github page');
   console.log('    $ component open component/emitter');
