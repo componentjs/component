@@ -24,16 +24,16 @@ program
 program.on('--help', function(){
   console.log('  Commands:');
   console.log();
-  console.log('    install [name ...]      install one or more components');
   console.log('    build                   build the component');
-  console.log('    search [query]          search with the given query');
   console.log('    crawl                   crawl a github user/organization for components');
-  console.log('    ls                      list installed components');
-  console.log('    pin                     pin ranged dependencies to the highest installed, compatible version');
-  console.log('    validate                validate component.json\'s for specifications compliance');
   console.log('    duplicates              check for multiple versions of dependencies');
+  console.log('    install [name ...]      install one or more components');
+  console.log('    ls                      list installed components');
   console.log('    open                    open a repo\'s github page');
+  console.log('    pin                     pin ranged dependencies to the highest installed, compatible version');
+  console.log('    search [query]          search with the given query');
   console.log('    update                  update pinned depedencies to the highest available version')
+  console.log('    validate                validate component.json\'s for specifications compliance');
   console.log();
   console.log('  For more help, go to the Component Guide at https://github.com/component/guide. Quickly access this page by executing `component open guide`.');
   console.log();
