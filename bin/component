@@ -28,6 +28,7 @@ program.on('--help', function(){
   console.log('    crawl                   crawl a github user/organization for components');
   console.log('    duplicates              check for multiple versions of dependencies');
   console.log('    install [name ...]      install one or more components');
+  console.log('    link ../path/to/folder  link a locally installed component as a dependency');
   console.log('    ls                      list installed components');
   console.log('    open                    open a repo\'s github page');
   console.log('    outdated                check if any pinned versions are outdated');

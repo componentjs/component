@@ -41,6 +41,7 @@
     "component-duplicates": "bin/component-duplicates",
     "component-help": "bin/component-help",
     "component-install": "bin/component-install",
+    "component-link": "bin/component-link",
     "component-ls": "bin/component-ls",
     "component-open": "bin/component-open",
     "component-outdated": "bin/component-outdated",

@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
+var program = require('commander');
+var utils = require('component-consoler');
+
+program
+  .usage('../path/to/folder')
+  .option('-r, --repository <str>', 'link as a specific repository');
+
+program.on('--help', function() {
+  console.log('  `component link` links a locally installed component to your components/ directory, allowing your app to use it as a versioned dependency. The linked component can not be within this app\'s context. Do not include `/component.json` in the path.');
+  console.log();
+  console.log('  `.name`, `.repository`, and `.version` fields are necessary in the linked component. You may override these with the `--version` and `--repository` options.');
+  console.log();
+  console.log('  Example: ');
+  console.log();
+  console.log('    $ component link ../delegate');
+  console.log();
+  process.exit();
+});
+
+program.parse(process.argv);
+
+if (program.args.length !== 1) utils.fatal('requires exactly one local path.');
+
+var from = path.resolve(program.args[0]);
+var component = path.join(from, 'component.json');
+if (!fs.existsSync(component)) utils.fatal(component + ' does not exist!');
+
+if (path.relative(process.cwd(), from).slice(0, 2) !== '..') {
+  utils.fatal('can not link a component inside the app context.');
+}
+
+var json = require(component);
+
+var name = json.name;
+if (!name) utils.fatal(component + ' does not have a name!');
+name = name.toLowerCase();
+
+var repository = program.repository || json.repository || json.repo;
+if (!repository) utils.fatal(component + ' does not have a repository!');
+if (!~repository.indexOf('/')) utils.fatal(component + ' invalid repository. Repositories are of the form <user>/<repo>.');
+if (repository.split('/')[1] !== name) utils.fatal(component + ' name does not match repository\'s name!');
+
+var version = json.version;
+if (!version) utils.fatal(component + ' does not have a version!');
+
+var to = path.join(process.cwd(), 'components', repository, version);
+
+rimraf.sync(to);
+mkdirp.sync(path.dirname(to));
+fs.symlinkSync(from, to, 'junction');

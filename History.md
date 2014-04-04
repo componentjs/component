@@ -9,6 +9,7 @@ The primary goal of this release is to update `component-search` to use the craw
 * add:
 
     - `component build --watch`
+    - `component link`
 
 1.0.0-rc2 / 2014-04-03
 ======================
