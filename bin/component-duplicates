@@ -14,7 +14,7 @@ resolve(process.cwd(), {
   install: true,
   verbose: true,
 }, function (err, tree) {
-  if (err) utils.fatal(err);
+  if (err) utils.fatal(err.message);
 
   var dupes = flatten(tree).duplicates;
   var names = Object.keys(dupes);

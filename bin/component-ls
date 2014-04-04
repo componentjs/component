@@ -14,6 +14,6 @@ program
 // output tree
 
 resolve(process.cwd(), function (err, tree) {
-  if (err) utils.fatal(err);
+  if (err) utils.fatal(err.message);
   ls(tree);
 })

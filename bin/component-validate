@@ -12,5 +12,5 @@ resolve(process.cwd(), {
   verbose: true,
   validate: true,
 }, function (err) {
-  if (err) fatal(err);
+  if (err) fatal(err.message);
 })
