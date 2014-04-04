@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var resolve = require('component-resolver');
+var Resolve = require('component-resolver');
 var utils = require('component-consoler');
 var Build = require('component-build');
 var program = require('commander');
@@ -19,6 +19,7 @@ var log = utils.log;
 
 program
   .usage('component build [scripts] [styles] [files]')
+  .option('-w, --watch', 'watch file changes and rebuild automatically')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
   .option('-d, --dev', 'build development dependencies')
@@ -88,52 +89,105 @@ mkdir.sync(program.out);
 
 // resolve
 
-var start = Date.now();
-
-resolve(process.cwd(), {
+var options = {
   development: program.dev,
   install: true,
   verbose: true,
-}, function (err, tree) {
-  if (err) utils.fatal(err);
+  require: program.require,
+  umd: program.standalone || program.umd || '',
+  prefix: program.prefix || '',
+  browsers: program.browsers || '',
+};
 
-  var now = Date.now();
-  log('build', 'resolved in ' + (now - start) + 'ms');
-  start = now;
+var watching = program.watch;
+var resolving = false;
 
-  var build = Build(tree);
-  build.set('development', program.dev);
-  build.set('require', program.require);
-  build.set('umd', program.standalone || program.umd || '');
-  build.set('prefix', program.prefix || '');
-  build.set('browsers', program.browsers || '');
+var build;
 
-  if (builds.scripts) {
-    build.scripts(function (err, js) {
-      if (err) utils.fatal(err);
-      if (!js) return;
-      fs.writeFile(jsPath, js);
-      log('build', jsPath + ' in '
-        + (Date.now() - start) + 'ms - '
-        + (js.length / 1024 | 0) + 'kb');
-    })
+if (!watching) return resolve();
+
+var watcher = require('component-watcher')({
+  root: process.cwd()
+});
+
+watcher.on('resolve', resolve);
+watcher.on('scripts', buildScripts);
+watcher.on('styles', buildStyles);
+
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function (data) {
+  switch (data.trim()) {
+    case 'r':
+    case 'resolve':
+      return resolve();
+    case 's':
+    case 'j':
+    case 'js':
+    case 'scripts':
+      return buildScripts();
+    case 'c':
+    case 'css':
+    case 'styles':
+      return buildStyles();
   }
+});
 
-  if (builds.styles) {
-    build.styles(function (err, css) {
-      if (err) utils.fatal(err);
-      if (!css) return;
-      fs.writeFile(cssPath, css);
-      log('build', cssPath + ' in '
-        + (Date.now() - start) + 'ms - '
-        + (css.length / 1024 | 0) + 'kb');
-    })
-  }
+function resolve() {
+  if (resolving) return;
+  resolving = true;
+  var start = Date.now();
+  Resolve(process.cwd(), options, function (err, tree) {
+    resolving = false;
+    if (err) {
+      if (!watching) utils.fatal(err);
+      utils.error('build', 'resolve failed: ' + err.message);
+      return;
+    }
 
-  if (builds.files) {
-    build.files(function (err) {
-      if (err) utils.fatal(err);
-      log('build', 'files in ' + (Date.now() - start) + 'ms');
-    })
-  }
-})
+    build = Build(tree, options);
+
+    log('build', 'resolved in ' + (Date.now() - start) + 'ms');
+
+    buildScripts();
+    buildStyles();
+    buildFiles();
+  })
+}
+
+function buildScripts() {
+  if (resolving) return;
+  if (!builds.scripts) return;
+  var start = Date.now();
+  build.scripts(function (err, js) {
+    if (err) utils.fatal(err);
+    if (!js) return;
+    fs.writeFile(jsPath, js);
+    log('build', jsPath + ' in '
+      + (Date.now() - start) + 'ms - '
+      + (js.length / 1024 | 0) + 'kb');
+  })
+}
+
+function buildStyles() {
+  if (resolving) return;
+  if (!builds.styles) return;
+  var start = Date.now();
+  build.styles(function (err, css) {
+    if (err) utils.fatal(err);
+    if (!css) return;
+    fs.writeFile(cssPath, css);
+    log('build', cssPath + ' in '
+      + (Date.now() - start) + 'ms - '
+      + (css.length / 1024 | 0) + 'kb');
+  })
+}
+
+function buildFiles() {
+  if (resolving) return;
+  if (!builds.files) return;
+  var start = Date.now();
+  build.files(function (err) {
+    if (err) utils.fatal(err);
+    log('build', 'files in ' + (Date.now() - start) + 'ms');
+  })
+}

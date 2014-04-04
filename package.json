@@ -20,6 +20,7 @@
     "component-pin": "^1.0.2",
     "component-resolver": "^1.0.2",
     "component-updater": "^1.0.1",
+    "component-watcher": "^1.0.0",
     "commander": "^2.2.0",
     "semver": "^2.2.1",
     "mkdirp": "~0.3.5",

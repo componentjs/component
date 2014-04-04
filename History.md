@@ -6,6 +6,10 @@ For a more in-depth changelog about v1, please read: https://github.com/componen
 
 The primary goal of this release is to update `component-search` to use the crawled `component.json`s as well as update documentation.
 
+* add:
+
+    - `component build --watch`
+
 1.0.0-rc2 / 2014-04-03
 ======================
 
