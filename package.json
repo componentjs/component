@@ -19,6 +19,7 @@
     "component-outdated2": "^1.0.1",
     "component-pin": "^1.0.2",
     "component-resolver": "^1.0.2",
+    "component-search2": "^1.0.0",
     "component-updater": "^1.0.1",
     "component-watcher": "^1.0.0",
     "commander": "^2.2.0",

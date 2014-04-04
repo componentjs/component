@@ -4,38 +4,65 @@
  * Module dependencies.
  */
 
+var co = require('co');
 var program = require('commander');
-var component = require('..');
 var utils = require('component-consoler');
+var search = co(require('component-search2'));
+
 var cols = process.stdout.columns || 80;
-var openSite = require('open');
 
 // parse argv
 
 program
   .usage('[query]')
-  .option('-j, --json', 'json component output')
-  .option('-o, --open', 'open matches in your default browser')
+  .option('-o, --owner <string>', 'filter by a GitHub user/organization')
+  .option('-k, --keywords <string>', 'filter by a comma-delimited list of keywords')
+  .option('-l, --limit <integer>', 'maximum number of results', parseInt)
+  .option('-f, --force', 'force redownloading the cache')
+  .option('-m, --maxage <seconds>', 'redownload the cache if older than <maxage>'. parseInt)
   .option('-v, --verbose', 'verbose output')
   .parse(process.argv);
 
-// --open
+var query = {
+  text: program.args.join(' '),
+  owner: program.owner,
+  limit: program.limit || 5,
+  force: program.force,
+  maxage: 1000 * (program.maxage || 3600),
+  verbose: true,
+}
 
-if (program.open) program.json = true;
-
-// query
-
-var query = program.args.join(' ');
+if (program.keywords) {
+  var keywords = program.keywords.split(',');
+  if (keywords.length) query.keywords = keywords;
+}
 
 // search
 
-component.search(query, function(err, pkgs){
+search(query, function (err, pkgs) {
   if (err) utils.fatal(err.message);
-  if (!pkgs.length) return;
-  if (program.open) return open(pkgs);
-  if (program.json) json(pkgs)
-  else verbose(pkgs);
-});
+  if (!pkgs.length) return utils.log('search', 'no matching components found');
+  verbose(pkgs);
+})
+
+/**
+ * Verbose output.
+ */
+
+function verbose(pkgs) {
+  console.log();
+  pkgs.forEach(function(pkg){
+    console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
+    console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
+    console.log('  desc: \033[90m%s\033[m', description(pkg.description));
+    if (program.verbose && pkg.demo) console.log('  demo: \033[90m%s\033[m', pkg.demo);
+    if (program.verbose) console.log('  version: \033[90m%s\033[m', pkg.version);
+    if (program.verbose) console.log('  license: \033[90m%s\033[m', pkg.license || 'none');
+    console.log('  ★ \033[90m%s\033[m', pkg.github.stargazers_count);
+    console.log();
+  });
+  console.log();
+}
 
 /**
  * Wrap description `str`.
@@ -46,80 +73,10 @@ function description(str) {
   var space;
   var width = cols - 20;
   for (var i = 0; i < str.length; ++i) {
-    if (i && i % width == 0) {
+    if (i && i % width === 0) {
       space = str.indexOf(' ', i);
       str = str.slice(0, space) + '\n ' + str.slice(space);
     }
   }
   return str;
 }
-
-/**
- * Filter blanks. TODO: remove... shouldn't be necessary
- */
-
-function blanks(pkg) {
-  return pkg;
-}
-
-/**
- * Sort by stars descending.
- */
-
-function stars(a, b) {
-  return b.stars - a.stars;
-}
-
-/**
- * Open `pkgs` in the default browser.
- */
-
-function open(pkgs) {
-  var max = 5;
-  pkgs.slice(0, max).forEach(function(pkg){
-    if (!pkg.repo) return console.warn('%s missing "repo"', pkg.name);
-    openSite('https://github.com/' + pkg.repo);
-  });
-}
-
-/**
- * Verbose output.
- */
-
-function verbose(pkgs) {
-  console.log();
-  pkgs.filter(blanks).sort(stars).forEach(function(pkg){
-    console.log('  \033[36m%s\033[m', pkg.repo.toLowerCase());
-    console.log('  url: \033[90mhttps://github.com/%s\033[m', pkg.repo);
-    console.log('  desc: \033[90m%s\033[m', description(pkg.description));
-    if (program.verbose && pkg.demo) console.log('  demo: \033[90m%s\033[m', pkg.demo);
-    if (program.verbose) console.log('  version: \033[90m%s\033[m', pkg.version);
-    if (program.verbose) console.log('  license: \033[90m%s\033[m', pkg.license || 'none');
-    console.log('  ★ \033[90m%s\033[m', pkg.stars);
-    console.log();
-  });
-  console.log();
-}
-
-/**
- * JSON output.
- */
-
-function json(pkgs) {
-  var len = pkgs.length;
-  console.log('[');
-  pkgs.filter(blanks).sort(stars).forEach(function(pkg, i){
-    process.stdout.write(JSON.stringify(pkg, null, 2));
-    if (i < len - 1) process.stdout.write(',\n');
-  });
-  console.log(']');
-}
-
-/**
- * Handle EPIPE for pagers.
- */
-
-process.stdout.on('error', function(err){
-  if ('EPIPE' == err.code) return;
-  throw err;
-});

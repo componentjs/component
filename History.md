@@ -11,6 +11,10 @@ The primary goal of this release is to update `component-search` to use the craw
     - `component build --watch`
     - `component link`
 
+* changed:
+
+    - update `component-search` to use crawled components
+
 1.0.0-rc2 / 2014-04-03
 ======================
 
