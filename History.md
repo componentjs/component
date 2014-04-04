@@ -1,19 +1,22 @@
 
-For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/component-v1.md.
+For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/changelogs/1.0.0.md.
 
-1.0.0-rc3 /
+1.0.0-rc4 /
 ======================
 
-The primary goal of this release is to update `component-search` to use the crawled `component.json`s as well as update documentation.
+The goal of this release is to update all documentation, fix any pending bugs, and update the http://component.io website before a final release.
+
+1.0.0-rc3 / 2014-04-03
+======================
+
+The primary goal of this release is to make 1.0.0 feature complete. Please try all the new commands and provide feedback!
 
 * add:
 
     - `component build --watch`
     - `component link`
 
-* changed:
-
-    - update `component-search` to use crawled components
+* update `component-search` to use crawled components
 
 1.0.0-rc2 / 2014-04-03
 ======================
