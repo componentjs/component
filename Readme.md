@@ -30,4 +30,4 @@ For questions and more information about Component, please visit the [guide](htt
 
 - [visionmedia](https://github.com/visionmedia)/[@tjholowaychuk](https://twitter.com/tjholowaychuk) - author
 - [jonathanong](https://github.com/jonathanong)/[@jongleberry](https://twitter.com/jongleberry) - maintainer
-- [segmentio](https://github.com/segmentio)/[segment.io](https://segment.io) - sponser
+- [segmentio](https://github.com/segmentio)/[segment.io](https://segment.io) - sponsor
