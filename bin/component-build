@@ -19,10 +19,10 @@ var log = utils.log;
 
 program
   .usage('component build [scripts] [styles] [files]')
-  .option('-w, --watch', 'watch file changes and rebuild automatically')
+  .option('-w, --watch', 'watch for file changes and rebuild automatically')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
-  .option('-d, --dev', 'build development dependencies')
+  .option('-d, --dev', 'build development dependencies, use aliases, and use sourceURLs')
   .option('-s, --standalone <name>', 'build a standalone, UMD-wrapped version of the component with the given global name')
   .option('-R, --no-require', 'exclude require from build')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>', '')

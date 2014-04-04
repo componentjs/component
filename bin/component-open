@@ -5,23 +5,17 @@ var resolve = require('path').resolve;
 var program = require('commander');
 var open = require('open');
 
-program
-  .usage('[repo]')
-
 program.on('--help', function(){
+  console.log('  Opens the relevant webpage in your favorite browser.')
+  console.log();
   console.log('  Commands:');
   console.log();
-  console.log('    # open http://component.io');
-  console.log('    $ component open');
-  console.log();
-  console.log('    # open the Component Guide');
-  console.log('    $ component open guide');
-  console.log();
-  console.log('    # open component/emitter\'s github page');
-  console.log('    $ component open component/emitter');
-  console.log();
-  console.log('    # open the current component\'s github page');
-  console.log('    $ component open .');
+  console.log('    open                    opens http://component.io');
+  console.log('    open guide              opens the guide to Component');
+  console.log('    open help               opens the component(1) API docs');
+  console.log('    open help <command>     opens the docs to a specific component(1) command');
+  console.log('    open .                  opens the current component\'s github page');
+  console.log('    open <repo>             opens <repo>\'s github page');
   console.log();
   process.exit();
 });
@@ -29,15 +23,20 @@ program.on('--help', function(){
 program.parse(process.argv);
 
 var args = program.args;
-if (args.length > 1) fatal('you may only open one repo at a time');
-
 if (!args.length) return open('http://component.io/');
 
-var repo = args[0];
+var arg = args[0];
 
-if (repo === 'guide') return open('https://github.com/component/guide');
+if (arg === 'guide') return open('https://github.com/component/guide');
 
-if (repo === '.') {
+if (arg === 'help') {
+  var uri = 'https://github.com/component/guide/blob/master/component/api.md';
+  if (args[1]) uri += '#' + args[1];
+  open(uri);
+  return;
+}
+
+if (arg === '.') {
   // to do: check if this file actually exists
   var json;
   try {
@@ -45,9 +44,9 @@ if (repo === '.') {
   } catch (err) {
     fatal('error opening the component.json in this directory');
   }
-  repo = json.repository || json.repo;
-  if (!repo) fatal('this component.json does not have a .repository field');
+  arg = json.repository || json.repo;
+  if (!arg) fatal('this component.json does not have a .repository field');
 }
 
-if (!~repo.indexOf('/')) fatal('invalid repository name');
-open('https://github.com/' + repo);
+if (!~arg.indexOf('/')) fatal('invalid repository name');
+open('https://github.com/' + arg);

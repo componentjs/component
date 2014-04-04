@@ -27,19 +27,18 @@ program.on('--help', function(){
   console.log('    build                   build the component');
   console.log('    crawl                   crawl a github user/organization for components');
   console.log('    duplicates              check for multiple versions of dependencies');
-  console.log('    install [name ...]      install one or more components');
-  console.log('    link ../path/to/folder  link a locally installed component as a dependency');
+  console.log('    install [name ...]      install and save one or more components');
+  console.log('    link [folder]           symlink a component');
   console.log('    ls                      list installed components');
   console.log('    open                    open a repo\'s github page');
-  console.log('    outdated                check if any pinned versions are outdated');
-  console.log('    pin                     pin ranged dependencies to the highest installed, compatible version');
+  console.log('    outdated                check for outdated pinned dependencies');
+  console.log('    pin                     pin ranged dependencies');
   console.log('    search [query]          search with the given query');
-  console.log('    update                  update pinned depedencies to the highest available version')
-  console.log('    validate                validate component.json\'s for specifications compliance');
+  console.log('    update                  update pinned dependencies')
+  console.log('    validate                validate component.json\'s');
   console.log();
-  console.log('  For more help, go to the Component Guide at https://github.com/component/guide. Quickly access this page by executing `component open guide`.');
-  console.log();
-  console.log('  If you\'re having issues with Component, try running commands with `DEBUG=component*`. For example, `DEBUG=component* component install`.');
+  console.log('  For more help, run `component open -h` for relevant links.');
+  console.log('  You may also `component open help <command>` to open the relevant documentation in your favorite browser.')
   console.log();
   process.exit();
 });

@@ -8,14 +8,10 @@ var program = require('commander');
 var utils = require('component-consoler');
 
 program
-  .usage('../path/to/folder')
+  .usage('[../path/to/folder]')
   .option('-r, --repository <str>', 'link as a specific repository');
 
 program.on('--help', function() {
-  console.log('  `component link` links a locally installed component to your components/ directory, allowing your app to use it as a versioned dependency. The linked component can not be within this app\'s context. Do not include `/component.json` in the path.');
-  console.log();
-  console.log('  `.name`, `.repository`, and `.version` fields are necessary in the linked component. You may override these with the `--version` and `--repository` options.');
-  console.log();
   console.log('  Example: ');
   console.log();
   console.log('    $ component link ../delegate');

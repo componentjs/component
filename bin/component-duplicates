@@ -6,7 +6,7 @@ var utils = require('component-consoler');
 var program = require('commander');
 
 program
-  .option('-d, --dev', 'check development dependencies as well')
+  .option('-d, --dev', 'check development dependencies')
   .parse(process.argv);
 
 resolve(process.cwd(), {
