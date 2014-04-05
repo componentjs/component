@@ -1,6 +1,6 @@
 {
   "name": "component",
-  "version": "1.0.0-rc3",
+  "version": "1.0.0-rc4",
   "description": "Component package manager consuming git repositories",
   "keywords": [
     "component",
@@ -16,11 +16,11 @@
     "component-consoler": "^1.0.1",
     "component-flatten": "^1.0.0",
     "component-ls": "^2.0.0",
-    "component-outdated2": "^1.0.1",
+    "component-outdated2": "^1.0.2",
     "component-pin": "^1.0.2",
-    "component-resolver": "^1.0.2",
+    "component-resolver": "^1.0.3",
     "component-search2": "^1.0.0",
-    "component-updater": "^1.0.1",
+    "component-updater": "^1.0.2",
     "component-watcher": "^1.0.0",
     "commander": "^2.2.0",
     "semver": "^2.2.1",

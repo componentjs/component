@@ -1,10 +1,15 @@
 
 For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/changelogs/1.0.0.md.
 
-1.0.0-rc4 /
+1.0.0-rc4 / 2014-04-04
 ======================
 
-The goal of this release is to update all documentation, fix any pending bugs, and update the http://component.io website before a final release.
+Component `1.0.0` is now feature complete. Please help debug and open an issues you may have with this release! `1.0.0` will not be released until http://component.io is updated.
+
+* doc updates
+* better debug/error messages
+* bug fixes
+* re-add `component install --proxy`
 
 1.0.0-rc3 / 2014-04-03
 ======================
