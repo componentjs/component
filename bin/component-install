@@ -9,6 +9,7 @@ var program = require('commander');
 program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
+  .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
   // .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
   .parse(process.argv);
 
@@ -57,6 +58,7 @@ var hasJson = exists(jsonPath);
 
 var options = {
   development: program.dev,
+  proxy: program.proxy,
   install: true,
   verbose: true,
 };
