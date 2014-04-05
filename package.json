@@ -15,7 +15,7 @@
     "component-build": "^1.0.1",
     "component-consoler": "^1.0.1",
     "component-flatten": "^1.0.0",
-    "component-ls": "^2.0.0",
+    "component-ls": "^2.1.0",
     "component-outdated2": "^1.0.2",
     "component-pin": "^1.0.2",
     "component-resolver": "^1.0.3",

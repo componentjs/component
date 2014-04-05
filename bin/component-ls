@@ -16,5 +16,5 @@ var ls = require('component-ls');
 
 resolve(process.cwd(), function (err, tree) {
   if (err) utils.fatal(err.message);
-  ls(tree);
+  ls(tree, program.depth);
 })
