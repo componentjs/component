@@ -1,15 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
-var co = require('co');
 var program = require('commander');
-var utils = require('component-consoler');
-var search = co(require('component-search2'));
-
-var cols = process.stdout.columns || 80;
 
 // parse argv
 
@@ -22,6 +13,12 @@ program
   .option('-m, --maxage <seconds>', 'redownload the cache if older than <maxage>'. parseInt)
   .option('-v, --verbose', 'verbose output')
   .parse(process.argv);
+
+var co = require('co');
+var utils = require('component-consoler');
+var search = co(require('component-search2'));
+
+var cols = process.stdout.columns || 80;
 
 var query = {
   text: program.args.join(' '),

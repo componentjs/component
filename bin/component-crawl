@@ -4,16 +4,17 @@
  * Module dependencies.
  */
 
-var request = require('superagent');
 var program = require('commander');
-var utils = require('component-consoler');
-
-var endpoint = process.env.COMPONENT_CRAWLER_ENDPOINT
-  || 'http://component-crawler.herokuapp.com/';
 
 program.usage('<user|organization>...');
 
 program.parse(process.argv);
+
+var request = require('superagent');
+var utils = require('component-consoler');
+
+var endpoint = process.env.COMPONENT_CRAWLER_ENDPOINT
+  || 'http://component-crawler.herokuapp.com/';
 
 var users = program.args;
 if (!users.length) utils.fatal('<user|organization> required.');

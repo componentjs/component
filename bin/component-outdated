@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-var fatal = require('component-consoler').fatal;
-var outdated = require('component-outdated2');
-var resolve = require('component-resolver');
 var program = require('commander');
-var co = require('co');
 
 program
   .option('-d, --dev', 'update development dependencies')
   .parse(process.argv);
+
+var fatal = require('component-consoler').fatal;
+var outdated = require('component-outdated2');
+var resolve = require('component-resolver');
+var co = require('co');
 
 var options = {
   development: program.dev,

@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-var fatal = require('component-consoler').fatal;
-var resolve = require('path').resolve;
 var program = require('commander');
-var open = require('open');
 
 program.on('--help', function(){
   console.log('  Opens the relevant webpage in your favorite browser.')
@@ -22,6 +19,10 @@ program.on('--help', function(){
 });
 
 program.parse(process.argv);
+
+var fatal = require('component-consoler').fatal;
+var resolve = require('path').resolve;
+var open = require('open');
 
 var args = program.args;
 if (!args.length) return open('http://component.io/');

@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var path = require('path');
-var mkdirp = require('mkdirp');
-var rimraf = require('rimraf');
 var program = require('commander');
-var utils = require('component-consoler');
 
 program
   .usage('[../path/to/folder]')
@@ -20,6 +15,12 @@ program.on('--help', function() {
 });
 
 program.parse(process.argv);
+
+var fs = require('fs');
+var path = require('path');
+var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
+var utils = require('component-consoler');
 
 if (program.args.length !== 1) utils.fatal('requires exactly one local path.');
 

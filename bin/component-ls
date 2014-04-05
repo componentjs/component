@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var resolve = require('component-resolver');
-var utils = require('component-consoler');
-var ls = require('component-ls');
 
 // parse argv
 
 program
   .option('-d, --depth <n>', 'set the depth to <n>', Infinity)
   .parse(process.argv);
+
+var resolve = require('component-resolver');
+var utils = require('component-consoler');
+var ls = require('component-ls');
 
 // output tree
 

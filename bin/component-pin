@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-var fatal = require('component-consoler').fatal;
-var resolve = require('component-resolver');
 var program = require('commander');
-var pin = require('component-pin');
-var co = require('co');
 
 program
   .option('-d, --dev', 'pin development dependencies')
   .parse(process.argv);
+
+var fatal = require('component-consoler').fatal;
+var resolve = require('component-resolver');
+var pin = require('component-pin');
+var co = require('co');
 
 var options = {
   development: program.dev,

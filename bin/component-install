@@ -1,19 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
-var resolve = require('component-resolver');
-var utils = require('component-consoler');
 var program = require('commander');
-var semver = require('semver');
-var path = require('path');
-var fs = require('fs');
-var exists = fs.existsSync;
-var write = fs.writeFileSync;
-var fatal = utils.fatal;
-var log = utils.log;
 
 /**
  * Options.
@@ -50,6 +37,16 @@ program.on('--help', function(){
   process.exit();
 });
 
+var resolve = require('component-resolver');
+var utils = require('component-consoler');
+var semver = require('semver');
+var path = require('path');
+var fs = require('fs');
+
+var exists = fs.existsSync;
+var write = fs.writeFileSync;
+var fatal = utils.fatal;
+var log = utils.log;
 var dependencies = program.args;
 var jsonPath = path.resolve('component.json');
 var hasJson = exists(jsonPath);

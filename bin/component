@@ -1,17 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
 var program = require('commander');
-var spawn = require('win-fork');
-var path = require('path');
-var fs = require('fs');
-var join = path.join;
-var stat = fs.statSync;
-var exists = fs.existsSync;
-var resolve = path.resolve;
 
 // usage
 
@@ -47,6 +36,14 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
+var spawn = require('win-fork');
+var path = require('path');
+var fs = require('fs');
+var join = path.join;
+var stat = fs.statSync;
+var exists = fs.existsSync;
+var resolve = path.resolve;
+
 // args void of cmd
 
 var args = process.argv.slice(3);
@@ -57,7 +54,7 @@ var cmd = program.args[0];
 
 // alias "install" as "add"
 
-if ('add' == cmd) cmd = 'install';
+if ('add' === cmd) cmd = 'install';
 
 // display help
 

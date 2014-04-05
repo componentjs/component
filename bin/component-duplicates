@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-var resolve = require('component-resolver');
-var flatten = require('component-flatten');
-var utils = require('component-consoler');
 var program = require('commander');
 
 program
   .option('-d, --dev', 'check development dependencies')
   .parse(process.argv);
+
+var resolve = require('component-resolver');
+var flatten = require('component-flatten');
+var utils = require('component-consoler');
 
 resolve(process.cwd(), {
   development: program.dev,

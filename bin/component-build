@@ -1,19 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-
-var Resolve = require('component-resolver');
-var utils = require('component-consoler');
-var Build = require('component-build');
 var program = require('commander');
-var mkdir = require('mkdirp');
-var path = require('path');
-var fs = require('fs');
-
-var exists = fs.existsSync || path.existsSync;
-var log = utils.log;
 
 // options
 
@@ -54,7 +41,16 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
+var Resolve = require('component-resolver');
+var utils = require('component-consoler');
+var Build = require('component-build');
+var mkdir = require('mkdirp');
+var path = require('path');
+var fs = require('fs');
+
+var exists = fs.existsSync || path.existsSync;
 var args = program.args;
+var log = utils.log;
 
 // object of which files to build
 var builds;

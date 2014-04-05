@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var resolve = require('component-resolver');
-var fatal = require('component-consoler').fatal;
 
 program.parse(process.argv);
+
+var resolve = require('component-resolver');
+var fatal = require('component-consoler').fatal;
 
 resolve(process.cwd(), {
   // no need to resolve dependencies
