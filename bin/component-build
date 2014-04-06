@@ -93,7 +93,6 @@ var options = {
   umd: program.standalone || program.umd || '',
   prefix: program.prefix || '',
   browsers: program.browsers || '',
-  out: program.out || 'build',
 };
 
 var watching = program.watch;
