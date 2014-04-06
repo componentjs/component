@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 
+var open = require('open');
 var program = require('commander');
+var Component = require('..');
+var logger = Component.utils.logger;
+var normalize = Component.utils.normalizeJson;
+
+/**
+ * Help.
+ */
 
 program.on('--help', function(){
   console.log('  Opens the relevant webpage in your favorite browser.')
@@ -18,39 +26,42 @@ program.on('--help', function(){
   process.exit();
 });
 
+/**
+ * Parse.
+ */
+
 program.parse(process.argv);
 
-var fatal = require('component-consoler').fatal;
-var resolve = require('path').resolve;
-var open = require('open');
+/**
+ * Open.
+ */
 
-var args = program.args;
-if (!args.length) return open('http://component.io/');
+switch (program.args[0]) {
+  case undefined:
+    return open('http://component.io/');
 
-var arg = args[0];
+  case 'guide':
+    return open('https://github.com/component/guide');
 
-if (arg === 'guide') return open('https://github.com/component/guide');
+  case 'troubleshoot':
+  case 'troubleshooting':
+    return open('https://github.com/component/guide/blob/master/component/troubleshooting.md');
 
-if (arg === 'troubleshooting') return open('https://github.com/component/guide/blob/master/component/troubleshooting.md');
+  case 'help':
+    var uri = 'https://github.com/component/guide/blob/master/component/api.md';
+    if (program.args[1]) uri += '#' + program.args[1];
+    return open(uri);
 
-if (arg === 'help') {
-  var uri = 'https://github.com/component/guide/blob/master/component/api.md';
-  if (args[1]) uri += '#' + args[1];
-  open(uri);
-  return;
+  case '.':
+    try {
+      var component = new Component(process.cwd());
+    } catch (e) {
+      logger.fatal(e);
+    }
+    var json = normalize(component.json);
+    var repo = json.repository;
+    if (!repo) logger.fatal('The component.json does not have a repository field.');
+    program.args[0] = component.json.repository;
+  default:
+    open('https://github.com/' + program.args[0]);
 }
-
-if (arg === '.') {
-  // to do: check if this file actually exists
-  var json;
-  try {
-    json = require(resolve('component.json'));
-  } catch (err) {
-    fatal('error opening the component.json in this directory');
-  }
-  arg = json.repository || json.repo;
-  if (!arg) fatal('this component.json does not have a .repository field');
-}
-
-if (!~arg.indexOf('/')) fatal('invalid repository name');
-open('https://github.com/' + arg);

@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
 var program = require('commander');
+var Component = require('..');
+var fs = require('fs');
+var path = require('path');
+var semver = require('semver');
+var logger = Component.utils.logger;
 
 /**
  * Options.
  */
 
 program
-  .usage('[name ...]')
-  .option('-d, --dev', 'install development dependencies')
-  .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
-  // .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
+  .usage('[package ...]')
+  .option('-d, --dev', 'install development dependencies alongside regular ones')
+  .option('-o, --out <dir>', 'set the destination directory to install dependencies')
+  .option('-v, --verbose', 'output verbose logging while installing')
   .parse(process.argv);
 
 /**
@@ -20,100 +25,142 @@ program
 program.on('--help', function(){
   console.log('  Examples:');
   console.log();
-  console.log('    # install deps in ./component.json');
+  console.log('    # install dependencies from ./component.json');
   console.log('    $ component install');
   console.log();
-  console.log('    # install a single component');
+  console.log('    # install a single component as a dependency');
   console.log('    $ component install component/tip');
   console.log();
-  console.log('    # install several components');
+  console.log('    # install several components at once');
   console.log('    $ component install component/tip component/popover');
   console.log();
-  console.log('    # install a specific tag / sha');
-  console.log('    $ component install component/tip@8bf1ffc3f');
+  console.log('    # install a specific version of a component');
+  console.log('    $ component install component/tip@1.0.0');
   console.log();
-  console.log('    # install regular & development deps in .');
-  console.log('    $ component install -d');
+  console.log('    # install regular and development dependencies from ./component.json');
+  console.log('    $ component install --dev');
+  console.log();
+  console.log('    # install a single component as a development dependency');
+  console.log('    $ component install --dev component/tip');
   console.log();
   process.exit();
 });
 
-var resolve = require('component-resolver');
-var utils = require('component-consoler');
-var semver = require('semver');
-var path = require('path');
-var fs = require('fs');
-
-var exists = fs.existsSync;
-var write = fs.writeFileSync;
-var fatal = utils.fatal;
-var log = utils.log;
-var dependencies = program.args;
-var jsonPath = path.resolve('component.json');
-var hasJson = exists(jsonPath);
-
 /**
- * Installer.
+ * Padding.
  */
 
-var options = {
-  development: program.dev,
-  proxy: program.proxy,
-  install: true,
-  verbose: true,
-};
+console.log();
+process.on('exit', function(){ console.log(); });
 
-// Install everything in the dependency tree
-if (!dependencies.length) {
-  if (!hasJson) fatal('missing component.json');
-  resolve(process.cwd(), options, function (err) {
-    if (err) fatal(err.message);
-    log('install', 'complete');
-  });
-  return;
+/**
+ * Settings.
+ */
+
+var packages = program.args;
+var dev = program.dev;
+var out = program.out;
+var verbose = program.verbose;
+
+/**
+ * Component.
+ */
+
+try {
+  var component = new Component(process.cwd());
+} catch (e) {
+  logger.fatal(e);
 }
 
-var json = hasJson && require(jsonPath);
+if (dev) component.development();
+if (out) component.installTo(out);
 
-var deps = {};
-dependencies = dependencies.map(function (dependency) {
-  var frags = dependency.split('@');
-  var name = frags[0].toLowerCase();
-  if (!~name.indexOf('/')) utils.fatal('"' + name + '" is not a valid dependency');
-  var version = frags[1];
-  deps[name] = version || '*';
-  return [name, version];
-});
+/**
+ * Without dependencies, install everything from the component.json in the
+ * current working directory.
+ */
 
-resolve({
-  dependencies: deps
-}, options, function (err, tree) {
-  if (err) fatal(err.message);
-  log('install', 'complete');
-  if (!json) return;
+if (!packages) {
+  return listen(component.install(function(err){
+    if (err) logger.fatal(err);
+  }));
+}
 
-  json.dependencies = json.dependencies || {};
+/**
+ * Install each dependency in the list of `packages`, and save them to the
+ * component.json in the current directory.
+ */
 
-  dependencies.forEach(function (dep) {
-    var name = dep[0];
-    var version = dep[1];
-    // if the dependency, don't install.
-    // not sure if this is correct behavior.
-    if (json.dependencies[name]) return;
-    // if we're installing "any" version,
-    // add a corresponding ^ or ~ to the current version
-    if (!version) {
-      var node = tree.dependencies[name];
-      if (!node.version) {
-        version = '*'; // this means master
-      } else if (semver.gte(node.version, '1.0.0')) {
-        version = '^' + node.version;
-      } else {
-        version = '~' + node.version;
-      }
+component.installed(function(err, installed){
+  if (err) logger.fatal(err);
+
+  var unpinned = [];
+  var repos = [];
+  var json = component.json;
+  var deps = dev
+    ? (json.development = json.development || {})
+    : (json.dependencies = json.dependencies || {});
+
+  packages.forEach(function(pkg){
+    var parts = pkg.split('@');
+    var repo = parts[0].toLowerCase();
+    var version = parts[1];
+    if (!~repo.indexOf('/')) return logger.fatal('Invalid component name "' + pkg + '".');
+    repos.push(repo);
+
+    // the only case when we don't want to update the version is if the package
+    // was already installed and a new version wasn't supplied
+    if (version) {
+      deps[repo] = version;
+    } else if (!installed[repo]) {
+      deps[repo] = '*';
+      unpinned.push(repo);
     }
-    json.dependencies[name] = version;
   });
 
-  write(jsonPath, JSON.stringify(json, null, 2));
-})
+  var emitter = component.install(function(err){
+    if (err) logger.fatal(err);
+    component.save(json, function(err){
+      if (err) logger.fatal(err)
+    });
+  });
+
+  listen(emitter, repos);
+
+  // when the download completes, if the package was unpinned, check the final
+  // version that was resolved and pin it with "~"
+  emitter.on('download', function(repo, version){
+    if (~unpinned.indexOf(repo)) deps[repo] = '~' + version;
+  });
+});
+
+/**
+ * Attach listeners to the install steps, optionally filtering by `repos`.
+ *
+ * @param {Emitter} emitter
+ * @param {Array} repos (optional)
+ */
+
+function listen(emitter, repos){
+  emitter.on('download', function(repo, version){
+    if (match(repo)) logger.log('installed', repo + '@' + version);
+  });
+
+  emitter.on('exists', function(repo, version){
+    if (match(repo)) logger.log('exists', repo + '@' + version);
+  });
+
+  if (!verbose) return;
+
+  emitter.on('versions', function(repo){
+    if (match(repo)) logger.log('versions', repo);
+  });
+
+  emitter.on('downloading', function(repo, version){
+    if (match(repo)) logger.log('fetch', repo + '@' + version);
+  });
+
+  function match(repo){
+    return !! repos && ~repos.indexOf(repo);
+  }
+}

@@ -1,20 +1,90 @@
 #!/usr/bin/env node
 
+var archy = require('archy');
+var chalk = require('chalk');
+var Component = require('..');
 var program = require('commander');
+var logger = Component.utils.logger;
+var normalize = Component.utils.normalizeJson;
 
-// parse argv
+/**
+ * Options.
+ */
 
 program
   .option('-d, --depth <n>', 'set the depth to <n>', Infinity)
+  .option('-D, --dev', 'whether to output development dependencies')
   .parse(process.argv);
 
-var resolve = require('component-resolver');
-var utils = require('component-consoler');
-var ls = require('component-ls');
+/**
+ * Padding.
+ */
 
-// output tree
+console.log();
+process.on('exit', function(){ console.log(); });
 
-resolve(process.cwd(), function (err, tree) {
-  if (err) utils.fatal(err.message);
-  ls(tree, program.depth);
-})
+/**
+ * Component.
+ */
+
+try {
+  var component = new Component(process.cwd());
+} catch(e) {
+  logger.fatal(e);
+}
+
+/**
+ * Log a tree for the component's dependencies.
+ */
+
+component.installed(function(err, installed){
+  if (err) logger.fatal(err);
+
+  var tree = walk(component.json);
+
+  debugger;
+
+  console.log(indent(archy(tree), 2));
+
+  /**
+   * Walk the dependencies of a `node` and print our their versions.
+   *
+   * @param {Object} node
+   * @param {Number} depth (optional)
+   */
+
+  function walk(node, depth){
+    depth = depth || 0;
+    var ret = {};
+    var json = normalize(node);
+    var repo = json.repository;
+    var deps = program.dev
+      ? extend({}, json.dependencies, json.development)
+      : json.dependencies;
+
+    ret.label = depth
+      ? chalk.cyan(repo) + ' ' + chalk.gray(installed[repo].version)
+      : chalk.blue(json.name);
+
+    if (depth++ > program.depth) return ret;
+
+    ret.nodes = Object.keys(deps).map(function(repo){
+      return installed[repo]
+        ? walk(installed[repo], depth)
+        : chalk.cyan(repo) + chalk.red(' not installed')
+    });
+
+    return ret;
+  }
+});
+
+/**
+ * Indent a `string` by `n` spaces.
+ *
+ * @param {String} string
+ * @param {Number} n
+ */
+
+function indent(string, n) {
+  return string.replace(/^/gm, new Array(n + 1).join(' '));
+}

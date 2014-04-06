@@ -15,16 +15,10 @@ program.on('--help', function(){
   console.log();
   console.log('    build                   build the component');
   console.log('    crawl                   crawl a github user/organization for components');
-  console.log('    duplicates              check for multiple versions of dependencies');
   console.log('    install [name ...]      install and save one or more components');
-  console.log('    link [folder]           symlink a component');
   console.log('    ls                      list installed components');
   console.log('    open                    open a repo\'s github page');
-  console.log('    outdated                check for outdated pinned dependencies');
-  console.log('    pin                     pin ranged dependencies');
   console.log('    search [query]          search with the given query');
-  console.log('    update                  update pinned dependencies')
-  console.log('    validate                validate component.json\'s');
   console.log();
   console.log('  For more help, run `component open -h` for relevant links.');
   console.log('  You may also `component open help <command>` to open the relevant documentation in your favorite browser.')

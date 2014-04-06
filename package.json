@@ -1,40 +1,42 @@
 {
   "name": "component",
-  "version": "1.0.0-rc4",
-  "description": "Component package manager consuming git repositories",
+  "repository": "component/component",
+  "version": "1.0.0",
+  "description": "A package manager for the frontend.",
   "keywords": [
     "component",
     "package",
     "client",
     "browser",
-    "module"
+    "front-end",
+    "frontend",
+    "module",
+    "html",
+    "css",
+    "javascript",
+    "bower",
+    "browserify"
   ],
-  "author": "TJ Holowaychuk <tj@vision-media.ca>",
-  "repository": "component/component",
+  "main": "lib/index.js",
   "dependencies": {
-    "component-build": "^1.0.1",
-    "component-consoler": "^1.0.1",
-    "component-flatten": "^1.0.0",
-    "component-ls": "^2.1.0",
-    "component-outdated2": "^1.0.2",
-    "component-pin": "^1.0.2",
-    "component-resolver": "^1.0.3",
-    "component-search2": "^1.0.0",
-    "component-updater": "^1.0.2",
-    "component-watcher": "^1.0.0",
-    "commander": "^2.2.0",
-    "semver": "^2.2.1",
-    "mkdirp": "~0.3.5",
+    "archy": "0.0.2",
+    "async": "^0.6.2",
+    "chalk": "^0.4.0",
+    "clone-component": "^0.2.2",
+    "debug": "^0.8.0",
+    "defaults": "^1.0.0",
+    "extend": "^1.2.1",
+    "fs-extra": "^0.8.1",
+    "netrc": "^0.1.3",
+    "object-values": "^0.1.1",
+    "open": "0.0.4",
     "rimraf": "^2.2.6",
-    "superagent": "~0.17.0",
-    "win-fork": "~1.1.1",
-    "debug": "*",
-    "open": "~0.0.4",
-    "co": "^3.0.0"
+    "semver": "^2.2.1",
+    "superagent": "^0.17.0",
+    "ware": "^0.2.1"
   },
   "devDependencies": {
-    "mocha": "1",
-    "should": "3"
+    "mocha": "^1.18.2"
   },
   "bin": {
     "component": "bin/component",
@@ -52,7 +54,6 @@
     "component-update": "bin/component-update",
     "component-validate": "bin/component-validate"
   },
-  "main": "lib/component",
   "engines": {
     "node": ">= 0.10.0"
   },
