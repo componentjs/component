@@ -37,13 +37,10 @@ try {
  * Log a tree for the component's dependencies.
  */
 
-component.installed(function(err, installed){
+component.getComponents(function(err, installed){
   if (err) logger.fatal(err);
 
-  var tree = walk(component.json);
-
-  debugger;
-
+  var tree = walk(component.json());
   console.log(indent(archy(tree), 2));
 
   /**

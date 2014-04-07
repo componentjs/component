@@ -1,23 +1,33 @@
 #!/usr/bin/env node
 
+var Build = require('component-build');
+var fs = require('fs');
+var mkdir = require('mkdirp');
+var path = require('path');
 var program = require('commander');
+var Resolve = require('component-resolver');
+var utils = require('component-consoler');
 
-// options
+var exists = fs.existsSync || path.existsSync;
+var args = program.args;
+var log = utils.log;
+
+/**
+ * Options.
+ */
 
 program
-  .usage('component build [scripts] [styles] [files]')
-  .option('-w, --watch', 'watch for file changes and rebuild automatically')
-  .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
-  .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
-  .option('-d, --dev', 'build development dependencies, use aliases, and use sourceURLs')
-  .option('-s, --standalone <name>', 'build a standalone, UMD-wrapped version of the component with the given global name')
-  .option('-R, --no-require', 'exclude require from build')
+  .usage('component build')
+  .option('-o, --out <dir>', 'output directory, defaulting to ./build', 'build')
+  .option('-n, --name <file>', 'base name for build files, defaulting to "build"', 'build')
+  .option('-d, --dev', 'build development dependencies and enable source maps')
+  .option('-s, --standalone <name>', 'build a standalone version of the component with the given global name')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>', '')
-  .option('-b, --browsers <string>', 'browsers to support with autoprefixer')
-  .option('-c, --copy', 'copy files instead of linking')
-  .option('--umd', 'alias for --standalone')
+  .option('-c, --copy', 'copy files instead of linking');
 
-// examples
+/**
+ * Help.
+ */
 
 program.on('--help', function(){
   console.log('  Examples:');
@@ -26,31 +36,19 @@ program.on('--help', function(){
   console.log('    $ component build');
   console.log();
   console.log('    # build to ./dist as assets.js, assets.css');
-  console.log('    $ component build -o dist -n assets');
+  console.log('    $ component build --out dist --name assets');
   console.log();
-  console.log('    # build as standalone as window.$');
+  console.log('    # build a standalone version using `$` as the global variable');
   console.log('    $ component build --standalone $');
-  console.log();
-  console.log('    # build only .js');
-  console.log('    $ component build scripts');
   console.log();
   process.exit();
 });
 
-// parse argv
+/**
+ * Parse.
+ */
 
 program.parse(process.argv);
-
-var Resolve = require('component-resolver');
-var utils = require('component-consoler');
-var Build = require('component-build');
-var mkdir = require('mkdirp');
-var path = require('path');
-var fs = require('fs');
-
-var exists = fs.existsSync || path.existsSync;
-var args = program.args;
-var log = utils.log;
 
 // object of which files to build
 var builds;

@@ -16,7 +16,6 @@ program
   .option('-d, --dev', 'install development dependencies alongside regular ones')
   .option('-o, --out <dir>', 'set the destination directory to install dependencies')
   .option('-v, --verbose', 'output verbose logging while installing')
-  .parse(process.argv);
 
 /**
  * Examples.
@@ -45,6 +44,12 @@ program.on('--help', function(){
   console.log();
   process.exit();
 });
+
+/**
+ * Parse.
+ */
+
+program.parse(process.argv);
 
 /**
  * Padding.
@@ -80,10 +85,12 @@ if (out) component.installTo(out);
  * current working directory.
  */
 
-if (!packages) {
-  return listen(component.install(function(err){
+if (!packages.length) {
+  listen(component)
+  component.install(function(err){
     if (err) logger.fatal(err);
-  }));
+  });
+  return;
 }
 
 /**
@@ -91,12 +98,13 @@ if (!packages) {
  * component.json in the current directory.
  */
 
-component.installed(function(err, installed){
+component.getComponents(function(err, installed){
   if (err) logger.fatal(err);
 
   var unpinned = [];
   var repos = [];
-  var json = component.json;
+  var existing = component.json();
+  var json = component.json();
   var deps = dev
     ? (json.development = json.development || {})
     : (json.dependencies = json.dependencies || {});
@@ -118,49 +126,54 @@ component.installed(function(err, installed){
     }
   });
 
-  var emitter = component.install(function(err){
-    if (err) logger.fatal(err);
-    component.save(json, function(err){
-      if (err) logger.fatal(err)
-    });
-  });
-
-  listen(emitter, repos);
+  // set the updated config so that install will pick them up
+  component.json(json);
 
   // when the download completes, if the package was unpinned, check the final
   // version that was resolved and pin it with "~"
-  emitter.on('download', function(repo, version){
+  component.on('download', function(repo, version){
+    debugger;
     if (~unpinned.indexOf(repo)) deps[repo] = '~' + version;
+  });
+
+  listen(component, repos);
+
+  component.install(function(err){
+    if (!err) return component.json(json);
+    component.json(existing);
+    logger.fatal(err);
   });
 });
 
 /**
  * Attach listeners to the install steps, optionally filtering by `repos`.
  *
- * @param {Emitter} emitter
+ * @param {Emitter} component
  * @param {Array} repos (optional)
  */
 
-function listen(emitter, repos){
-  emitter.on('download', function(repo, version){
-    if (match(repo)) logger.log('installed', repo + '@' + version);
+function listen(component, repos){
+
+  component.on('exists', function(repo, version){
+    if (match(repo)) logger.log('exists', repo + '@' + version);
   });
 
-  emitter.on('exists', function(repo, version){
-    if (match(repo)) logger.log('exists', repo + '@' + version);
+  component.on('downloading', function(repo, version){
+    if (match(repo)) logger.log('fetch', repo + '@' + version);
+  });
+
+  component.on('download', function(repo, version){
+    if (match(repo)) logger.log('install', repo + '@' + version);
   });
 
   if (!verbose) return;
 
-  emitter.on('versions', function(repo){
+  component.on('versions', function(repo){
     if (match(repo)) logger.log('versions', repo);
   });
 
-  emitter.on('downloading', function(repo, version){
-    if (match(repo)) logger.log('fetch', repo + '@' + version);
-  });
-
   function match(repo){
-    return !! repos && ~repos.indexOf(repo);
+    if (!repos) return true;
+    return ~repos.indexOf(repo);
   }
 }

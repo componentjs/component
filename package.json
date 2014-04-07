@@ -42,17 +42,10 @@
     "component": "bin/component",
     "component-build": "bin/component-build",
     "component-crawl": "bin/component-crawl",
-    "component-duplicates": "bin/component-duplicates",
     "component-help": "bin/component-help",
     "component-install": "bin/component-install",
-    "component-link": "bin/component-link",
     "component-ls": "bin/component-ls",
-    "component-open": "bin/component-open",
-    "component-outdated": "bin/component-outdated",
-    "component-pin": "bin/component-pin",
-    "component-search": "bin/component-search",
-    "component-update": "bin/component-update",
-    "component-validate": "bin/component-validate"
+    "component-open": "bin/component-open"
   },
   "engines": {
     "node": ">= 0.10.0"
