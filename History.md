@@ -1,6 +1,25 @@
 
 For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/changelogs/1.0.0.md.
 
+1.0.0-rc5 / 2014-04-07
+======================
+
+Primarily bug fixes.
+
+* bitbucket support
+* `component-link`
+
+  * add `--tag`
+  * remove the requirement of the component name matching the repository name
+
+* `component-build`
+
+  * fix `--out`
+  * fix `--copy`
+  * fix file path rewriting for local components
+
+* fix `component-ls --depth`
+
 1.0.0-rc4 / 2014-04-04
 ======================
 
