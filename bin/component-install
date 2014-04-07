@@ -98,7 +98,7 @@ if (!packages.length) {
  * component.json in the current directory.
  */
 
-component.getComponents(function(err, installed){
+component.readComponents(function(err, installed){
   if (err) logger.fatal(err);
 
   var unpinned = [];
@@ -167,6 +167,14 @@ function listen(component, repos){
   });
 
   if (!verbose) return;
+
+  component.on('downloading file', function(repo, version, file){
+    if (match(repo)) logger.log('fetch', file + ' from ' + repo + '@' + version);
+  });
+
+  component.on('download file', function(repo, version, file){
+    if (match(repo)) logger.log('install', file + ' from ' + repo + '@' + version);
+  });
 
   component.on('versions', function(repo){
     if (match(repo)) logger.log('versions', repo);
