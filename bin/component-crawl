@@ -2,7 +2,8 @@
 
 var program = require('commander');
 var request = require('superagent');
-var logger = require('..').utils.logger;
+var Component = require('..');
+var logger = Component.logger;
 
 /**
  * Usage.

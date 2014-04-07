@@ -5,7 +5,7 @@ var Component = require('..');
 var fs = require('fs');
 var path = require('path');
 var semver = require('semver');
-var logger = Component.utils.logger;
+var logger = Component.logger;
 
 /**
  * Options.

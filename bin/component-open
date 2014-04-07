@@ -3,8 +3,8 @@
 var open = require('open');
 var program = require('commander');
 var Component = require('..');
-var logger = Component.utils.logger;
-var normalize = Component.utils.normalizeJson;
+var logger = Component.logger;
+var normalize = Component.normalize.json;
 
 /**
  * Help.

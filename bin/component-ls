@@ -4,8 +4,8 @@ var archy = require('archy');
 var chalk = require('chalk');
 var Component = require('..');
 var program = require('commander');
-var logger = Component.utils.logger;
-var normalize = Component.utils.normalizeJson;
+var logger = Component.logger;
+var normalize = Component.normalize.json;
 
 /**
  * Options.
