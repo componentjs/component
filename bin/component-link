@@ -4,6 +4,7 @@ var program = require('commander');
 
 program
   .usage('[../path/to/folder]')
+  .option('-t, --tag <str>', 'link as a specific version/tag/commit/branch')
   .option('-r, --repository <str>', 'link as a specific repository');
 
 program.on('--help', function() {
@@ -34,16 +35,11 @@ if (path.relative(process.cwd(), from).slice(0, 2) !== '..') {
 
 var json = require(component);
 
-var name = json.name;
-if (!name) utils.fatal(component + ' does not have a name!');
-name = name.toLowerCase();
-
 var repository = program.repository || json.repository || json.repo;
 if (!repository) utils.fatal(component + ' does not have a repository!');
 if (!~repository.indexOf('/')) utils.fatal(component + ' invalid repository. Repositories are of the form <user>/<repo>.');
-if (repository.split('/')[1] !== name) utils.fatal(component + ' name does not match repository\'s name!');
 
-var version = json.version;
+var version = program.tag || json.version;
 if (!version) utils.fatal(component + ' does not have a version!');
 
 var to = path.join(process.cwd(), 'components', repository, version);
