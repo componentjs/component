@@ -94,6 +94,7 @@ var options = {
   prefix: program.prefix || '',
   browsers: program.browsers || '',
   destination: program.out,
+  copy: program.copy,
 };
 
 var watching = program.watch;
