@@ -18,9 +18,9 @@ var options = {
 };
 
 resolve(process.cwd(), options, function (err, tree) {
-  if (err) fatal(err.message);
+  if (err) fatal(err);
 
   co(outdated(tree, options))(function (err) {
-    if (err) fatal(err.message);
+    if (err) fatal(err);
   })
 })

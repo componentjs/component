@@ -37,7 +37,7 @@ if (program.keywords) {
 // search
 
 search(query, function (err, pkgs) {
-  if (err) utils.fatal(err.message);
+  if (err) utils.fatal(err);
   if (!pkgs.length) return utils.log('search', 'no matching components found');
   verbose(pkgs);
 })

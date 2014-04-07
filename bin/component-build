@@ -137,7 +137,7 @@ function resolve() {
   Resolve(process.cwd(), options, function (err, tree) {
     resolving = false;
     if (err) {
-      if (!watching) utils.fatal(err.message);
+      if (!watching) utils.fatal(err);
       utils.error('build', 'resolve failed: ' + err.message);
       return;
     }
@@ -157,7 +157,7 @@ function buildScripts() {
   if (!builds.scripts) return;
   var start = Date.now();
   build.scripts(function (err, js) {
-    if (err) utils.fatal(err.message);
+    if (err) utils.fatal(err);
     if (!js) return;
     fs.writeFile(jsPath, js);
     log('build', jsPath + ' in '
@@ -171,7 +171,7 @@ function buildStyles() {
   if (!builds.styles) return;
   var start = Date.now();
   build.styles(function (err, css) {
-    if (err) utils.fatal(err.message);
+    if (err) utils.fatal(err);
     if (!css) return;
     fs.writeFile(cssPath, css);
     log('build', cssPath + ' in '
@@ -185,7 +185,7 @@ function buildFiles() {
   if (!builds.files) return;
   var start = Date.now();
   build.files(function (err) {
-    if (err) utils.fatal(err.message);
+    if (err) utils.fatal(err);
     log('build', 'files in ' + (Date.now() - start) + 'ms');
   })
 }

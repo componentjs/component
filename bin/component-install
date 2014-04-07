@@ -67,7 +67,7 @@ var options = {
 if (!dependencies.length) {
   if (!hasJson) fatal('missing component.json');
   resolve(process.cwd(), options, function (err) {
-    if (err) fatal(err.message);
+    if (err) fatal(err);
     log('install', 'complete');
   });
   return;
@@ -88,7 +88,7 @@ dependencies = dependencies.map(function (dependency) {
 resolve({
   dependencies: deps
 }, options, function (err, tree) {
-  if (err) fatal(err.message);
+  if (err) fatal(err);
   log('install', 'complete');
   if (!json) return;
 
