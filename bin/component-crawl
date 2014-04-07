@@ -3,7 +3,7 @@
 var program = require('commander');
 var request = require('superagent');
 var Component = require('..');
-var logger = Component.logger;
+var logger = require('../lib/logger');
 
 /**
  * Usage.

@@ -3,8 +3,8 @@
 var open = require('open');
 var program = require('commander');
 var Component = require('..');
-var logger = Component.logger;
-var normalize = Component.normalize.json;
+var logger = require('../lib/logger');
+var normalize = require('../lib/spec').normalize;
 
 /**
  * Help.
@@ -58,7 +58,7 @@ switch (program.args[0]) {
     } catch (e) {
       logger.fatal(e);
     }
-    var json = normalize(component.json);
+    var json = normalize.json(component.json());
     var repo = json.repository;
     if (!repo) logger.fatal('The component.json does not have a repository field.');
     program.args[0] = component.json.repository;

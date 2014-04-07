@@ -4,8 +4,8 @@ var archy = require('archy');
 var chalk = require('chalk');
 var Component = require('..');
 var program = require('commander');
-var logger = Component.logger;
-var normalize = Component.normalize.json;
+var logger = require('../lib/logger');
+var normalize = require('../lib/spec').normalize;
 
 /**
  * Options.
@@ -37,7 +37,7 @@ try {
  * Log a tree for the component's dependencies.
  */
 
-component.getComponents(function(err, installed){
+component.readComponents(function(err, installed){
   if (err) logger.fatal(err);
 
   var tree = walk(component.json());
@@ -53,7 +53,7 @@ component.getComponents(function(err, installed){
   function walk(node, depth){
     depth = depth || 0;
     var ret = {};
-    var json = normalize(node);
+    var json = normalize.json(node);
     var repo = json.repository;
     var deps = program.dev
       ? extend({}, json.dependencies, json.development)

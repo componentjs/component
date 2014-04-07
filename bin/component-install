@@ -5,7 +5,8 @@ var Component = require('..');
 var fs = require('fs');
 var path = require('path');
 var semver = require('semver');
-var logger = Component.logger;
+var logger = require('../lib/logger');
+var normalize = require('../lib/spec').normalize;
 
 /**
  * Options.
@@ -110,19 +111,22 @@ component.readComponents(function(err, installed){
     : (json.dependencies = json.dependencies || {});
 
   packages.forEach(function(pkg){
-    var parts = pkg.split('@');
-    var repo = parts[0].toLowerCase();
-    var version = parts[1];
-    if (!~repo.indexOf('/')) return logger.fatal('Invalid component name "' + pkg + '".');
-    repos.push(repo);
+    try {
+      var repo = normalize.repository(pkg);
+      var key = repo.string;
+    } catch (e) {
+      logger.fatal(e);
+    }
+
+    repos.push(key);
 
     // the only case when we don't want to update the version is if the package
     // was already installed and a new version wasn't supplied
-    if (version) {
-      deps[repo] = version;
-    } else if (!installed[repo]) {
-      deps[repo] = '*';
-      unpinned.push(repo);
+    if (repo.version) {
+      deps[key] = repo.version;
+    } else if (!installed[key]) {
+      deps[key] = '*';
+      unpinned.push(key);
     }
   });
 
