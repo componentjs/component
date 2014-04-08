@@ -37,7 +37,7 @@ try {
  * Log a tree for the component's dependencies.
  */
 
-component.readComponents(function(err, installed){
+component.localDependencies(function(err, installed){
   if (err) logger.fatal(err);
 
   var tree = walk(component.json());
@@ -53,11 +53,9 @@ component.readComponents(function(err, installed){
   function walk(node, depth){
     depth = depth || 0;
     var ret = {};
-    var json = normalize.json(node);
+    var json = normalize.json(node, program.dev);
     var repo = json.repository;
-    var deps = program.dev
-      ? extend({}, json.dependencies, json.development)
-      : json.dependencies;
+    var deps = json.dependencies;
 
     ret.label = depth
       ? chalk.cyan(repo) + ' ' + chalk.gray(installed[repo].version)

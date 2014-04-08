@@ -99,16 +99,15 @@ if (!packages.length) {
  * component.json in the current directory.
  */
 
-component.readComponents(function(err, installed){
+component.localDependencies(function(err, installed){
   if (err) logger.fatal(err);
 
   var unpinned = [];
   var repos = [];
   var existing = component.json();
   var json = component.json();
-  var deps = dev
-    ? (json.development = json.development || {})
-    : (json.dependencies = json.dependencies || {});
+  var conf = normalize.json(json, dev);
+  var deps = conf.deps;
 
   packages.forEach(function(pkg){
     try {
@@ -136,7 +135,6 @@ component.readComponents(function(err, installed){
   // when the download completes, if the package was unpinned, check the final
   // version that was resolved and pin it with "~"
   component.on('download', function(repo, version){
-    debugger;
     if (~unpinned.indexOf(repo)) deps[repo] = '~' + version;
   });
 
