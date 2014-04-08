@@ -44,29 +44,30 @@ component.localDependencies(function(err, installed){
   console.log(indent(archy(tree), 2));
 
   /**
-   * Walk the dependencies of a `node` and print our their versions.
+   * Walk the dependencies of a `conf` and print our their versions.
    *
-   * @param {Object} node
+   * @param {Object} conf
+   * @param {String} peg
    * @param {Number} depth (optional)
    */
 
-  function walk(node, depth){
+  function walk(conf, peg, depth){
     depth = depth || 0;
     var ret = {};
-    var json = normalize.json(node, program.dev);
-    var repo = json.repository;
-    var deps = json.dependencies;
+    var repo = conf.repository;
+    var deps = conf.dependencies;
 
     ret.label = depth
-      ? chalk.cyan(repo) + ' ' + chalk.gray(installed[repo].version)
-      : chalk.blue(json.name);
+      ? repo + ' ' + chalk.green(installed[repo].version) + ' ' + chalk.gray(peg)
+      : chalk.cyan(conf.name);
 
     if (depth++ > program.depth) return ret;
 
     ret.nodes = Object.keys(deps).map(function(repo){
+      var peg = deps[repo];
       return installed[repo]
-        ? walk(installed[repo], depth)
-        : chalk.cyan(repo) + chalk.red(' not installed')
+        ? walk(installed[repo].conf, peg, depth)
+        : repo + ' ' + chalk.red('not installed') + ' ' + chalk.gray(peg);
     });
 
     return ret;
