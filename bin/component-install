@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-var program = require('commander');
 var Component = require('..');
 var fs = require('fs');
-var path = require('path');
-var semver = require('semver');
 var logger = require('../lib/logger');
 var normalize = require('../lib/spec').normalize;
+var path = require('path');
+var program = require('commander');
+var semver = require('semver');
 
 /**
  * Options.

@@ -1,16 +1,11 @@
 #!/usr/bin/env node
 
-var Build = require('component-build');
-var fs = require('fs');
-var mkdir = require('mkdirp');
-var path = require('path');
+var Component = require('..');
+var join = require('path').join;
+var logger = require('../lib/logger');
+var mkdir = require('mkdirp').sync;
 var program = require('commander');
-var Resolve = require('component-resolver');
-var utils = require('component-consoler');
-
-var exists = fs.existsSync || path.existsSync;
-var args = program.args;
-var log = utils.log;
+var write = require('fs').writeFileSync;
 
 /**
  * Options.
@@ -19,6 +14,7 @@ var log = utils.log;
 program
   .usage('component build')
   .option('-o, --out <dir>', 'output directory, defaulting to ./build', 'build')
+  .option('-i, --in <file>', 'input directory, defaulting to ./', 'components')
   .option('-n, --name <file>', 'base name for build files, defaulting to "build"', 'build')
   .option('-d, --dev', 'build development dependencies and enable source maps')
   .option('-s, --standalone <name>', 'build a standalone version of the component with the given global name')
@@ -50,138 +46,40 @@ program.on('--help', function(){
 
 program.parse(process.argv);
 
-// object of which files to build
-var builds;
-if (!args.length) {
-  builds = {
-    scripts: true,
-    styles: true,
-    files: true,
-  };
-} else {
-  builds = {
-    scripts: !!~args.indexOf('scripts')
-      || !!~args.indexOf('js'),
-    styles: !!~args.indexOf('styles')
-      || !!~args.indexOf('css'),
-    files: !!~args.indexOf('files'),
-  };
+/**
+ * Settings.
+ */
+
+var copy = program.copy;
+var dev = program.dev;
+var name = program.name;
+var components = program.in;
+var out = program.out;
+var prefix = program.prefix;
+var standalone = program.standalone;
+
+/**
+ * Component.
+ */
+
+try {
+  var component = new Component(process.cwd());
+} catch (e) {
+  logger.fatal(e);
 }
 
-// component.json required
+if (components) component.installTo(components);
+if (out) component.buildTo(out);
+if (dev) component.development(true);
+if (copy) component.symlink(false);
 
-if (!exists('component.json')) utils.fatal('missing component.json');
+/**
+ * Build.
+ */
 
-// output paths
-
-var jsPath = path.join(program.out, program.name + '.js');
-var cssPath = path.join(program.out, program.name + '.css');
-
-// mkdir -p
-
-mkdir.sync(program.out);
-
-// resolve
-
-var options = {
-  development: program.dev,
-  install: true,
-  verbose: true,
-  require: program.require,
-  umd: program.standalone || program.umd || '',
-  prefix: program.prefix || '',
-  browsers: program.browsers || '',
-};
-
-var watching = program.watch;
-var resolving = false;
-
-var build;
-
-if (!watching) return resolve();
-
-var watcher = require('component-watcher')({
-  root: process.cwd()
+component.build(function(err, res){
+  if (err) return logger.fatal(err);
+  mkdir(out);
+  write(join(out, name + '.js'), res.require + res.js);
+  write(join(out, name + '.css'), res.css);
 });
-
-watcher.on('resolve', resolve);
-watcher.on('scripts', buildScripts);
-watcher.on('styles', buildStyles);
-
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', function (data) {
-  switch (data.trim()) {
-    case 'r':
-    case 'resolve':
-      return resolve();
-    case 's':
-    case 'j':
-    case 'js':
-    case 'scripts':
-      return buildScripts();
-    case 'c':
-    case 'css':
-    case 'styles':
-      return buildStyles();
-  }
-});
-
-function resolve() {
-  if (resolving) return;
-  resolving = true;
-  var start = Date.now();
-  Resolve(process.cwd(), options, function (err, tree) {
-    resolving = false;
-    if (err) {
-      if (!watching) utils.fatal(err.message);
-      utils.error('build', 'resolve failed: ' + err.message);
-      return;
-    }
-
-    build = Build(tree, options);
-
-    log('build', 'resolved in ' + (Date.now() - start) + 'ms');
-
-    buildScripts();
-    buildStyles();
-    buildFiles();
-  })
-}
-
-function buildScripts() {
-  if (resolving) return;
-  if (!builds.scripts) return;
-  var start = Date.now();
-  build.scripts(function (err, js) {
-    if (err) utils.fatal(err.message);
-    if (!js) return;
-    fs.writeFile(jsPath, js);
-    log('build', jsPath + ' in '
-      + (Date.now() - start) + 'ms - '
-      + (js.length / 1024 | 0) + 'kb');
-  })
-}
-
-function buildStyles() {
-  if (resolving) return;
-  if (!builds.styles) return;
-  var start = Date.now();
-  build.styles(function (err, css) {
-    if (err) utils.fatal(err.message);
-    if (!css) return;
-    fs.writeFile(cssPath, css);
-    log('build', cssPath + ' in '
-      + (Date.now() - start) + 'ms - '
-      + (css.length / 1024 | 0) + 'kb');
-  })
-}
-
-function buildFiles() {
-  if (resolving) return;
-  if (!builds.files) return;
-  var start = Date.now();
-  build.files(function (err) {
-    if (err) utils.fatal(err.message);
-    log('build', 'files in ' + (Date.now() - start) + 'ms');
-  })
-}
