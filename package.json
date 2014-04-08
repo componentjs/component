@@ -33,6 +33,7 @@
     "rimraf": "^2.2.6",
     "semver": "^2.2.1",
     "superagent": "^0.17.0",
+    "to-function": "^2.0.3",
     "ware": "^0.2.1"
   },
   "devDependencies": {
