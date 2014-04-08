@@ -5,6 +5,7 @@ var join = require('path').join;
 var logger = require('../lib/logger');
 var mkdir = require('mkdirp').sync;
 var program = require('commander');
+var rm = require('rimraf').sync;
 var write = require('fs').writeFileSync;
 
 /**
@@ -72,14 +73,17 @@ if (components) component.installTo(components);
 if (out) component.buildTo(out);
 if (dev) component.development(true);
 if (copy) component.symlink(false);
+if (prefix) component.prefix(prefix);
 
 /**
  * Build.
  */
 
+rm(out);
+mkdir(out);
 component.build(function(err, res){
   if (err) return logger.fatal(err);
-  mkdir(out);
-  write(join(out, name + '.js'), res.require + res.js);
-  write(join(out, name + '.css'), res.css);
+  debugger;
+  write(join(out, name + '.js'), [res.require, res.scripts, res.aliases].join('\n\n'));
+  write(join(out, name + '.css'), res.styles);
 });

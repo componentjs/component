@@ -107,7 +107,7 @@ component.localDependencies(function(err, installed){
   var existing = component.json();
   var json = component.json();
   var conf = normalize.json(json, dev);
-  var deps = conf.deps;
+  var deps = conf.dependencies;
 
   packages.forEach(function(pkg){
     try {
