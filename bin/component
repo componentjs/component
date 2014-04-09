@@ -1,14 +1,26 @@
 #!/usr/bin/env node
 
 var program = require('commander');
+var spawn = require('win-fork');
+var path = require('path');
+var fs = require('fs');
 
-// usage
+var join = path.join;
+var stat = fs.statSync;
+var exists = fs.existsSync;
+var resolve = path.resolve;
+
+/**
+ * Usage.
+ */
 
 program
   .version(require('../package').version)
   .usage('<command> [options]');
 
-// sub-command help
+/**
+ * Help.
+ */
 
 program.on('--help', function(){
   console.log('  Commands:');
@@ -26,41 +38,25 @@ program.on('--help', function(){
   process.exit();
 });
 
-// parse argv
+/**
+ * Parse.
+ */
 
 program.parse(process.argv);
+if (!program.args.length) program.help();
 
-var spawn = require('win-fork');
-var path = require('path');
-var fs = require('fs');
-var join = path.join;
-var stat = fs.statSync;
-var exists = fs.existsSync;
-var resolve = path.resolve;
+/**
+ * Settings.
+ */
 
-// args void of cmd
-
-var args = process.argv.slice(3);
-
-// command
-
-var cmd = program.args[0];
-
-// alias "install" as "add"
-
-if ('add' === cmd) cmd = 'install';
-
-// display help
-
-if (!cmd) program.help();
-
-// executable
-
+var cmd = normalize(program.args[0]);
+var args = program.args.slice(1);
 var bin = 'component-' + cmd;
-
-// local or resolve to absolute executable path
-
 var local = join(__dirname, bin);
+
+/**
+ * Use the local, built-in commands or resolve to an absolute path.
+ */
 
 if (exists(local)) {
   bin = local;
@@ -71,17 +67,43 @@ if (exists(local)) {
   }, bin);
 }
 
-// display help if bin does not exist
+/**
+ * Help if the bin doesn't exist.
+ */
 
 if (!exists(bin)) {
-  console.error('\n  %s(1) does not exist', bin);
+  console.error();
+  console.error('  %s(1) does not exist', bin);
+  console.error();
   program.help();
 }
 
-// spawn
+/**
+ * Spawn.
+ */
 
-var proc = spawn(bin, args, { stdio: 'inherit', customFds: [0, 1, 2] });
+var proc = spawn(bin, args, {
+  stdio: 'inherit',
+  customFds: [0, 1, 2]
+});
 
 proc.on('close', function(code){
   process.exit(code);
 });
+
+/**
+ * Normalize a `cmd` against aliases.
+ *
+ * @param {String} cmd
+ * @return {String}
+ */
+
+function normalize(cmd){
+  switch (cmd) {
+    case 'add':
+    case 'i':
+      return 'install';
+    default:
+      return cmd;
+  }
+}
