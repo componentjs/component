@@ -32,7 +32,8 @@
     "debug": "*",
     "open": "~0.0.4",
     "cogent": "~0.4.3",
-    "co": "^3.0.0"
+    "co": "^3.0.0",
+    "tiny-lr-fork": "0.0.5"
   },
   "devDependencies": {
     "mocha": "1",
