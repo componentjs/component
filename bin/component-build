@@ -99,7 +99,7 @@ var options = {
   copy: program.copy,
 };
 
-var watching = program.watch;
+var watching = program.watch || program.reload;
 var resolving = false;
 
 var build;
@@ -146,11 +146,13 @@ server.on('error', function (err) {
 });
 
 function reload() {
-  server.changed({
-    body: {
-      files: slice.call(arguments)
-    }
-  });
+  if (program.reload) {
+    server.changed({
+      body: {
+        files: slice.call(arguments)
+      }
+    });
+  }
 }
 
 function resolve() {
