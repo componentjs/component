@@ -83,6 +83,14 @@ var cssPath = path.join(program.out, program.name + '.css');
 
 mkdir.sync(program.out);
 
+// whitespace
+
+console.log();
+
+process.on('exit', function(){
+  console.log();
+});
+
 // resolve
 
 var options = {

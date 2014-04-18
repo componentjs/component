@@ -17,6 +17,14 @@ var options = {
   verbose: true,
 };
 
+// whitespace
+
+console.log();
+
+process.on('exit', function(){
+  console.log();
+});
+
 resolve(process.cwd(), options, function (err, tree) {
   if (err) fatal(err);
 
