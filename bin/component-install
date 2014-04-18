@@ -52,6 +52,14 @@ var dependencies = program.args;
 var jsonPath = path.resolve('component.json');
 var hasJson = exists(jsonPath);
 
+// whitespace
+
+console.log();
+
+process.on('exit', function(){
+  console.log();
+});
+
 /**
  * Installer.
  */

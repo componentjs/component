@@ -34,6 +34,14 @@ if (program.keywords) {
   if (keywords.length) query.keywords = keywords;
 }
 
+// whitespace
+
+console.log();
+
+process.on('exit', function(){
+  console.log();
+});
+
 // search
 
 search(query, function (err, pkgs) {
