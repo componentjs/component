@@ -47,7 +47,6 @@
     "component-install": "bin/component-install",
     "component-link": "bin/component-link",
     "component-ls": "bin/component-ls",
-    "component-open": "bin/component-open",
     "component-outdated": "bin/component-outdated",
     "component-pin": "bin/component-pin",
     "component-search": "bin/component-search",
