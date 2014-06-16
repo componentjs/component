@@ -4,7 +4,10 @@ var program = require('commander');
 
 program
   .option('-d, --dev', 'update development dependencies')
+  .option('--debug', 'turn on debug statements')
   .parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler,component-outdated2,component-resolver');
 
 var fatal = require('component-consoler').fatal;
 var outdated = require('component-outdated2');

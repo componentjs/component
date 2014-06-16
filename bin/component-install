@@ -10,6 +10,7 @@ program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
   .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
+  .option('--debug', 'turn on debug statements')
   // .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
   .parse(process.argv);
 
@@ -37,6 +38,8 @@ program.on('--help', function(){
   console.log();
   process.exit();
 });
+
+if (program.debug) require('debug').enable('component-consoler,component-resolver');
 
 var resolve = require('component-resolver');
 var utils = require('component-consoler');

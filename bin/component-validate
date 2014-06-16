@@ -2,7 +2,11 @@
 
 var program = require('commander');
 
-program.parse(process.argv);
+program
+  .option('--debug', 'turn on debug statements')
+  .parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler,component-resolver');
 
 var resolve = require('component-resolver');
 var fatal = require('component-consoler').fatal;

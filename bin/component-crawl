@@ -6,9 +6,13 @@
 
 var program = require('commander');
 
-program.usage('<user|organization>...');
+program
+  .usage('<user|organization>...')
+  .option('--debug', 'turn on debug statements');
 
 program.parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler');
 
 var request = require('superagent');
 var utils = require('component-consoler');
