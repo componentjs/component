@@ -5,7 +5,8 @@ var program = require('commander');
 program
   .usage('[../path/to/folder]')
   .option('-t, --tag <str>', 'link as a specific version/tag/commit/branch')
-  .option('-r, --repository <str>', 'link as a specific repository');
+  .option('-r, --repository <str>', 'link as a specific repository')
+  .option('--debug', 'turn on debug statements');
 
 program.on('--help', function() {
   console.log('  Example: ');
@@ -16,6 +17,8 @@ program.on('--help', function() {
 });
 
 program.parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler*');
 
 var fs = require('fs');
 var path = require('path');

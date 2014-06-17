@@ -4,7 +4,10 @@ var program = require('commander');
 
 program
   .option('-d, --dev', 'check development dependencies')
+  .option('--debug', 'turn on debug statements')
   .parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler*,component-flatten*,component-resolver*');
 
 var resolve = require('component-resolver');
 var flatten = require('component-flatten');

@@ -12,7 +12,10 @@ program
   .option('-f, --force', 'force redownloading the cache')
   .option('-m, --maxage <seconds>', 'redownload the cache if older than <maxage>'. parseInt)
   .option('-v, --verbose', 'verbose output')
+  .option('--debug', 'turn on debug statements')
   .parse(process.argv);
+
+if (program.debug) require('debug').enable('component-consoler*,component-search*');
 
 var co = require('co');
 var utils = require('component-consoler');

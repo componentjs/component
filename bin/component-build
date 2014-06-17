@@ -16,6 +16,7 @@ program
   .option('-b, --browsers <string>', 'browsers to support with autoprefixer')
   .option('-c, --copy', 'copy files instead of linking')
   .option('--umd', 'alias for --standalone')
+  .option('--debug', 'turn on debug statements');
 
 // examples
 
@@ -40,6 +41,8 @@ program.on('--help', function(){
 // parse argv
 
 program.parse(process.argv);
+
+if (program.debug) require('debug').enable('component-build*,component-consoler*,component-resolver*');
 
 var Resolve = require('component-resolver');
 var utils = require('component-consoler');
