@@ -39,7 +39,7 @@ program.on('--help', function(){
   process.exit();
 });
 
-if (program.debug) require('debug').enable('component-consoler,component-resolver');
+if (program.debug) require('debug').enable('component-consoler*,component-resolver*');
 
 var resolve = require('component-resolver');
 var utils = require('component-consoler');

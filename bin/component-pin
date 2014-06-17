@@ -7,7 +7,7 @@ program
   .option('--debug', 'turn on debug statements')
   .parse(process.argv);
 
-if (program.debug) require('debug').enable('component-consoler,component-pin,component-resolver');
+if (program.debug) require('debug').enable('component-consoler*,component-pin*,component-resolver*');
 
 var fatal = require('component-consoler').fatal;
 var resolve = require('component-resolver');

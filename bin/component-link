@@ -18,7 +18,7 @@ program.on('--help', function() {
 
 program.parse(process.argv);
 
-if (program.debug) require('debug').enable('component-consoler');
+if (program.debug) require('debug').enable('component-consoler*');
 
 var fs = require('fs');
 var path = require('path');

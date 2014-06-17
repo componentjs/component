@@ -9,7 +9,7 @@ program
   .option('--debug', 'turn on debug statements')
   .parse(process.argv);
 
-if (program.debug) require('debug').enable('component-consoler,component-ls,component-resolver');
+if (program.debug) require('debug').enable('component-consoler*,component-ls*,component-resolver*');
 
 var resolve = require('component-resolver');
 var utils = require('component-consoler');
