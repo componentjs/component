@@ -19,15 +19,13 @@ program.on('--help', function(){
   console.log('    install [name ...]      install and save one or more components');
   console.log('    link [folder]           symlink a component');
   console.log('    ls                      list installed components');
-  console.log('    open                    open a repo\'s github page');
   console.log('    outdated                check for outdated pinned dependencies');
   console.log('    pin                     pin ranged dependencies');
   console.log('    search [query]          search with the given query');
   console.log('    update                  update pinned dependencies')
   console.log('    validate                validate component.json\'s');
   console.log();
-  console.log('  For more help, run `component open -h` for relevant links.');
-  console.log('  You may also `component open help <command>` to open the relevant documentation in your favorite browser.')
+  console.log('  For more help, run `component build -h` for relevant links.');
   console.log();
   process.exit();
 });
