@@ -7,6 +7,7 @@ var program = require('commander');
 program
   .usage('component build [scripts] [styles] [files]')
   .option('-w, --watch', 'watch for file changes and rebuild automatically')
+  .option('-r, --reload', 'refresh livereload server on file changes (works only with --watch)')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
   .option('-d, --dev', 'build development dependencies, use aliases, and use sourceURLs')
@@ -54,6 +55,7 @@ var fs = require('fs');
 var exists = fs.existsSync || path.existsSync;
 var args = program.args;
 var log = utils.log;
+var slice = Array.prototype.slice;
 
 // object of which files to build
 var builds;
@@ -108,7 +110,7 @@ var options = {
   copy: program.copy,
 };
 
-var watching = program.watch;
+var watching = program.watch || program.reload;
 var resolving = false;
 
 var build;
@@ -140,6 +142,29 @@ process.stdin.on('data', function (data) {
       return buildStyles();
   }
 });
+
+if (!program.reload) return;
+
+var server = require('tiny-lr-fork')();
+server.listen(35729);
+
+server.on('error', function (err) {
+  if (err.code === 'EADDRINUSE') {
+    utils.fatal('livereload port 35729 is already in use by another process');
+  }
+
+  utils.fatal(err);
+});
+
+function reload() {
+  if (program.reload) {
+    server.changed({
+      body: {
+        files: slice.call(arguments)
+      }
+    });
+  }
+}
 
 function resolve() {
   if (resolving) return;
@@ -174,6 +199,7 @@ function buildScripts() {
     log('build', jsPath + ' in '
       + (Date.now() - start) + 'ms - '
       + (js.length / 1024 | 0) + 'kb');
+    reload(jsPath);
   })
 }
 
@@ -188,6 +214,7 @@ function buildStyles() {
     log('build', cssPath + ' in '
       + (Date.now() - start) + 'ms - '
       + (css.length / 1024 | 0) + 'kb');
+    reload(cssPath);
   })
 }
 
