@@ -3,7 +3,7 @@
 
   [![Build Status](https://travis-ci.org/component/component.png)](https://travis-ci.org/component/component) [![Gittip](http://img.shields.io/gittip/jonathanong.png)](https://www.gittip.com/jonathanong/)
 
-  Component is a vertically integrated frontend solution, handling everything from package management to the build process, handling everything including HTML, JS, CSS, images, and fonts. Think of it as an opinionated `npm + browserify + rework-npm + grunt/gulp/brocolli` all wrapped into `component build`.
+  Component is a vertically integrated frontend solution, handling everything from package management to the build process, handling everything including HTML, JS, CSS, images, and fonts. Think of it as an opinionated `npm + browserify + rework-npm + grunt/gulp/broccoli` all wrapped into `component build`.
 
   Want to know more about Component? Visit the [guide](https://github.com/component/guide) or view the [comparison with other solutions](https://github.com/component/guide/blob/master/component/vs.md).
 
