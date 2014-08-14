@@ -69,7 +69,7 @@ var local = join(__dirname, bin);
 if (exists(local)) {
   bin = local;
 } else {
-  bin = process.env.PATH.split(':').reduce(function(binary, p) {
+  bin = process.env.PATH.split(path.delimiter).reduce(function(binary, p) {
     p = resolve(p, bin);
     return exists(p) && stat(p).isFile() ? p : binary;
   }, bin);
