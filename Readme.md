@@ -14,7 +14,7 @@ version of node and/or npm to avoid breakage. Please see the detailed [changelog
 
 ## Installation
 
-  First, you need [node](https://nodejs.org) v0.10+ installed. If you do not have it installed, visit [node's download page](http://nodejs.org/download/).
+  First, you need [node](http://nodejs.org) v0.10+ installed. If you do not have it installed, visit [node's download page](http://nodejs.org/download/).
 
   With [node](http://nodejs.org) installed, run the following command:
 
