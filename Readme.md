@@ -1,3 +1,4 @@
+Newcomers should use [Duo](https://github.com/duojs/duo) instead of this implementation. Duo is more feature-complete and adds additional goodies, so check it out!
 
   ![web component logo](http://i49.tinypic.com/e7nj9v.png)
 
