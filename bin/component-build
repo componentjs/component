@@ -17,7 +17,7 @@ program
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>', '')
   .option('-b, --browsers <string>', 'browsers to support with autoprefixer')
   .option('-c, --copy', 'copy files instead of linking')
-  .option('--umd', 'alias for --standalone')
+  .option('--umd [name]', 'alias for --standalone')
   .option('--debug', 'turn on debug statements');
 
 // examples
