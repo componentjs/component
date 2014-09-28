@@ -31,7 +31,7 @@ For questions and more information about Component, please visit the [guide](htt
 
 The team and organization got massive changes.  Short story: 
 
-[jonathanong](https://github.com/jonathanong) stopped developping on component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to [duo](duojs.org)
+[jonathanong](https://github.com/jonathanong) stopped developping on component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to [duo](http://duojs.org)
 
 TODO: 
 
