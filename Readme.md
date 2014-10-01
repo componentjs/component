@@ -23,7 +23,7 @@ version of node and/or npm to avoid breakage. Please see the detailed [changelog
 
 ## Getting Started
 
-Read this [Getting Started](https://github.com/componentjs/guide/blob/master/componentjs/getting-started.md) guide to get a basic static site running very quickly with Component.
+Read this [Getting Started](https://github.com/componentjs/guide/blob/master/component/getting-started.md) guide to get a basic static site running very quickly with Component.
 
 For questions and more information about Component, please visit the [guide](https://github.com/componentjs/guide) repository.
 
