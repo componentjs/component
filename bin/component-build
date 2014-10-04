@@ -52,6 +52,7 @@ var Build = require('component-build');
 var mkdir = require('mkdirp');
 var path = require('path');
 var fs = require('fs');
+var rimraf = require('rimraf');
 
 var exists = fs.existsSync || path.existsSync;
 var args = program.args;
@@ -195,7 +196,11 @@ function buildScripts() {
   if (!builds.scripts) return;
   var start = Date.now();
   build.scripts(function (err, js) {
-    if (err) utils.fatal(err);
+    if (err) {
+      utils.error(err);
+      if (fs.existsSync(jsPath)) fs.unlinkSync(jsPath);
+      return;
+    }
     if (!js) return;
     fs.writeFile(jsPath, js);
     log('build', jsPath + ' in '
@@ -210,7 +215,11 @@ function buildStyles() {
   if (!builds.styles) return;
   var start = Date.now();
   build.styles(function (err, css) {
-    if (err) utils.fatal(err);
+    if (err) {
+      utils.error(err);
+      if (fs.existsSync(cssPath)) fs.unlinkSync(cssPath);
+      return;
+    }
     if (!css) return;
     fs.writeFile(cssPath, css);
     log('build', cssPath + ' in '
@@ -225,7 +234,14 @@ function buildFiles() {
   if (!builds.files) return;
   var start = Date.now();
   build.files(function (err) {
-    if (err) utils.fatal(err);
-    log('build', 'files in ' + (Date.now() - start) + 'ms');
+    if (err) {
+      utils.error(err);
+      rimraf(options.destination, function(err) {
+        if (err) utils.fatal(err);
+        return 
+      });
+    } else {
+      log('build', 'files in ' + (Date.now() - start) + 'ms');
+    }
   })
 }
