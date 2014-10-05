@@ -1,6 +1,6 @@
   ![web component logo](http://i49.tinypic.com/e7nj9v.png)
 
-  [![Build Status](https://travis-ci.org/componentjs/component.png)](https://travis-ci.org/componentjs/component) [![Gittip](http://img.shields.io/gittip/jonathanong.png)](https://www.gittip.com/jonathanong/)
+  [![Build Status](https://travis-ci.org/componentjs/component.png)](https://travis-ci.org/componentjs/component)
 
   Component is a vertically integrated frontend solution, handling everything from package management to the build process, handling everything including HTML, JS, CSS, images, and fonts. Think of it as an opinionated `npm + browserify + rework-npm + grunt/gulp/broccoli` all wrapped into `component build`.
 
@@ -27,22 +27,22 @@ Read this [Getting Started](https://github.com/componentjs/guide/blob/master/com
 
 For questions and more information about Component, please visit the [guide](https://github.com/componentjs/guide) repository.
 
+Note: the Component repo (this repo) has only documentation for Component 0.19. All of the documentation related to 1.0.0 will be handled in the [guide repo](https://github.com/componentjs/guide).
+
 ## Team
 
-The team and organization got massive changes.  Short story: 
+The team and organization have undergone massive changes. In summary, [jonathanong](https://github.com/jonathanong) stopped developing Component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to using [duo](http://duojs.org). Component will still be maintained and updated while it is in use.
 
-[jonathanong](https://github.com/jonathanong) stopped developping on component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to [duo](http://duojs.org)
+The long story of Component and the changes that occurred in component can be found in Jonathan Ong's blog post ["the future of component"](http://www.jongleberry.com/the-future-of-component.html).
 
-TODO: 
-
- - long story
- - splitting orga into componentjs
- - new maintainers
-
-[The future of component](http://www.jongleberry.com/the-future-of-component.html)
 
 ## Contributors
 
-- [visionmedia](https://github.com/visionmedia)/[@tjholowaychuk](https://twitter.com/tjholowaychuk) - author
-- [jonathanong](https://github.com/jonathanong)/[@jongleberry](https://twitter.com/jongleberry) - maintainer
-- [segmentio](https://github.com/segmentio)/[segment.io](https://segment.io) - sponsor
+- [Anton Wilhelm](https://github.com/timaschew)/[@timaschew](https://twitter.com/timaschew) - maintainer
+- [Keith Rosenberg](https://github.com/netpoetica)/[@netpoetica](https://twitter.com/netpoetica) - maintainer
+- [Trevor Gerhardt](https://github.com/trevorgerhardt)/[@trevorgerhardt](https://twitter.com/trevorgerhardt) - maintainer
+- [Clinton Wood](https://github.com/clintwood) - maintainer
+- [Jason Kurht](https://github.com/jasonkuhrt)/[@jasonkuhrt](https://twitter.com/jasonkuhrt) - maintainer
+- [visionmedia](https://github.com/visionmedia)/[@tjholowaychuk](https://twitter.com/tjholowaychuk) - original author
+- [jonathanong](https://github.com/jonathanong)/[@jongleberry](https://twitter.com/jongleberry) - second-gen author
+- [segmentio](https://github.com/segmentio)/[segment.io](https://segment.io) - original sponsor
