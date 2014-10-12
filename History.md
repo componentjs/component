@@ -1,6 +1,34 @@
 
 For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/changelogs/1.0.0.md.
 
+1.0.0-rc7 / 2014-10-12
+======================
+
+* `component-build`
+
+  * update autoprefixer
+
+* require2
+
+  * provide `require.loader`
+  * provide `require.latest(moduleName)` to require a remote module without specify the version
+
+
+1.0.0-rc6 / 2014-10-05
+======================
+
+ * `component-build --watch` deletes build files if errors occur and doesn't stop the process anymore
+ * allow to require locals below the root without throwing an error
+ * allow to require paths which cannot be resolved without throwing an error
+ * fix requiring files from a local (without file extension)
+ * feature: nested locals like `foo/bar`
+ * fix CSS parsing for url rewriting, 10x faster
+ * fix module name when exporting as AMD
+ * fix AMD export for `strict` mode
+ * fix remaining quotes when rewrite `require()` paths
+ * allow hashtag in CSS URLs
+
+
 1.0.0-rc5 / 2014-04-07
 ======================
 

@@ -108,7 +108,7 @@ var options = {
   autorequire: program.auto,
   umd: program.standalone || program.umd || '',
   prefix: program.prefix || '',
-  browsers: program.browsers || '',
+  browsers: program.browsers,
   destination: program.out,
   copy: program.copy,
 };
