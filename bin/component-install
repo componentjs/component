@@ -10,6 +10,7 @@ program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
   .option('-p, --proxy', 'use a proxy, eg. http://localhost:3128')
+  .option('-t, --timeout <in ms>', 'use a timeout for remotes, default: 5000ms', 5000)
   .option('--debug', 'turn on debug statements')
   // .option('-p, --proxy <proxy>', 'use a proxy, eg. http://localhost:3128')
   .parse(process.argv);
@@ -70,6 +71,7 @@ process.on('exit', function(){
 var options = {
   development: program.dev,
   proxy: program.proxy,
+  timeout: program.timeout,
   install: true,
   verbose: true,
 };
