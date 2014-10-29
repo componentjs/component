@@ -98,14 +98,14 @@ describe('component install', function(){
 
   describe('[name...]', function(){
     it('should install the multiple components', function(done){
-      exec('bin/component install component/domify@1.0.0 component/is-module@1.0.0', function(err, stdout){
+      exec('bin/component install component/domify@1.0.0 component/dialog@0.3.0', function(err, stdout){
         if (err) return done(err);
         stdout.should.include('install');
         stdout.should.include('complete');
         var json = require(path.resolve('components/component/domify/1.0.0/component.json'));
         json.name.should.equal('domify');
-        var json = require(path.resolve('components/component/is-module/1.0.0/component.json'));
-        json.name.should.equal('is-module');
+        var json = require(path.resolve('components/component/dialog/0.3.0/component.json'));
+        json.name.should.equal('dialog');
         done();
       })
     })
