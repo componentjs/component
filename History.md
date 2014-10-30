@@ -1,3 +1,10 @@
+1.0.0 / 2014-10-30
+======================
+* use `debug` instead of consoler.js to warn about __requiring components below root__
+* add repository redirects for api.github.com requests (if a user rename a repo)
+* require2
+
+  * fix semver sorting for `require.latest`
 
 For a more in-depth changelog about v1, please read: https://github.com/component/guide/blob/master/changelogs/1.0.0.md.
 
