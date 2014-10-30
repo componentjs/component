@@ -6,12 +6,9 @@
 
   Want to know more about Component? Visit the [guide](https://github.com/componentjs/guide) or view the [comparison with other solutions](https://github.com/componentjs/guide/blob/master/component/vs.md).
 
-> **New release**: We'll release component 1.0.0 soon!
-
-> **Please note**: As of 1 April 2014, component v1.0.0 release candidates have been pushed to master. Several
+> **Component 1.0.0**: Several
 major new features have been added, some have been removed, and the project has been greatly reorganized. You may need to upgrade your
-version of node and/or npm to avoid breakage. Please see the detailed [changelog](https://github.com/componentjs/guide/blob/master/changelogs/1.0.0.md) in the
-[Guide](https://github.com/componentjs/guide) repo.
+version of node and/or npm to avoid breakage. Please see the detailed [changelog](https://github.com/componentjs/guide/blob/master/changelogs/1.0.0.md). Component 0.x will not be maintained anymore.
 
 ## Installation
 
@@ -24,8 +21,6 @@ version of node and/or npm to avoid breakage. Please see the detailed [changelog
 ## Getting Started
 
 Read this [Getting Started](https://github.com/componentjs/guide/blob/master/component/getting-started.md) guide to get a basic static site running very quickly with Component.
-
-For questions and more information about Component, please visit the [guide](https://github.com/componentjs/guide) repository.
 
 Note: the Component repo (this repo) has only documentation for Component 0.19. All of the documentation related to 1.0.0 will be handled in the [guide repo](https://github.com/componentjs/guide).
 
