@@ -10,7 +10,7 @@ http://github.com/componentjs
 
 ### components
 Components are modular frontend components which can be used with component to build web applications.  
-http://github.com/component is a GitHub organisation which contains many components.
+http://github.com/component is a GitHub organization which contains many components.
 
 You can join our IRC channel on freenode: [#components](http://webchat.freenode.net/?channels=components) 
 
@@ -28,7 +28,7 @@ You should use `component.io` in a general context to avoid disambiguation.
 ## component in another context 
 
 #### github.com/components
-https://github.com/components is a GitHub organisation which support many 
+https://github.com/components is a GitHub organization which support many 
 package manager like npm, Bower, Component, Jam, volo, ...
 
 https://github.com/components/components
