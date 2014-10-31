@@ -6,6 +6,8 @@
 
   Want to know more about Component? Visit the [guide](https://github.com/componentjs/guide) or view the [comparison with other solutions](https://github.com/componentjs/guide/blob/master/component/vs.md).
 
+  If you're confused about _component_, _components_, _componentjs_, please read [disambiguation](https://github.com/componentjs/component/blob/master/disambiguation.md)
+
 > **Component 1.0.0**: Several
 major new features have been added, some have been removed, and the project has been greatly reorganized. You may need to upgrade your
 version of node and/or npm to avoid breakage. Please see the detailed [changelog](https://github.com/componentjs/guide/blob/master/changelogs/1.0.0.md). Component 0.x will not be maintained anymore.
