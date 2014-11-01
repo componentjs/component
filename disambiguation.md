@@ -44,7 +44,7 @@ http://componentjs.com
 Bower has now their own [bower.json](https://github.com/bower/bower.json-spec) 
 file. But in earlier versions they used 
 [component.json](https://groups.google.com/forum/#!topic/twitter-bower/Dcq8G0en1WI). 
-Some properties of `bower.json` and copmonent's `compnoent.json` have the 
+Some properties of `bower.json` and [component's](https://github.com/componentjs/spec/blob/master/component.json/specifications.md) `component.json` have the 
 same name, but there is no `scripts` property, so `bower.json` is not compatible 
 with component.
 
