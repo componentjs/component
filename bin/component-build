@@ -121,7 +121,8 @@ var build;
 if (!watching) return resolve();
 
 var watcher = require('component-watcher')({
-  root: process.cwd()
+  root: process.cwd(), 
+  development: program.dev
 });
 
 watcher.on('resolve', resolve);

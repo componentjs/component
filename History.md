@@ -1,3 +1,9 @@
+1.0.1 / 2014-11-22
+======================
+
+ * watch development fields [watcher.js#2](https://github.com/componentjs/watcher.js/issues/2)
+ * check latest tag for component.json at first [component#611](https://github.com/componentjs/component/issues/611)
+
 1.0.0 / 2014-10-30
 ======================
 * use `debug` instead of consoler.js to warn about __requiring components below root__
