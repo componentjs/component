@@ -3,6 +3,7 @@
 
  * watch development fields [watcher.js#2](https://github.com/componentjs/watcher.js/issues/2)
  * check latest tag for component.json at first [component#611](https://github.com/componentjs/component/issues/611)
+ * download archive if globs are used in component.json [downloader.js#7](https://github.com/componentjs/downloader.js/pull/7)
 
 1.0.0 / 2014-10-30
 ======================
