@@ -32,6 +32,7 @@ The team and organization have undergone massive changes. In summary, [jonathano
 
 The long story of Component and the changes that occurred in component can be found in Jonathan Ong's blog post ["the future of component"](http://www.jongleberry.com/the-future-of-component.html).
 
+Development for copmonent (maintenance and features) will be continued at the latest when latest browsers will support the [ES6 modules](http://guybedford.com/es6-modules-today) and [Web Components](http://www.w3.org/TR/components-intro/) natively.
 
 ## Contributors
 
