@@ -28,7 +28,7 @@ Note: the Component repo (this repo) has only documentation for Component 0.19. 
 
 ## Team
 
-The team and organization have undergone massive changes. In summary, [jonathanong](https://github.com/jonathanong) stopped developing Component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to using [duo](http://duojs.org). Component will still be maintained and updated while it is in use. You can read more about Duo.js and Component [here](https://github.com/componentjs/component/blob/add-extras-md/Extra.md#about-duojs).
+The team and organization have undergone massive changes. In summary, [jonathanong](https://github.com/jonathanong) stopped developing Component and started with [normalize.io](https://normalize.github.io/) and the guys from [segmentio](https://github.com/segmentio) switched to using [duo](http://duojs.org). Component will still be maintained and updated while it is in use. You can read more about Duo.js and Component [here](https://github.com/componentjs/component/blob/master/Extra.md#about-duojs).
 
 The long story of Component and the changes that occurred in component can be found in Jonathan Ong's blog post ["the future of component"](http://www.jongleberry.com/the-future-of-component.html).
 
