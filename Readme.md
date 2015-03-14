@@ -1,6 +1,6 @@
   ![web component logo](http://i49.tinypic.com/e7nj9v.png)
 
-  [![Build Status](https://travis-ci.org/componentjs/component.png)](https://travis-ci.org/componentjs/component)
+<!--[![Build Status](https://travis-ci.org/componentjs/component.png)](https://travis-ci.org/componentjs/component) -->
 
   Component is a vertically integrated frontend solution, handling everything from package management to the build process, handling everything including HTML, JS, CSS, images, and fonts. Think of it as an opinionated `npm + browserify + rework-npm + grunt/gulp/broccoli` all wrapped into `component build`.
 
