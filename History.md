@@ -1,3 +1,8 @@
+1.1.0 / 2015-03-14
+======================
+
+ * provide shrinkwrapper support: [component-shrinkwrapper](https://github.com/componentjs/shrinkwrapper)
+
 1.0.1 / 2014-11-22
 ======================
 
