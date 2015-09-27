@@ -2,6 +2,21 @@
 
 <!--[![Build Status](https://travis-ci.org/componentjs/component.png)](https://travis-ci.org/componentjs/component) -->
 
+# THIS PROJECT IS DEPRECATED
+Component is not maintained anymore. See [here #639](https://github.com/componentjs/component/issues/639) for more information.
+
+You can stil use the component registry on [component.github.io](http://component.github.io/) to search for components.
+  All the [components](https://github.com/component) are not affected, because most of them also provide a `package.json` file. 
+The `component.json` files in these components are still kept to provide backwards compatibility for component and [duo](http://duojs.org/).
+
+Consider to use another tool, which rely on the [package.json](https://docs.npmjs.com/files/package.json) standard:
+
+- [webpack](http://webpack.github.io/)
+- [jspm](http://jspm.io/)
+- [browserify](http://browserify.org/)
+
+---
+
   Component is a vertically integrated frontend solution, handling everything from package management to the build process, handling everything including HTML, JS, CSS, images, and fonts. Think of it as an opinionated `npm + browserify + rework-npm + grunt/gulp/broccoli` all wrapped into `component build`.
 
   Want to know more about Component? Visit the [guide](https://github.com/componentjs/guide) or view the [comparison with other solutions](https://github.com/componentjs/guide/blob/master/component/vs.md).
