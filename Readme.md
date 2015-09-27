@@ -9,10 +9,11 @@ You can stil use the component registry on [component.github.io](http://componen
   All the [components](https://github.com/component) are not affected, because most of them also provide a `package.json` file. 
 The `component.json` files in these components are still kept to provide backwards compatibility for component and [duo](http://duojs.org/).
 
-Consider to use another tool, which rely on the [package.json](https://docs.npmjs.com/files/package.json) standard:
+## What now?
+Consider to use another tool, which rely on the [npm](https://www.npmjs.com/) and the [package.json](https://docs.npmjs.com/files/package.json) standard:
 
 - [webpack](http://webpack.github.io/)
-- [jspm](http://jspm.io/)
+- [jspm](http://jspm.io/) (supports npm and github endpoint)
 - [browserify](http://browserify.org/)
 
 ---
